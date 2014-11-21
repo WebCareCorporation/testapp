@@ -5,14 +5,14 @@
         id        = "com.tutorialspoint.onlineviewer"
         version   = "1.0">
 
-    <name>Tutorials Point</name>
+    <name>Anu's App</name>
 
     <description>
-        Tutorials Point Online Viewer
+        Anu's First App
     </description>
 
     <author href="http://tutorialspoint.com" email="contact@tutorialspoint.com">
-        Tutorials Point
+       Bevkoof Log
     </author>
 
     <preference name="permissions" value="none"/>
