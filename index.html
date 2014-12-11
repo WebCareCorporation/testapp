@@ -34,7 +34,15 @@
 
             $.connection.hub.logging = true;
             // Get the user name and store it to prepend to messages.
-            $('#displayname').val(prompt('Enter your name:', ''));
+
+            if (localStorage.getItem("Name") == undefined) {
+                $('#displayname').val(prompt('Enter your name:', ''));
+                localStorage.setItem("Name", $('#displayname').val());
+            } else {
+                $('#displayname').val(localStorage.getItem("Name"));
+            }
+            
+
 
             // Declare a function on the chat hub so the server can invoke it          
             chat.client.sendMessage = function (name, message) {
@@ -44,31 +52,49 @@
                     ':  ' + encodedMsg + '</li>');
             };
 
-            chat.client.updateList = function (name) {
-                $('#users').append('<li>' + name + '</li>');
+            chat.client.updateList = function (names) {
+                var users = names.split(",");
+                $('#users').empty();
+                $.each(users, function (index, chunk) {
+                    $('#users').append('<li>' + index + " : " + chunk + '</li>');
+                });
             };
             // Start the connection
             $.connection.hub.start().done(function () {
                 $("#send").click(function () {
                     // Call the chat method on the server
                     chat.server.send($('#displayname').val(), $('#to').val(), $('#msg').val());
+                    $('#msg').val("");
                 });
             });
 
-            //$('#displayname').val(prompt('Enter your name:', ''));
-            //chat.addMessage = function (message) {
-            //    $('#chatMessages').append('<li>' + message + '</li>');
-            //};
+            
+            $.connection.hub.connectionSlow(function () {
+                alert("week network");
+            });
 
-            //$.connection.hub.start().done(function () {
-            //    alert("connection done");
-            //});
 
-            //$("#sendChatMessage").click(function () {
-            //    var message = $("#chatMessage").val();
-            //    console.log("Message: " + message);
-            //    chat.server.send(message);
-            //});
+            var tryingToReconnect = false;
+
+            $.connection.hub.reconnecting(function () {
+                tryingToReconnect = true;
+            });
+
+            $.connection.hub.reconnected(function () {
+                tryingToReconnect = false;
+            });
+
+            $.connection.hub.disconnected(function () {
+
+                chat.server.RemoveUser($('#displayname').val());
+
+                setTimeout(function () {
+                    $.connection.hub.start();
+                }, 5000);
+
+            });
+
+
         });
     </script>
 </head>
