@@ -28,7 +28,7 @@ define(['require', 'CustomFunctions'],
                         //alert('resgisterd' + e.regid);
                         localStorage.setItem("FirstTime", "false");
                         var name = localStorage.getItem("Name");
-                        signal.SendGCMID(name, e.regid);
+                        SendGCMID(name, e.regid);
                     }
                     break;
 
