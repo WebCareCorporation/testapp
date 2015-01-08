@@ -1,40 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<widget xmlns     = "http://www.w3.org/ns/widgets"
-        xmlns:gap = "http://phonegap.com/ns/1.0"
-        id        = "com.gapshap.onlineviewer"
-        version   = "1.0">
+<widget id="com.chat.gapshap" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
 
   <name>Gapshap</name>
 
   <description>
-    App for Gapshap
+    App for gapshap
   </description>
 
-  <author href="#" email="kumarvarinder393@gmail.com">
-    Varinder Kumar
+  <author href="" email="kumarvarinder393@gmail.com">
+    Varinder KUmar
   </author>
 
-  <preference name="permissions" value="none"/>
-
-
-  <icon src="res/icon/android/drawable-ldpi/ic_launcher.png" gap:platform="android" gap:qualifier="ldpi" />
-  <icon src="res/icon/android/drawable-mdpi/ic_launcher.png" gap:platform="android" gap:qualifier="mdpi" />
-  <icon src="res/icon/android/drawable-hdpi/ic_launcher.png" gap:platform="android" gap:qualifier="hdpi" />
-  <icon src="res/icon/android/drawable-xhdpi/ic_launcher.png" gap:platform="android" gap:qualifier="xhdpi" />
-  <icon src="res/icon/android/drawable-xxhdpi/ic_launcher.png" gap:platform="android" gap:qualifier="xxhdpi" />
-  <icon src="res/icon/blackberry/icon-80.png"     gap:platform="blackberry" />
-  <icon src="res/icon/blackberry/icon-80.png"     gap:platform="blackberry" gap:state="hover"/>
-  <icon src="res/icon/ios/Icon-72.png" gap:platform="ios" gap:qualifier=""/>
-
-  <icon src="res/icon/ios/icon-57.png" gap:platform="ios" width="57" height="57" />
-  <icon src="res/icon/ios/icon-72.png" gap:platform="ios" width="72" height="72" />
-  <icon src="res/icon/ios/icon-57-2x.png" gap:platform="ios" width="114" height="114" />
-  <icon src="res/icon/ios/icon-72-2x.png" gap:platform="ios" width="144" height="144" />
-  <icon src="res/icon/windows-phone/icon-48.png"  gap:platform="winphone" />
-  <icon src="res/icon/windows-phone/icon-173.png" gap:platform="winphone"   gap:role="background" />
-
-
+  <content src="index.html" />
+  <access origin="*" />
 
   <feature name="http://api.phonegap.com/1.0/camera"/>
   <feature name="http://api.phonegap.com/1.0/contacts"/>
@@ -44,8 +23,72 @@
   <feature name="http://api.phonegap.com/1.0/network"/>
   <feature name="http://api.phonegap.com/1.0/notification"/>
 
-  <gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" />
-  <gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.7.5" />
+
+  <feature name="Device">
+    <param name="android-package" value="org.apache.cordova.device.Device" />
+  </feature>
+  
+  <preference name="permissions" value="none"/>
+	<plugins>
+        <plugin name="SQLitePlugin" value="SQLitePlugin" />
+	</plugins>
+
+  <!--<platform name="android">
+    --><!-- you can use any density that exists in the Android project --><!--
+    <splash src="www/res/screen/android/res-long-land-hdpi/default.png" density="land-hdpi"  gap:platform="android" gap:qualifier="hdpi" />
+    <splash src="www/res/screen/android/res-long-land-ldpi/default.png" density="land-ldpi"  gap:platform="android" gap:qualifier="ldpi" />
+    <splash src="www/res/screen/android/res-long-land-mdpi/default.png" density="land-mdpi"  gap:platform="android" gap:qualifier="mdpi" />
+    <splash src="www/res/screen/android/res-long-land-xhdpi/default.png" density="land-xhdpi"  gap:platform="android" gap:qualifier="xhdpi" />
+    <splash src="www/res/screen/android/res-long-land-xxhdpi/default.png" density="land-xxhdpi"  gap:platform="android" gap:qualifier="xxhdpi" />
+    <splash src="www/res/screen/android/res-long-land-xxxhdpi/default.png" density="land-xxxhdpi"  gap:platform="android" gap:qualifier="xxxhdpi" />
+
+    <splash src="www/res/screen/android/res-long-port-hdpi/default.png" density="port-hdpi"  gap:platform="android" gap:qualifier="hdpi" />
+    <splash src="www/res/screen/android/res-long-port-ldpi/default.png" density="port-ldpi"  gap:platform="android" gap:qualifier="ldpi" />
+    <splash src="www/res/screen/android/res-long-port-mdpi/default.png" density="port-mdpi"  gap:platform="android" gap:qualifier="mdpi" />
+    <splash src="www/res/screen/android/res-long-port-xhdpi/default.png" density="port-xhdpi"  gap:platform="android" gap:qualifier="xhdpi" />
+    <splash src="www/res/screen/android/res-long-port-xxhdpi/default.png" density="port-xxhdpi"  gap:platform="android" gap:qualifier="xxhdpi" />
+    <splash src="www/res/screen/android/res-long-port-xxxhdpi/default.png" density="port-xxxhdpi"  gap:platform="android" gap:qualifier="xxxhdpi" />
+  </platform>-->
+
+  <!--<platform name="ios">
+    --><!-- images are determined by width and height. The following are supported --><!--
+    <splash src="res/screen/ios/Default~iphone.png" width="320" height="480"/>
+    <splash src="res/screen/ios/Default@2x~iphone.png" width="640" height="960"/>
+    <splash src="res/screen/ios/Default-Portrait~ipad.png" width="768" height="1024"/>
+    <splash src="res/screen/ios/Default-Portrait@2x~ipad.png" width="1536" height="2048"/>
+    <splash src="res/screen/ios/Default-Landscape~ipad.png" width="1024" height="768"/>
+    <splash src="res/screen/ios/Default-Landscape@2x~ipad.png" width="2048" height="1536"/>
+    <splash src="res/screen/ios/Default-568h@2x~iphone.png" width="640" height="1136"/>
+    <splash src="res/screen/ios/Default-667h.png" width="750" height="1334"/>
+    <splash src="res/screen/ios/Default-736h.png" width="1242" height="2208"/>
+    <splash src="res/screen/ios/Default-Landscape-736h.png" width="2208" height="1242"/>
+  </platform>-->
+
+  <!--<platform name="wp8">
+    --><!-- images are determined by width and height. The following are supported --><!--
+    <splash src="res/screen/wp8/SplashScreenImage.jpg" width="768" height="1280"/>
+  </platform>
+
+  <platform name="windows8">
+    --><!-- images are determined by width and height. The following are supported --><!--
+    <splash src="res/screen/windows8/splashscreen.png" width="620" height="300"/>
+  </platform>-->
+
+
+  <!--<icon src="www/res/android/drawable-ldpi/ic_launcher.png" gap:platform="android" gap:qualifier="ldpi" />
+  <icon src="www/res/android/drawable-mdpi/ic_launcher.png" gap:platform="android" gap:qualifier="mdpi" />
+  <icon src="www/www/res/android/drawable-hdpi/ic_launcher.png" gap:platform="android" gap:qualifier="hdpi" />
+  <icon src="www/res/android/drawable-xhdpi/ic_launcher.png" gap:platform="android" gap:qualifier="xhdpi" />
+  <icon src="www/res/android/drawable-xxhdpi/ic_launcher.png" gap:platform="android" gap:qualifier="xxhdpi" />-->
+
+  <!--<icon src="res/icon/ios/Icon-72.png" gap:platform="ios" gap:qualifier=""/>
+
+  <icon src="res/icon/ios/icon-57.png" gap:platform="ios" width="57" height="57" />
+  <icon src="res/icon/ios/icon-72.png" gap:platform="ios" width="72" height="72" />
+  <icon src="res/icon/ios/icon-57-2x.png" gap:platform="ios" width="114" height="114" />
+  <icon src="res/icon/ios/icon-72-2x.png" gap:platform="ios" width="144" height="144" />-->
+
+  <!--<gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.7.5" />
   <gap:plugin name="org.apache.cordova.battery-status" version="0.2.11" />
   <gap:plugin name="org.apache.cordova.camera" version="0.3.2" />
   <gap:plugin name="org.apache.cordova.console" version="0.2.11" />
@@ -63,6 +106,6 @@
   <gap:plugin name="org.apache.cordova.media-capture" version="0.3.3" />
   <gap:plugin name="org.apache.cordova.network-information" version="0.2.12" />
   <gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4" />
-  <gap:plugin name="org.apache.cordova.vibration" version="0.3.11" />
+  <gap:plugin name="org.apache.cordova.vibration" version="0.3.11" />-->
 
 </widget>
