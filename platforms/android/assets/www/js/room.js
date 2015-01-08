@@ -11,14 +11,8 @@ function (require, custom, signal, database) {
         signal.initialize();
 
         database.init();
-        pushNotification = window.plugins.pushNotification;
-        pushNotification.register(
-                successHandler,
-                errorHandler,
-                {
-                    "senderID": "third-diorama-819",
-                    "ecb": "onNotification"
-                });
+
+
         $.ui.autoLaunch = false;
 
         $.ui.backButtonText = "";
@@ -32,9 +26,10 @@ function (require, custom, signal, database) {
         alert('error = ' + error);
     }
 
-    function onNotification(e) {
-        //$("#app-status-ul").append('<li>EVENT -> RECEIVED:' + e.event + '</li>');
-
+    window.onNotificationGCM = function (e) {
+       //$("#app-status-ul").append('<li>EVENT -> RECEIVED:' + e.event + '</li>');
+       alert("received");
+       alert(e.event);
         switch (e.event) {
             case 'registered':
                 if (e.regid.length > 0) {
@@ -42,7 +37,7 @@ function (require, custom, signal, database) {
                     // Your GCM push server needs to know the regID before it can push to this device
                     // here is where you might want to send it the regID for later use.
                     console.log("regID = " + e.regid);
-
+                    alert('resgisterd' + e.regid);
 
                 }
                 break;
@@ -118,10 +113,26 @@ function (require, custom, signal, database) {
     var onDeviceReady = function () {                             // called when Cordova is ready
         if (window.Cordova && navigator.splashscreen) {
 
+
             readyFunction();
         }
     };
     var readyFunction = function () {
+
+        if (window.plugins.pushNotification) {
+
+            alert("push plugin found");
+            pushNotification = window.plugins.pushNotification;
+            pushNotification.register(
+                    successHandler,
+                    errorHandler,
+                    {
+                        "senderID": "899559090645",
+                        "ecb": "onNotificationGCM"
+                    });
+        } else {
+            alert("push plugin not found");
+        }
 
 
         window.background = false;

@@ -1,35 +1,59 @@
-var app = {
-    // Application Constructor
-    initialize: function () {
+define(['require', 'CustomFunctions', 'signalRHub', 'Database'],
+function (require, custom, signal, database) {
+
+    var initialize = function () {
 
         $.ui.autoLaunch = false;
         $.ui.backButtonText = "";
 
+        if (!localStorage.getItem("uniqueId")) {
+            var uniqueId = guid();
+            localStorage.setItem("uniqueId", uniqueId);
+        }
 
         this.bindEvents();
-    },
+    };
+
+    var guid = function () {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+                       .toString(16)
+                       .substring(1);
+        }
+        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+              s4() + '-' + s4() + s4() + s4();
+
+    };
+
     // Bind Event Listeners
     //
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function () {
+    var bindEvents = function () {
         if (!window.Cordova) {
             $(document).ready(function () {
-                app.readyFunction(); 
+                readyFunction();
             });
         }
         document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
+    };
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function () {
+    var onDeviceReady = function () {
         if (window.Cordova && navigator.splashscreen) {
-            app.readyFunction();
+
+            custom.initialize();
+
+            signal.initialize();
+
+            //signal.initiateConnection();
+
+            readyFunction();
         }
-    },
-    readyFunction: function () {
+    };
+    var readyFunction = function () {
         if (localStorage.getItem("Name") != undefined && localStorage.getItem("Name") != "") {
 
             if (window.Cordova && navigator.splashscreen) {
@@ -46,28 +70,41 @@ var app = {
             $.ui.launch();
 
         }
-    
+
 
         $("#register").on("click", function () {
-            localStorage.setItem("Name", $("#name").val());
+            localStorage.setItem("tempName", $("#name").val());
 
-            $.ui.loadContent("main", null, null, "fade");
+            signal.startConnection();
 
-            setTimeout(window.location = "rooms.html", 5000);
+            //$.ui.loadContent("main", null, null, "fade");
+
+            //setTimeout(window.location = "rooms.html", 5000);
         });
 
         $("#Submit").on("click", function () {
-            localStorage.setItem("Name", $("#changenameText").val());
 
-            $.ui.loadContent("main", null, null, "fade");
+            if (localStorage.getItem("Name") != $("#changenameText").val()) {
+                localStorage.setItem("tempName", $("#changenameText").val());
 
-            setTimeout(window.location = "rooms.html", 5000);
+                signal.startConnection();
+            } else {
+                $.ui.loadContent("main", null, null, "fade");
+
+                setTimeout(window.location = "rooms.html", 5000);
+            }
+            //localStorage.setItem("Name", $("#changenameText").val());
+
+            //$.ui.loadContent("main", null, null, "fade");
+
+            //setTimeout(window.location = "rooms.html", 5000);
         });
 
         $("#GoToRooms").on("click", function () {
             window.location = "rooms.html"
         });
-    } 
-};
+    };
 
-app.initialize();
+    initialize();
+
+});

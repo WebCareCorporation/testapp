@@ -1,2 +1,2 @@
-D:\android\gapshap\gapshap\platforms\android\ant-build\AndroidManifest.xml : \
-D:\android\gapshap\gapshap\platforms\android\AndroidManifest.xml \
+F:\GIt\testapp\platforms\android\ant-build\AndroidManifest.xml : \
+F:\GIt\testapp\platforms\android\AndroidManifest.xml \

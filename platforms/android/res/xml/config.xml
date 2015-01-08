@@ -38,13 +38,10 @@
     <description>
     App for gapshap
   </description>
-    <author email="kumarvarinder393@gmail.com" href="">
+    <author email="bathindavarinder@gmail.com" href="">
     Varinder KUmar
   </author>
     <content src="index.html" />
     <access origin="*" />
     <preference name="permissions" value="none" />
-    <plugins>
-        <plugin name="SQLitePlugin" value="SQLitePlugin" />
-    </plugins>
 </widget>

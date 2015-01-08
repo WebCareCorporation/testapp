@@ -8,7 +8,7 @@
     App for gapshap
   </description>
 
-  <author href="" email="kumarvarinder393@gmail.com">
+  <author href="" email="bathindavarinder@gmail.com">
     Varinder KUmar
   </author>
 
@@ -29,9 +29,7 @@
   </feature>
   
   <preference name="permissions" value="none"/>
-	<plugins>
-        <plugin name="SQLitePlugin" value="SQLitePlugin" />
-	</plugins>
+	
 
   <!--<platform name="android">
     --><!-- you can use any density that exists in the Android project --><!--

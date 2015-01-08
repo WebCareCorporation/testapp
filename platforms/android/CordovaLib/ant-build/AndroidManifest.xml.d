@@ -1,2 +1,2 @@
-D:\android\gapshap\gapshap\platforms\android\CordovaLib\ant-build\AndroidManifest.xml : \
-D:\android\gapshap\gapshap\platforms\android\CordovaLib\AndroidManifest.xml \
+F:\GIt\testapp\platforms\android\CordovaLib\ant-build\AndroidManifest.xml : \
+F:\GIt\testapp\platforms\android\CordovaLib\AndroidManifest.xml \

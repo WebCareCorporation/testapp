@@ -7,6 +7,75 @@ define(['require', 'CustomFunctions'],
             chat.server.joinRoom(groupname, name);
         };
 
+        function successHandler(result) {
+
+        }
+        function errorHandler(error) {
+            //alert('error = ' + error);
+        }
+
+        window.onNotificationGCM = function (e) {
+            //$("#app-status-ul").append('<li>EVENT -> RECEIVED:' + e.event + '</li>');
+            alert("received");
+            alert(e.event);
+            switch (e.event) {
+                case 'registered':
+                    if (e.regid.length > 0) {
+                        //$("#app-status-ul").append('<li>REGISTERED -> REGID:' + e.regid + "</li>");
+                        // Your GCM push server needs to know the regID before it can push to this device
+                        // here is where you might want to send it the regID for later use.
+                        console.log("regID = " + e.regid);
+                        //alert('resgisterd' + e.regid);
+                        localStorage.setItem("FirstTime", "false");
+                        var name = localStorage.getItem("Name");
+                        signal.SendGCMID(name, e.regid);
+                    }
+                    break;
+
+                case 'message':
+                    // if this flag is set, this notification happened while we were in the foreground.
+                    // you might want to play a sound to get the user's attention, throw up a dialog, etc.
+                    if (e.foreground) {
+                        custom.showNotification("Gapshap", e.payload.message);
+                        //$("#app-status-ul").append('<li>--INLINE NOTIFICATION--' + '</li>');
+
+                        //// on Android soundname is outside the payload.
+                        //// On Amazon FireOS all custom attributes are contained within payload
+                        //var soundfile = e.soundname || e.payload.sound;
+                        //// if the notification contains a soundname, play it.
+                        //var my_media = new Media("/android_asset/www/" + soundfile);
+                        //my_media.play();
+                    }
+                    else {
+                        custom.showNotification("Gapshap", e.payload.message);
+                        // otherwise we were launched because the user touched a notification in the notification tray.
+                        //if (e.coldstart) {
+                        //    $("#app-status-ul").append('<li>--COLDSTART NOTIFICATION--' + '</li>');
+                        //}
+                        //else {
+                        //    $("#app-status-ul").append('<li>--BACKGROUND NOTIFICATION--' + '</li>');
+                        //}
+                    }
+
+                    //$("#app-status-ul").append('<li>MESSAGE -> MSG: ' + e.payload.message + '</li>');
+                    ////Only works for GCM
+                    //$("#app-status-ul").append('<li>MESSAGE -> MSGCNT: ' + e.payload.msgcnt + '</li>');
+                    ////Only works on Amazon Fire OS
+                    //$status.append('<li>MESSAGE -> TIME: ' + e.payload.timeStamp + '</li>');
+                    break;
+
+                case 'error':
+                    //$("#app-status-ul").append('<li>ERROR -> MSG:' + e.msg + '</li>');
+                    break;
+
+                default:
+                    //$("#app-status-ul").append('<li>EVENT -> Unknown, an event was received and we do not know what it is</li>');
+                    break;
+            }
+        };
+
+
+
         var Message = function (message, by, left) {
 
             var divExist = true;
@@ -43,16 +112,22 @@ define(['require', 'CustomFunctions'],
 
         };
 
+        var SendGCMID = function (name, GCMId) {
+            chat.server.updateUserGCMID(name, GCMId);
+        };
 
         //var signalr = {
         return {
             // Application Constructor
             chat: undefined,
-
+            SendGCMID: SendGCMID,
             initialize: function () {
- 
+
                 document.addEventListener("offline", this.onOffline, false);
-                $.connection.hub.url = "http://bathindavarinder-001-site1.smarterasp.net/signalr";
+
+                if (window.Cordova) {
+                    $.connection.hub.url = "http://bathindavarinder-001-site1.smarterasp.net/signalr";
+                }
 
                 chat = $.connection.chatHub;
 
@@ -88,6 +163,19 @@ define(['require', 'CustomFunctions'],
                             $("#userList").append('<li><a href="#" class="icon chat ui-link" id="' + name + '">' + name + '</li>');
                     }
                 };
+                chat.client.registerConfirm = function (result) {
+                    if (result == "true") {
+
+                        localStorage.setItem("Name", localStorage.getItem("tempName"));
+
+                        $.ui.loadContent("main", null, null, "fade");
+
+                        setTimeout(window.location = "rooms.html", 5000);
+                    }
+                    else {
+                        $("#Info").html("This username is already taken. Please use other name.");
+                    }
+                }
 
                 chat.client.leftRoom = function (name) {
                     $('#userList #' + name).parent().remove();
@@ -100,13 +188,13 @@ define(['require', 'CustomFunctions'],
 
                 $.connection.hub.reconnecting(function () {
                     var msg = $('<li> Reconnecting.... </li>');
-                    custom.informMessage("Reconnecting....", "Gapshap", true);
+                    custom.informMessage(msg, "Gapshap", true);
                     tryingToReconnect = true;
                 });
 
                 $.connection.hub.connectionSlow(function () {
                     var msg = $('<li> Connection slow.... </li>');
-                    custom.informMessage(" Connection slow....", "Gapshap", true);
+                    custom.informMessage(msg, "Gapshap", true);
 
                 });
 
@@ -114,7 +202,7 @@ define(['require', 'CustomFunctions'],
                     tryingToReconnect = false;
                     var myClientId = $.connection.hub.id;
                     var msg = $('<li> Reconnected.... </li>');
-                    custom.informMessage(" Reconnected.... ", "Gapshap", true);
+                    custom.informMessage(msg, "Gapshap", true);
                     if (myClientId != localStorage.getItem("ConnId")) {
 
                         var msg = $('<li> updating connection.... </li>');
@@ -242,6 +330,21 @@ define(['require', 'CustomFunctions'],
                         var room = localStorage.getItem("room");
 
 
+                        if (!localStorage.getItem("FirstTime")) {
+                            if (window.Cordova) {
+                                pushNotification = window.plugins.pushNotification;
+                                pushNotification.register(
+                                        successHandler,
+                                        errorHandler,
+                                        {
+                                            "senderID": "899559090645",
+                                            "ecb": "onNotificationGCM"
+                                        });
+                            }
+
+                        }
+
+
                         JoinRoom(room, name);
                         custom.show('afui', true);
                         custom.show('loading', false);
@@ -253,7 +356,24 @@ define(['require', 'CustomFunctions'],
                     custom.openRooms();
                 }
             },
+            startConnection: function () {
 
+                if (custom.CheckConnection()) {
+
+                    $.connection.hub.start().done(function () {
+
+                        var name = localStorage.getItem("tempName");
+
+                        var uniqueId = localStorage.getItem("uniqueId");
+
+                        chat.server.registerUser(uniqueId, name);
+
+                    });
+
+                } else {
+                    alert("please check your network.");
+                }
+            },
             leaveRoom: function (groupname, name) {
 
                 var myClientId = localStorage.getItem("ConnId");
