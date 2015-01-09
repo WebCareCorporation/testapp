@@ -12,6 +12,14 @@ function (require, custom, signal) {
         bindEvents();
     };
     var bindEvents = function () {
+
+        document.addEventListener("backbutton", function () {
+            $('body').fadeOut(600, function () {
+                document.location.href = "index.html"
+            });
+
+        }, false);
+
         if (!window.Cordova) {
             $(document).ready(function () {
                 readyFunction();
@@ -27,12 +35,7 @@ function (require, custom, signal) {
     };
     var readyFunction = function () {
        
-        document.addEventListener("backbutton", function () {
-            $('body').fadeOut(600, function () {
-                document.location.href = "index.html"
-            });
-
-        }, false);
+        
 
         $("#townList > li a").on("click", function () {
 

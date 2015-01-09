@@ -4,11 +4,11 @@ define(['require', 'CustomFunctions'],
         //    return signalr;
 
         if (window.Cordova) {
-            $.connection.hub.url = "http://bathindavarinder-001-site1.smarterasp.net/signalr"; 
+            $.connection.hub.url = "http://bathindavarinder-001-site1.smarterasp.net/signalr";
         }
-        
+
         window.chat = $.connection.chatHub;
-       
+
 
         window.chat.client.updateMembers = function (names) {
 
@@ -204,7 +204,7 @@ define(['require', 'CustomFunctions'],
 
         window.onNotificationGCM = function (e) {
             //$("#app-status-ul").append('<li>EVENT -> RECEIVED:' + e.event + '</li>');
-           
+
             console.log("event fired : " + e.event);
             switch (e.event) {
                 case 'registered':
@@ -216,7 +216,7 @@ define(['require', 'CustomFunctions'],
                         //alert('resgisterd' + e.regid);
                         localStorage.setItem("FirstTime", "false");
                         var name = localStorage.getItem("Name");
-                        SendGCMID(name, e.regid); 
+                        SendGCMID(name, e.regid);
                     }
                     break;
 
@@ -229,7 +229,7 @@ define(['require', 'CustomFunctions'],
                         var n = message.indexOf(":");
 
                         var name = message.substring(0, n);
-                        console.log("got name : " +name);
+                        console.log("got name : " + name);
                         custom.showNotification(name, e.payload.message);
                         //$("#app-status-ul").append('<li>--INLINE NOTIFICATION--' + '</li>');
 
@@ -249,7 +249,7 @@ define(['require', 'CustomFunctions'],
                         console.log("got name : " + name);
                         custom.showNotification(name, e.payload.message);
 
-                      
+
                         // otherwise we were launched because the user touched a notification in the notification tray.
                         //if (e.coldstart) {
                         //    $("#app-status-ul").append('<li>--COLDSTART NOTIFICATION--' + '</li>');
@@ -295,7 +295,7 @@ define(['require', 'CustomFunctions'],
                         lockBounce: false
                     });
                 }
-            } 
+            }
 
             if (left && !divExist) {
                 return;
@@ -321,17 +321,17 @@ define(['require', 'CustomFunctions'],
         //var signalr = {
         return {
             // Application Constructor
-            
+
             SendGCMID: SendGCMID,
             initialize: function () {
 
                 document.addEventListener("offline", this.onOffline, false);
 
-               
+
 
                 var tryingToReconnect = false;
 
-                
+
 
             }, JoinRoom: JoinRoom,
             initiateConnection: function () {
@@ -339,7 +339,7 @@ define(['require', 'CustomFunctions'],
 
                 if (custom.CheckConnection()) {
 
-                   
+
 
                     $.connection.hub.start().done(function () {
                         var myClientId = $.connection.hub.id;
@@ -349,9 +349,9 @@ define(['require', 'CustomFunctions'],
                         var room = localStorage.getItem("room");
 
 
-                        
+                        if (!localStorage.getItem("FirstTime")) {
                             if (window.Cordova) {
-                             
+
                                 pushNotification = window.plugins.pushNotification;
                                 pushNotification.register(
                                         successHandler,
@@ -361,8 +361,7 @@ define(['require', 'CustomFunctions'],
                                             "ecb": "onNotificationGCM"
                                         });
                             }
-
-                       // }
+                        }
 
 
                         JoinRoom(room, name);
@@ -397,7 +396,7 @@ define(['require', 'CustomFunctions'],
             leaveRoom: function (groupname, name) {
 
                 var myClientId = localStorage.getItem("ConnId");
-                localStorage.setItem("room",undefined);
+                localStorage.setItem("room", undefined);
                 window.chat.server.leaveRoom(groupname, name, myClientId);
 
                 if (tryingToReconnect) {

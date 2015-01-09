@@ -1500,16 +1500,28 @@
     <Content Include="www\appframework\Sendbtn.jpg" />
     <Content Include="www\appframework\Sendbtn1.jpg" />
     <Content Include="www\css\custom.css" />
+    <Content Include="www\css\customres.css" />
     <Content Include="www\css\index.css" />
+    <Content Include="www\css\jquery.mobile-1.0.1.css" />
+    <Content Include="www\css\jquery.mobile.structure-1.0.1.css" />
+    <Content Include="www\img\header_logo.png" />
     <Content Include="www\img\logo.png" />
     <Content Include="www\index.html" />
     <Content Include="www\index1.html" />
     <Content Include="www\index22.html" />
+    <Content Include="www\Indexapp.js" />
+    <Content Include="www\js\addstarscript.js" />
     <Content Include="www\js\cordova.js" />
     <Content Include="www\js\CustomFunctions.js" />
     <Content Include="www\js\Database.js" />
     <Content Include="www\js\handlebars-v2.0.0.js" />
     <Content Include="www\js\index.js" />
+    <Content Include="www\js\jquery-1.6.4-vsdoc.js" />
+    <Content Include="www\js\jquery-1.6.4.js" />
+    <Content Include="www\js\jquery-1.6.4.min.js" />
+    <Content Include="www\js\jquery-1.7.1.min.js" />
+    <Content Include="www\js\jquery.mobile-1.0.1.js" />
+    <Content Include="www\js\jquery.mobile-1.0.1.min.js" />
     <Content Include="www\js\jquery.signalR-2.1.2.js" />
     <Content Include="www\js\jquery.signalR-2.1.2.min.js" />
     <Content Include="www\js\require.js" />
@@ -1537,6 +1549,7 @@
     <Content Include="www\res\screen\android\res-long-port-xxxhdpi\default.png" />
     <Content Include="www\room.html" />
     <Content Include="www\rooms.html" />
+    <Content Include="www\RoomsApp.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="platforms\android\ant-build\rsLibs\" />

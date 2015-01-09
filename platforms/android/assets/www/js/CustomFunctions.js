@@ -135,8 +135,8 @@
             window.activeUser = username;
             $("#HeadName").text(username);
             $('div#' + username).css("display", "block");
-            $('#userList #' + username).parent().css("background-color", "#619ef2");
-
+            $('#userList #' + username).parent().css("background-color", "#fff");
+            $('#userList #' + username).css("background-color", "#fff");
             $.ui.toggleSideMenu();
         },
         CheckConnection: function () {

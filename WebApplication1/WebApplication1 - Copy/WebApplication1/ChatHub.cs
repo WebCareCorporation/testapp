@@ -248,8 +248,6 @@ namespace WebApplication1
             Clients.Client(senderConnId).byPersonalChat(message, name);
 
 
-
-
             if (string.IsNullOrEmpty(reciever))
             {
                 if (userGCMIDs.Any(x => x.Key == name))
@@ -268,7 +266,7 @@ namespace WebApplication1
                 }
                 else
                 {
-                    Clients.Client(senderConnId).byPersonalChat(" push not avail ", name);
+                    Clients.Client(senderConnId).byPersonalChat(" User not available ", name);
                 }
             }
             else
