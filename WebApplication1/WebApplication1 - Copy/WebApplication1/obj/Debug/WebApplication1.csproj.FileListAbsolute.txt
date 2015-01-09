@@ -1,0 +1,108 @@
+c:\users\varinder\documents\visual studio 2012\Projects\WebApplication1\WebApplication1\bin\WebApplication1.dll
+c:\users\varinder\documents\visual studio 2012\Projects\WebApplication1\WebApplication1\bin\WebApplication1.pdb
+c:\users\varinder\documents\visual studio 2012\Projects\WebApplication1\WebApplication1\bin\Microsoft.AspNet.SignalR.Core.dll
+c:\users\varinder\documents\visual studio 2012\Projects\WebApplication1\WebApplication1\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+c:\users\varinder\documents\visual studio 2012\Projects\WebApplication1\WebApplication1\bin\Microsoft.Owin.dll
+c:\users\varinder\documents\visual studio 2012\Projects\WebApplication1\WebApplication1\bin\Microsoft.Owin.Host.SystemWeb.dll
+c:\users\varinder\documents\visual studio 2012\Projects\WebApplication1\WebApplication1\bin\Microsoft.Owin.Security.dll
+c:\users\varinder\documents\visual studio 2012\Projects\WebApplication1\WebApplication1\bin\Newtonsoft.Json.dll
+c:\users\varinder\documents\visual studio 2012\Projects\WebApplication1\WebApplication1\bin\Owin.dll
+c:\users\varinder\documents\visual studio 2012\Projects\WebApplication1\WebApplication1\bin\Microsoft.AspNet.SignalR.Core.xml
+c:\users\varinder\documents\visual studio 2012\Projects\WebApplication1\WebApplication1\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+c:\users\varinder\documents\visual studio 2012\Projects\WebApplication1\WebApplication1\bin\Microsoft.Owin.xml
+c:\users\varinder\documents\visual studio 2012\Projects\WebApplication1\WebApplication1\bin\Microsoft.Owin.Host.SystemWeb.xml
+c:\users\varinder\documents\visual studio 2012\Projects\WebApplication1\WebApplication1\bin\Microsoft.Owin.Security.xml
+c:\users\varinder\documents\visual studio 2012\Projects\WebApplication1\WebApplication1\bin\Newtonsoft.Json.xml
+c:\users\varinder\documents\visual studio 2012\Projects\WebApplication1\WebApplication1\obj\Debug\WebApplication1.dll
+c:\users\varinder\documents\visual studio 2012\Projects\WebApplication1\WebApplication1\obj\Debug\WebApplication1.pdb
+C:\Users\varinder\documents\visual studio 2012\Projects\WebApplication1\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
+F:\WebApplication1\WebApplication1\bin\WebApplication1.dll
+F:\WebApplication1\WebApplication1\bin\WebApplication1.pdb
+F:\WebApplication1\WebApplication1\bin\Microsoft.AspNet.SignalR.Core.dll
+F:\WebApplication1\WebApplication1\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+F:\WebApplication1\WebApplication1\bin\Microsoft.Owin.dll
+F:\WebApplication1\WebApplication1\bin\Microsoft.Owin.Host.SystemWeb.dll
+F:\WebApplication1\WebApplication1\bin\Microsoft.Owin.Security.dll
+F:\WebApplication1\WebApplication1\bin\Newtonsoft.Json.dll
+F:\WebApplication1\WebApplication1\bin\Owin.dll
+F:\WebApplication1\WebApplication1\bin\Microsoft.AspNet.SignalR.Core.xml
+F:\WebApplication1\WebApplication1\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+F:\WebApplication1\WebApplication1\bin\Microsoft.Owin.xml
+F:\WebApplication1\WebApplication1\bin\Microsoft.Owin.Host.SystemWeb.xml
+F:\WebApplication1\WebApplication1\bin\Microsoft.Owin.Security.xml
+F:\WebApplication1\WebApplication1\bin\Newtonsoft.Json.xml
+F:\WebApplication1\WebApplication1\obj\Debug\WebApplication1.dll
+F:\WebApplication1\WebApplication1\obj\Debug\WebApplication1.pdb
+F:\WebApplication1\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
+C:\WebApplication1\WebApplication1\bin\WebApplication1.dll
+C:\WebApplication1\WebApplication1\bin\WebApplication1.pdb
+C:\WebApplication1\WebApplication1\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\WebApplication1\WebApplication1\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\WebApplication1\WebApplication1\bin\Microsoft.Owin.dll
+C:\WebApplication1\WebApplication1\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\WebApplication1\WebApplication1\bin\Microsoft.Owin.Security.dll
+C:\WebApplication1\WebApplication1\bin\Newtonsoft.Json.dll
+C:\WebApplication1\WebApplication1\bin\Owin.dll
+C:\WebApplication1\WebApplication1\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\WebApplication1\WebApplication1\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+C:\WebApplication1\WebApplication1\bin\Microsoft.Owin.xml
+C:\WebApplication1\WebApplication1\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\WebApplication1\WebApplication1\bin\Microsoft.Owin.Security.xml
+C:\WebApplication1\WebApplication1\bin\Newtonsoft.Json.xml
+C:\WebApplication1\WebApplication1\obj\Debug\WebApplication1.dll
+C:\WebApplication1\WebApplication1\obj\Debug\WebApplication1.pdb
+C:\WebApplication1\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
+C:\WebApplication1\WebApplication1\WebApplication1\bin\WebApplication1.dll
+C:\WebApplication1\WebApplication1\WebApplication1\bin\WebApplication1.pdb
+C:\WebApplication1\WebApplication1\WebApplication1\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\WebApplication1\WebApplication1\WebApplication1\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\WebApplication1\WebApplication1\WebApplication1\bin\Microsoft.Owin.dll
+C:\WebApplication1\WebApplication1\WebApplication1\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\WebApplication1\WebApplication1\WebApplication1\bin\Microsoft.Owin.Security.dll
+C:\WebApplication1\WebApplication1\WebApplication1\bin\Newtonsoft.Json.dll
+C:\WebApplication1\WebApplication1\WebApplication1\bin\Owin.dll
+C:\WebApplication1\WebApplication1\WebApplication1\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\WebApplication1\WebApplication1\WebApplication1\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+C:\WebApplication1\WebApplication1\WebApplication1\bin\Microsoft.Owin.xml
+C:\WebApplication1\WebApplication1\WebApplication1\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\WebApplication1\WebApplication1\WebApplication1\bin\Microsoft.Owin.Security.xml
+C:\WebApplication1\WebApplication1\WebApplication1\bin\Newtonsoft.Json.xml
+C:\WebApplication1\WebApplication1\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
+C:\WebApplication1\WebApplication1\WebApplication1\obj\Debug\WebApplication1.dll
+C:\WebApplication1\WebApplication1\WebApplication1\obj\Debug\WebApplication1.pdb
+C:\WebApplication1 (1)\WebApplication1\WebApplication1\bin\WebApplication1.dll
+C:\WebApplication1 (1)\WebApplication1\WebApplication1\bin\WebApplication1.pdb
+C:\WebApplication1 (1)\WebApplication1\WebApplication1\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\WebApplication1 (1)\WebApplication1\WebApplication1\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\WebApplication1 (1)\WebApplication1\WebApplication1\bin\Microsoft.Owin.dll
+C:\WebApplication1 (1)\WebApplication1\WebApplication1\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\WebApplication1 (1)\WebApplication1\WebApplication1\bin\Microsoft.Owin.Security.dll
+C:\WebApplication1 (1)\WebApplication1\WebApplication1\bin\Newtonsoft.Json.dll
+C:\WebApplication1 (1)\WebApplication1\WebApplication1\bin\Owin.dll
+C:\WebApplication1 (1)\WebApplication1\WebApplication1\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\WebApplication1 (1)\WebApplication1\WebApplication1\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+C:\WebApplication1 (1)\WebApplication1\WebApplication1\bin\Microsoft.Owin.xml
+C:\WebApplication1 (1)\WebApplication1\WebApplication1\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\WebApplication1 (1)\WebApplication1\WebApplication1\bin\Microsoft.Owin.Security.xml
+C:\WebApplication1 (1)\WebApplication1\WebApplication1\bin\Newtonsoft.Json.xml
+C:\WebApplication1 (1)\WebApplication1\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
+C:\WebApplication1 (1)\WebApplication1\WebApplication1\obj\Debug\WebApplication1.dll
+C:\WebApplication1 (1)\WebApplication1\WebApplication1\obj\Debug\WebApplication1.pdb
+C:\testapp\WebApplication1 - Copy\WebApplication1 - Copy\WebApplication1\bin\WebApplication1.dll
+C:\testapp\WebApplication1 - Copy\WebApplication1 - Copy\WebApplication1\bin\WebApplication1.pdb
+C:\testapp\WebApplication1 - Copy\WebApplication1 - Copy\WebApplication1\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\testapp\WebApplication1 - Copy\WebApplication1 - Copy\WebApplication1\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\testapp\WebApplication1 - Copy\WebApplication1 - Copy\WebApplication1\bin\Microsoft.Owin.dll
+C:\testapp\WebApplication1 - Copy\WebApplication1 - Copy\WebApplication1\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\testapp\WebApplication1 - Copy\WebApplication1 - Copy\WebApplication1\bin\Microsoft.Owin.Security.dll
+C:\testapp\WebApplication1 - Copy\WebApplication1 - Copy\WebApplication1\bin\Newtonsoft.Json.dll
+C:\testapp\WebApplication1 - Copy\WebApplication1 - Copy\WebApplication1\bin\Owin.dll
+C:\testapp\WebApplication1 - Copy\WebApplication1 - Copy\WebApplication1\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\testapp\WebApplication1 - Copy\WebApplication1 - Copy\WebApplication1\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+C:\testapp\WebApplication1 - Copy\WebApplication1 - Copy\WebApplication1\bin\Microsoft.Owin.xml
+C:\testapp\WebApplication1 - Copy\WebApplication1 - Copy\WebApplication1\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\testapp\WebApplication1 - Copy\WebApplication1 - Copy\WebApplication1\bin\Microsoft.Owin.Security.xml
+C:\testapp\WebApplication1 - Copy\WebApplication1 - Copy\WebApplication1\bin\Newtonsoft.Json.xml
+C:\testapp\WebApplication1 - Copy\WebApplication1 - Copy\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
+C:\testapp\WebApplication1 - Copy\WebApplication1 - Copy\WebApplication1\obj\Debug\WebApplication1.dll
+C:\testapp\WebApplication1 - Copy\WebApplication1 - Copy\WebApplication1\obj\Debug\WebApplication1.pdb

@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Gapshap</title>
+    <!--
+    This template can be used for creating apps that require user login and user registration before starting actual app.
+-->
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0;" />
+
+    <link rel="stylesheet" type="text/css" href="appframework/af.ui.css" />
+    <link rel="stylesheet" type="text/css" href="appframework/icons.css" />
+
+
+
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="appframework/jq.appframework.js"></script>
+    <script type="text/javascript" charset="utf-8" src="appframework/appframework.ui.min.js"></script>
+       <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+    <!--<script type="text/javascript" src="Scripts/CustomFunctions.js"></script>-->
+    <script type="text/javascript" src="Scripts/jquery.signalR-2.1.2.js"></script>
+
+    <script src="signalr/hubs" type="text/javascript"></script>
+
+<!--    <script type="text/javascript" charset="utf-8" src="Scripts/signalRHub.js"></script>-->
+    <!-- phantom library, needed for XDK "legacy" container api calls -->
+    <!--<script src="intelxdk.js"></script>
+    <!-- phantom library, needed for Cordova api calls 
+    <script src="cordova.js"></script>
+    <!-- phantom library, needed for XDK "legacy" container CORS
+    <script src="xhr.js"></script>-->
+    <script data-main="Indexapp" src="Scripts/require.js"></script>
+    <!--<script type="text/javascript" charset="utf-8" src="Scripts/index.js"></script>-->
+
+    <script> 
+    </script>
+</head>
+<body>
+    <div id="afui">
+
+        <div id="content" style="">
+
+            <!-- Views -->
+
+            <!-- Welcome View -->
+            <div class="panel" title="Welcome" id="page1" data-header="none" data-footer="none" selected="true">
+                <div style="text-align: center">
+                    <br>
+                    <br>
+                    <h1>गपशप </h1>
+                    <br>
+                    <br>
+                    <p>Please register for gapshap</p>
+                    <br>
+                    <br>
+                </div>
+                <ul class="list inset">
+                    <li><a href="#signup" class="icon pencil" style="text-align: center">Register</a></li>
+                </ul>
+            </div>
+
+
+            <!-- Register View -->
+            <div class="panel" title="Register" id="signup" data-footer="none">
+                <div style="text-align: center">
+                    <br>
+                    <br>
+                    <p>Register</p>
+                    <br>
+                    <br>
+                </div>
+                <input name="name" id="name" type="text" placeholder="Name" />
+                <!--                <input name="email" type="text" placeholder="Email" />
+                <input name="username" type="text" placeholder="username" />
+                <input name="password" type="password" placeholder="password" />
+                <input name="password2" type="password" placeholder="confirm password" />-->
+                <a class="button block green" href="#" id="register">Register</a>
+            </div>
+
+            <div class="panel" title="Login in" id="signin" data-footer="none">
+                  <header>
+                    <h1>Gapshap</h1>
+                </header>
+                <div style="text-align: center">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    Currently logged in with name :<p id="logname"></p>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+                <ul class="list inset">
+                    <li><a href="#changename" class="icon pencil" style="text-align: center">Change Name</a></li>
+                    <li><a href="#" id="GoToRooms" class="icon pencil" style="text-align: center">Go To Rooms</a></li>
+                </ul>
+            </div>
+
+            <div class="panel" title="Change Name" id="changename" data-footer="none">
+                <div style="text-align: center">
+                    <br>
+                    <br>
+                    <p>Change Name</p>
+                    <br>
+                    <br>
+                </div>
+                <input name="name" id="changenameText" type="text" placeholder="Name" />
+                <!--                <input name="email" type="text" placeholder="Email" />
+                <input name="username" type="text" placeholder="username" />
+                <input name="password" type="password" placeholder="password" />
+                <input name="password2" type="password" placeholder="confirm password" />-->
+                <a class="button block green" href="#" id="Submit">Submit</a>
+            </div>
+
+            <!-- Main App View -->
+            <div class="panel" title="Start" id="main" data-load="startApp">
+                Fetching rooms......
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html>
