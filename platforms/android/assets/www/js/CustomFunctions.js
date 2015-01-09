@@ -41,6 +41,7 @@
     return {
 
         initialize: function () {
+            
             window.scroller = [];
         }, 
         showNotification: showNotification,
@@ -76,14 +77,14 @@
 
             if (addToHeader) {
 
-                var old = $("#HeadName").text();
+                //var old = $("#HeadName").text();
 
-                $("#HeadName").text(msg);
+                //$("#HeadName").text(msg);
 
-                setTimeout(function () {
-                    // Do something after 5 seconds
-                    $("#HeadName").text(old)
-                }, 5000);
+                //setTimeout(function () {
+                //    // Do something after 5 seconds
+                //    $("#HeadName").text(old)
+                //}, 5000);
 
             }
         },

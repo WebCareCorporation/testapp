@@ -420,7 +420,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/10/2014 21:19:09</publishTime>
     </File>
     <File Include="bin/WebApplication1.dll">
-      <publishTime>01/09/2015 11:08:57</publishTime>
+      <publishTime>01/09/2015 11:33:04</publishTime>
     </File>
     <File Include="chatroom.aspx">
       <publishTime>12/11/2014 23:59:02</publishTime>
@@ -486,10 +486,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/08/2015 00:16:54</publishTime>
     </File>
     <File Include="Scripts/signalRHub.js">
-      <publishTime>01/09/2015 00:38:35</publishTime>
+      <publishTime>01/09/2015 11:21:41</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/09/2015 11:08:57</publishTime>
+      <publishTime>01/09/2015 11:33:04</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -41,6 +41,7 @@
     return {
 
         initialize: function () {
+            
             window.scroller = [];
         }, 
         showNotification: showNotification,

@@ -17,34 +17,19 @@
     <script type="text/javascript" charset="utf-8" src="appframework/appframework.ui.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
-    <script type="text/javascript" src="js/CustomFunctions.js"></script>
+    <!--    <script type="text/javascript" src="js/CustomFunctions.js"></script>-->
     <script type="text/javascript" src="js/jquery.signalR-2.1.2.js"></script>
 
-  
-    <!-- phantom library, needed for XDK "legacy" container api calls -->
+    <script type="text/javascript" src="http://bathindavarinder-001-site1.smarterasp.net/signalr/hubs"></script>
+
     <script src="intelxdk.js"></script>
-    <!-- phantom library, needed for Cordova api calls -->
     <script src="cordova.js"></script>
-    <!-- phantom library, needed for XDK "legacy" container CORS -->
+
     <script src="xhr.js"></script>
-
-    <script type="text/javascript" charset="utf-8" src="js/index.js"></script>
+    <script data-main="Indexapp" src="js/require.js"></script>
     <script>
-        //function signUp() {
-
-        //    // signup code here
-
-        //    $.ui.loadContent("main", null, null, "fade");
-
-        //    setTimeout(window.location = "rooms.html", 5000);
-        //}
-
-        //function startApp() {
-        //    // clears all back button history
-        //    $.ui.clearHistory();
-
-        //    // your app code here
-        //}
+      
+ 
 
     </script>
 </head>
@@ -80,6 +65,7 @@
                     <br>
                     <p>Register</p>
                     <br>
+                    <div class="Info"></div>
                     <br>
                 </div>
                 <input name="name" id="name" type="text" placeholder="Name" />
@@ -91,7 +77,7 @@
             </div>
 
             <div class="panel" title="Login in" id="signin" data-footer="none">
-                  <header>
+                <header>
                     <h1>Gapshap</h1>
                 </header>
                 <div style="text-align: center">
@@ -102,7 +88,7 @@
                     Currently logged in with name :<p id="logname"></p>
                     <br>
                     <br>
-                    <br>
+                    <div class="Info"></div>
                     <br>
                 </div>
                 <ul class="list inset">

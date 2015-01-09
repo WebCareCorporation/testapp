@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using PushNotification;
+using System.Net;
+using System.Text;
+using System.IO;
 namespace WebApplication1
 {
     public class ChatHub : Hub
@@ -156,7 +159,8 @@ namespace WebApplication1
                     }
 
                     groupusers.Remove(u.Key);
-                    //  user.Remove(u.Key);
+                    user.Remove(u.Key);
+                    user.Add(userName, "");
                 }
             }
 
@@ -184,7 +188,7 @@ namespace WebApplication1
 
         public void JoinRoom(string groupName, string userName)
         {
-            if (!user.Any(x => x.Key == userName))
+            if (user.Any(x => x.Key == userName))
             {
                 user.Remove(userName);
             }
@@ -237,13 +241,79 @@ namespace WebApplication1
         {
             Clients.Group(grpName).addChatMessage(name + " : " + message);
         }
-        public void SendPersonalMessage(string name, string message, string by)
+        public void SendPersonalMessage(string name, string message, string sender)
         {
-            string connId = user[name];
-            string connIdBy = user[by];
-            Clients.Client(connId).recievePersonalChat(message, by);
+            string senderConnId = user[sender];
+            string reciever = user[name];
+            Clients.Client(senderConnId).byPersonalChat("avail : " + reciever + " End : " + message, name);
 
-            Clients.Client(connIdBy).byPersonalChat(message, name);
+
+
+
+            if (string.IsNullOrEmpty(reciever))
+            {
+                if (userGCMIDs.Any(x => x.Key == name))
+                {
+                    Clients.Client(senderConnId).byPersonalChat(" push notify : " + userGCMIDs[name], name);
+                    try
+                    {
+                        SendNotification(userGCMIDs[name], sender + " : " + message);
+                        //PushNotification.PushNotification push = new PushNotification.PushNotification();
+                        //string result = push.Android(userGCMIDs[name], "bathindavarinder@gmail.com", "2237679@Va", sender + " : " + message);
+                    }
+                    catch (Exception ex)
+                    {
+                        Clients.Client(senderConnId).byPersonalChat(" push res : " + ex.Message, name);
+                    }
+                }
+                else
+                {
+                    Clients.Client(senderConnId).byPersonalChat(" push not avail ", name);
+                }
+            }
+            else
+            {
+                Clients.Client(reciever).recievePersonalChat(message, sender);
+            }
+
+
+        }
+
+        public string SendNotification(string deviceId, string message)
+        {
+            string GoogleAppID = "AIzaSyAH_bMQkNYTT16IR3ycM4aulDRZ3Z-OOR8";
+            var SENDER_ID = "899559090645";
+            var value = message;
+            WebRequest tRequest;
+            tRequest = WebRequest.Create("https://android.googleapis.com/gcm/send");
+            tRequest.Method = "post";
+            tRequest.ContentType = " application/x-www-form-urlencoded;charset=UTF-8";
+            tRequest.Headers.Add(string.Format("Authorization: key={0}", GoogleAppID));
+
+            tRequest.Headers.Add(string.Format("Sender: id={0}", SENDER_ID));
+
+            string postData = "collapse_key=score_update&time_to_live=108&delay_while_idle=1&data.message=" + value + "&data.time=" +
+            System.DateTime.Now.ToString() + "&registration_id=" + deviceId + "";
+            Console.WriteLine(postData);
+            Byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+            tRequest.ContentLength = byteArray.Length;
+
+            Stream dataStream = tRequest.GetRequestStream();
+            dataStream.Write(byteArray, 0, byteArray.Length);
+            dataStream.Close();
+
+            WebResponse tResponse = tRequest.GetResponse();
+
+            dataStream = tResponse.GetResponseStream();
+
+            StreamReader tReader = new StreamReader(dataStream);
+
+            String sResponseFromServer = tReader.ReadToEnd();
+
+            tReader.Close();
+            dataStream.Close();
+            tResponse.Close();
+            return sResponseFromServer;
         }
 
 

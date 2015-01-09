@@ -88,3 +88,21 @@ C:\testapp\WebApplication1 - Copy\WebApplication1 - Copy\WebApplication1\bin\New
 C:\testapp\WebApplication1 - Copy\WebApplication1 - Copy\WebApplication1\obj\Release\WebApplication1.csprojResolveAssemblyReference.cache
 C:\testapp\WebApplication1 - Copy\WebApplication1 - Copy\WebApplication1\obj\Release\WebApplication1.dll
 C:\testapp\WebApplication1 - Copy\WebApplication1 - Copy\WebApplication1\obj\Release\WebApplication1.pdb
+C:\testapp\WebApplication1\WebApplication1 - Copy\WebApplication1\bin\WebApplication1.dll
+C:\testapp\WebApplication1\WebApplication1 - Copy\WebApplication1\bin\WebApplication1.pdb
+C:\testapp\WebApplication1\WebApplication1 - Copy\WebApplication1\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\testapp\WebApplication1\WebApplication1 - Copy\WebApplication1\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\testapp\WebApplication1\WebApplication1 - Copy\WebApplication1\bin\Microsoft.Owin.dll
+C:\testapp\WebApplication1\WebApplication1 - Copy\WebApplication1\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\testapp\WebApplication1\WebApplication1 - Copy\WebApplication1\bin\Microsoft.Owin.Security.dll
+C:\testapp\WebApplication1\WebApplication1 - Copy\WebApplication1\bin\Newtonsoft.Json.dll
+C:\testapp\WebApplication1\WebApplication1 - Copy\WebApplication1\bin\Owin.dll
+C:\testapp\WebApplication1\WebApplication1 - Copy\WebApplication1\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\testapp\WebApplication1\WebApplication1 - Copy\WebApplication1\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+C:\testapp\WebApplication1\WebApplication1 - Copy\WebApplication1\bin\Microsoft.Owin.xml
+C:\testapp\WebApplication1\WebApplication1 - Copy\WebApplication1\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\testapp\WebApplication1\WebApplication1 - Copy\WebApplication1\bin\Microsoft.Owin.Security.xml
+C:\testapp\WebApplication1\WebApplication1 - Copy\WebApplication1\bin\Newtonsoft.Json.xml
+C:\testapp\WebApplication1\WebApplication1 - Copy\WebApplication1\obj\Release\WebApplication1.csprojResolveAssemblyReference.cache
+C:\testapp\WebApplication1\WebApplication1 - Copy\WebApplication1\obj\Release\WebApplication1.dll
+C:\testapp\WebApplication1\WebApplication1 - Copy\WebApplication1\obj\Release\WebApplication1.pdb

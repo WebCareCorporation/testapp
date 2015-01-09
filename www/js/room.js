@@ -17,7 +17,7 @@ function (require, custom, signal, database) {
 
         bindEvents();
     };
-        var bindEvents = function () {
+    var bindEvents = function () {
 
         if (!window.Cordova) {
             $(document).ready(function () {
@@ -54,7 +54,7 @@ function (require, custom, signal, database) {
         }
     };
     var readyFunction = function () {
-        
+
         window.background = false;
 
         signal.initiateConnection();
