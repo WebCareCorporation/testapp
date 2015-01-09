@@ -1,6 +1,9 @@
 define(['require', 'CustomFunctions', 'signalRHub'],
 function (require, custom, signal) {
 
+    $("body").css("display", "none");
+    $("body").fadeIn(800);
+
     var initialize = function () {
 
         $.ui.autoLaunch = false;
@@ -103,7 +106,9 @@ function (require, custom, signal) {
         });
 
         $("#GoToRooms").on("click", function () {
-            window.location = "rooms.html"
+            $('body').fadeOut(600, function () {
+                document.location.href = "rooms.html"
+            });
         });
     };
 

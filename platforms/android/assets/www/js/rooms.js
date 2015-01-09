@@ -1,10 +1,12 @@
 ﻿define(['require', 'CustomFunctions', 'signalRHub'],
 function (require, custom, signal) {
+    $("body").css("display", "none");
+    $("body").fadeIn(1000);
 
     var initialize = function () {
       
-        $.ui.autoLaunch = false;
-        $.ui.backButtonText = "";
+        //$.ui.autoLaunch = false;
+        //$.ui.backButtonText = "";
          
      
         bindEvents();
@@ -25,18 +27,29 @@ function (require, custom, signal) {
     };
     var readyFunction = function () {
        
-        $("li a").on("click", function () {
+        document.addEventListener("backbutton", function () {
+            $('body').fadeOut(600, function () {
+                document.location.href = "index.html"
+            });
+
+        }, false);
+
+        $("#townList > li a").on("click", function () {
 
             var room = $(this).attr("id");
+            
             localStorage.setItem("room", room);
-            window.location = "room.html";
+            //window.location = "room.html";
 
+            $('body').fadeOut(600, function () {
+                document.location.href = "room.html"
+            });
         });
 
         $("#backButton").on("click", function () {
             window.location = "index.html#signin";
         });
-        $.ui.launch();
+     //   $.ui.launch();
     };
 
     initialize();

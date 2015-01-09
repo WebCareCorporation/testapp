@@ -156,7 +156,12 @@
             }
         },
         show: function (id, value) {
-            document.getElementById(id).style.display = value ? 'block' : 'none';
+            if (value) {
+                $("#"+id).fadeIn(700);
+            } else {
+                $("#" + id).fadeOut(700);
+            }
+            //document.getElementById(id).style.display = value ? 'block' : 'none';
         },
         openRooms: function () {
             window.location = "rooms.html";

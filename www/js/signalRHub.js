@@ -339,9 +339,7 @@ define(['require', 'CustomFunctions'],
 
                 if (custom.CheckConnection()) {
 
-                    custom.show('afui', false);
-
-                    custom.show('loading', true);
+                   
 
                     $.connection.hub.start().done(function () {
                         var myClientId = $.connection.hub.id;

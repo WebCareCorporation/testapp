@@ -1,10 +1,13 @@
 /*** general styling */
 .ui-page.ui-body-c{
 background:url(images/bg.png);
-box-shadow:  0px 0px 30px 5px rgba(107, 105, 105, 0.3) inset,
- 0px 0px 0px 1px rgba(107, 105, 105, 0.4) inset;
+/*box-shadow:  0px 0px 30px 5px rgba(107, 105, 105, 0.3) inset,
+ 0px 0px 0px 1px rgba(107, 105, 105, 0.4) inset;*/
 
 }
+.container-loaded {
+        opacity: 1;
+      }
 
 .ui-icon.ui-icon-arrow-r {
 background-color:rgb(136, 111, 110);
@@ -57,13 +60,13 @@ box-sizing: border-box;
 
 /* title bar */
 .ui-header.ui-bar-a{
-background:url(images/header_bg.png);
+background:url(../img/header_bg.png);
 }
 .ui-header .ui-title {
 text-indent:-9999px;
 font-size:0px;
-background:url(images/header_logo.png) no-repeat 69% 5px ;
-height:33px;
+background:url(../img/header_logo.png) no-repeat 65% -1px ;
+height:35px;
 padding:5px 0 5px 50px;
 margin:0px;
 }
@@ -93,12 +96,12 @@ border-bottom:1px solid rgba(65, 38, 37, 0.6);
 }
 
 .choice_list h1{
-margin-top:30px;
+margin-top:10px;
 font-size:18px;
 color:rgb(65, 38, 37);
 font-weight:normal;
 font-style:italic;
-padding:5px 0 6px 50px;
+padding:5px 0 6px 05px;
 background:url(images/pagination.png) no-repeat;
 }
 
