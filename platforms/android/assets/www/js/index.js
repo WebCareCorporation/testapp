@@ -2,7 +2,7 @@ define(['require', 'CustomFunctions', 'signalRHub'],
 function (require, custom, signal) {
 
     $("body").css("display", "none");
-    $("body").fadeIn(800);
+    $("body").fadeIn(200);
 
     var initialize = function () {
 
@@ -106,7 +106,7 @@ function (require, custom, signal) {
         });
 
         $("#GoToRooms").on("click", function () {
-            $('body').fadeOut(600, function () {
+            $('body').fadeOut(200, function () {
                 document.location.href = "rooms.html"
             });
         });

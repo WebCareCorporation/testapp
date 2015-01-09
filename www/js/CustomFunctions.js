@@ -38,6 +38,13 @@
         window.plugin.notification.local.add({ message: msg, title: title, autoCancel: true })
     };
 
+    var buildMsg = function (name,msg) {
+
+        var encodedMsg = $('<div style="display: block;" />').text(message).html();
+        
+        var msg = $('<li><b>' + name + "</b><br>" + encodedMsg + '</li>');
+
+    };
     return {
 
         initialize: function () {
@@ -46,7 +53,7 @@
         }, 
         showNotification: showNotification,
         buildChatWindow: buildChatWindow,
-
+        buildMsg:buildMsg,
         informMessage: function (msg, name, addToHeader) {
 
             if (window.background) {
@@ -135,8 +142,10 @@
             window.activeUser = username;
             $("#HeadName").text(username);
             $('div#' + username).css("display", "block");
-            $('#userList #' + username).parent().css("background-color", "#fff");
-            $('#userList #' + username).css("background-color", "#fff");
+            var back= $('#userList #Home').css("background-color");
+            
+            $('#userList #' + username).parent().css("background-color", back);
+            $('#userList #' + username).css("background-color", back);
             $.ui.toggleSideMenu();
         },
         CheckConnection: function () {
@@ -157,9 +166,9 @@
         },
         show: function (id, value) {
             if (value) {
-                $("#"+id).fadeIn(700);
+                $("#"+id).fadeIn(400);
             } else {
-                $("#" + id).fadeOut(700);
+                $("#" + id).fadeOut(400);
             }
             //document.getElementById(id).style.display = value ? 'block' : 'none';
         },

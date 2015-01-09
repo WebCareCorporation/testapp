@@ -1,7 +1,7 @@
 ﻿define(['require', 'CustomFunctions', 'signalRHub'],
 function (require, custom, signal) {
     $("body").css("display", "none");
-    $("body").fadeIn(1000);
+    $("body").fadeIn(400);
 
     var initialize = function () {
       
@@ -44,7 +44,7 @@ function (require, custom, signal) {
             localStorage.setItem("room", room);
             //window.location = "room.html";
 
-            $('body').fadeOut(600, function () {
+            $('body').fadeOut(300, function () {
                 document.location.href = "room.html"
             });
         });

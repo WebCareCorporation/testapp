@@ -9,6 +9,7 @@ define(['require', 'CustomFunctions'],
 
         window.chat = $.connection.chatHub;
 
+        var tryingToReconnect = false;
 
         window.chat.client.updateMembers = function (names) {
 
@@ -137,10 +138,11 @@ define(['require', 'CustomFunctions'],
 
             var name = message.substring(0, n);
 
-            var encodedMsg = $('<div />').text(message).html();
+            message = message.substring(n + 2, message.length);
 
 
-            var msg = $('<li>' + encodedMsg + '</li>');
+            var msg = custom.buildMsg(name, message);
+
             custom.informMessage(msg, "Gapshap", false);
 
             if (window.background) {
@@ -177,9 +179,8 @@ define(['require', 'CustomFunctions'],
             if (window.activeUser != by)
                 $('#userList #' + by).parent().css("background-color", "orange");
 
-            var encodedMsg = $('<div />').text(message).html();
 
-            var msg = $('<li>' + yourname + ' : ' + encodedMsg + '</li>');
+            var msg = custom.buildMsg(yourname, message);
 
             $('div#' + by + ' .ChatWindow').append(msg);
 
@@ -304,9 +305,8 @@ define(['require', 'CustomFunctions'],
             if (window.activeUser != by)
                 $('#userList #' + by).parent().css("background-color", "orange");
 
-            var encodedMsg = $('<div />').text(message).html();
 
-            var msg = $('<li>' + by + ' : ' + encodedMsg + '</li>');
+            var msg = custom.buildMsg(by, message);
 
             $('div#' + by + ' .ChatWindow').append(msg);
 
@@ -326,12 +326,6 @@ define(['require', 'CustomFunctions'],
             initialize: function () {
 
                 document.addEventListener("offline", this.onOffline, false);
-
-
-
-                var tryingToReconnect = false;
-
-
 
             }, JoinRoom: JoinRoom,
             initiateConnection: function () {
