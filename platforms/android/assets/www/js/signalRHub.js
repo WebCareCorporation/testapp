@@ -295,7 +295,7 @@ define(['require', 'CustomFunctions'],
                         lockBounce: false
                     });
                 }
-            }
+            } 
 
             if (left && !divExist) {
                 return;

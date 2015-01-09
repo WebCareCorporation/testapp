@@ -92,8 +92,12 @@ c:\testapp\platforms\android\assets\www\appframework\plugins\af.slidemenu.js \
 c:\testapp\platforms\android\assets\www\appframework\plugins\af.touchEvents.js \
 c:\testapp\platforms\android\assets\www\appframework\plugins\af.touchLayer.js \
 c:\testapp\platforms\android\assets\www\css\custom.css \
+c:\testapp\platforms\android\assets\www\css\customres.css \
 c:\testapp\platforms\android\assets\www\css\index.css \
+c:\testapp\platforms\android\assets\www\css\jquery.mobile-1.0.1.css \
+c:\testapp\platforms\android\assets\www\css\jquery.mobile.structure-1.0.1.css \
 c:\testapp\platforms\android\assets\www\img\logo.png \
+c:\testapp\platforms\android\assets\www\js\addstarscript.js \
 c:\testapp\platforms\android\assets\www\js\cordova.js \
 c:\testapp\platforms\android\assets\www\js\CustomFunctions.js \
 c:\testapp\platforms\android\assets\www\js\Database.js \
@@ -102,6 +106,9 @@ c:\testapp\platforms\android\assets\www\js\index.js \
 c:\testapp\platforms\android\assets\www\js\jquery-1.6.4-vsdoc.js \
 c:\testapp\platforms\android\assets\www\js\jquery-1.6.4.js \
 c:\testapp\platforms\android\assets\www\js\jquery-1.6.4.min.js \
+c:\testapp\platforms\android\assets\www\js\jquery-1.7.1.min.js \
+c:\testapp\platforms\android\assets\www\js\jquery.mobile-1.0.1.js \
+c:\testapp\platforms\android\assets\www\js\jquery.mobile-1.0.1.min.js \
 c:\testapp\platforms\android\assets\www\js\jquery.signalR-2.1.2.js \
 c:\testapp\platforms\android\assets\www\js\jquery.signalR-2.1.2.min.js \
 c:\testapp\platforms\android\assets\www\js\require.js \
