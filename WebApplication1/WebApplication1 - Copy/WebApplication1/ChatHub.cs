@@ -245,7 +245,7 @@ namespace WebApplication1
         {
             string senderConnId = user[sender];
             string reciever = user[name];
-            Clients.Client(senderConnId).byPersonalChat("avail : " + reciever + " End : " + message, name);
+            Clients.Client(senderConnId).byPersonalChat(message, name);
 
 
 
@@ -254,7 +254,7 @@ namespace WebApplication1
             {
                 if (userGCMIDs.Any(x => x.Key == name))
                 {
-                    Clients.Client(senderConnId).byPersonalChat(" push notify : " + userGCMIDs[name], name);
+                   // Clients.Client(senderConnId).byPersonalChat(" push notify : " + userGCMIDs[name], name);
                     try
                     {
                         SendNotification(userGCMIDs[name], sender + " : " + message);
@@ -263,7 +263,7 @@ namespace WebApplication1
                     }
                     catch (Exception ex)
                     {
-                        Clients.Client(senderConnId).byPersonalChat(" push res : " + ex.Message, name);
+                      //  Clients.Client(senderConnId).byPersonalChat(" push res : " + ex.Message, name);
                     }
                 }
                 else

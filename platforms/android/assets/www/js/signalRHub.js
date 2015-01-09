@@ -204,7 +204,8 @@ define(['require', 'CustomFunctions'],
 
         window.onNotificationGCM = function (e) {
             //$("#app-status-ul").append('<li>EVENT -> RECEIVED:' + e.event + '</li>');
-            alert(e.event);
+           
+            console.log("event fired : " + e.event);
             switch (e.event) {
                 case 'registered':
                     if (e.regid.length > 0) {
@@ -228,7 +229,7 @@ define(['require', 'CustomFunctions'],
                         var n = message.indexOf(":");
 
                         var name = message.substring(0, n);
-
+                        console.log("got name : " +name);
                         custom.showNotification(name, e.payload.message);
                         //$("#app-status-ul").append('<li>--INLINE NOTIFICATION--' + '</li>');
 
@@ -245,7 +246,7 @@ define(['require', 'CustomFunctions'],
                         var n = message.indexOf(":");
 
                         var name = message.substring(0, n);
-
+                        console.log("got name : " + name);
                         custom.showNotification(name, e.payload.message);
 
                       
