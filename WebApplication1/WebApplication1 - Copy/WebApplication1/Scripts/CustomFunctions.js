@@ -38,6 +38,14 @@
         window.plugin.notification.local.add({ message: msg, title: title, autoCancel: true })
     };
 
+    var buildMsg = function (name,msg) {
+
+        var encodedMsg ='<div style="display: block;">' + msg + '</div>';
+       
+        var msg = $('<li><b>' + name + "</b><br>" + encodedMsg + '</li><br>');
+
+        return msg;
+    };
     return {
 
         initialize: function () {
@@ -46,7 +54,7 @@
         }, 
         showNotification: showNotification,
         buildChatWindow: buildChatWindow,
-
+        buildMsg:buildMsg,
         informMessage: function (msg, name, addToHeader) {
 
             if (window.background) {
@@ -135,8 +143,10 @@
             window.activeUser = username;
             $("#HeadName").text(username);
             $('div#' + username).css("display", "block");
-            $('#userList #' + username).parent().css("background-color", "#619ef2");
-
+            var back= $('#userList #Home').css("background-color");
+            
+            $('#userList #' + username).parent().css("background-color", back);
+            $('#userList #' + username).css("background-color", back);
             $.ui.toggleSideMenu();
         },
         CheckConnection: function () {
@@ -156,7 +166,12 @@
             }
         },
         show: function (id, value) {
-            document.getElementById(id).style.display = value ? 'block' : 'none';
+            if (value) {
+                $("#"+id).fadeIn(400);
+            } else {
+                $("#" + id).fadeOut(400);
+            }
+            //document.getElementById(id).style.display = value ? 'block' : 'none';
         },
         openRooms: function () {
             window.location = "rooms.html";

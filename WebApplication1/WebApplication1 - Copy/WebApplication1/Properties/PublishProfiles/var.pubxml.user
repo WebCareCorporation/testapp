@@ -420,16 +420,31 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/10/2014 21:19:09</publishTime>
     </File>
     <File Include="bin/WebApplication1.dll">
-      <publishTime>01/09/2015 11:33:04</publishTime>
+      <publishTime>01/10/2015 11:52:05</publishTime>
     </File>
     <File Include="chatroom.aspx">
       <publishTime>12/11/2014 23:59:02</publishTime>
+    </File>
+    <File Include="css/custom.css">
+      <publishTime>01/10/2015 11:47:22</publishTime>
+    </File>
+    <File Include="css/customres.css">
+      <publishTime>01/10/2015 11:47:22</publishTime>
+    </File>
+    <File Include="css/index.css">
+      <publishTime>01/10/2015 11:47:22</publishTime>
+    </File>
+    <File Include="css/jquery.mobile-1.0.1.css">
+      <publishTime>01/10/2015 11:47:22</publishTime>
+    </File>
+    <File Include="css/jquery.mobile.structure-1.0.1.css">
+      <publishTime>01/10/2015 11:47:22</publishTime>
     </File>
     <File Include="Global.asax">
       <publishTime>12/10/2014 21:21:53</publishTime>
     </File>
     <File Include="Index.html">
-      <publishTime>01/09/2015 00:36:33</publishTime>
+      <publishTime>01/09/2015 13:22:50</publishTime>
     </File>
     <File Include="Indexapp.js">
       <publishTime>01/09/2015 10:56:51</publishTime>
@@ -441,10 +456,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/10/2014 21:19:20</publishTime>
     </File>
     <File Include="room.html">
-      <publishTime>01/09/2015 00:34:15</publishTime>
+      <publishTime>01/09/2015 14:42:28</publishTime>
     </File>
     <File Include="rooms.html">
-      <publishTime>01/09/2015 11:07:34</publishTime>
+      <publishTime>01/10/2015 11:50:25</publishTime>
     </File>
     <File Include="RoomsApp.js">
       <publishTime>01/09/2015 11:07:07</publishTime>
@@ -453,7 +468,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/13/2014 05:45:13</publishTime>
     </File>
     <File Include="Scripts/CustomFunctions.js">
-      <publishTime>01/08/2015 22:03:36</publishTime>
+      <publishTime>01/10/2015 11:38:54</publishTime>
     </File>
     <File Include="Scripts/Database.js">
       <publishTime>01/09/2015 10:57:45</publishTime>
@@ -462,7 +477,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/18/2014 18:07:03</publishTime>
     </File>
     <File Include="Scripts/index.js">
-      <publishTime>01/09/2015 11:04:15</publishTime>
+      <publishTime>01/10/2015 11:12:48</publishTime>
     </File>
     <File Include="Scripts/jquery-1.6.4.js">
       <publishTime>12/10/2014 21:19:17</publishTime>
@@ -480,13 +495,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/07/2015 22:25:10</publishTime>
     </File>
     <File Include="Scripts/room.js">
-      <publishTime>01/09/2015 00:28:56</publishTime>
+      <publishTime>01/10/2015 11:12:48</publishTime>
     </File>
     <File Include="Scripts/rooms.js">
-      <publishTime>01/08/2015 00:16:54</publishTime>
+      <publishTime>01/10/2015 11:12:48</publishTime>
     </File>
     <File Include="Scripts/signalRHub.js">
-      <publishTime>01/09/2015 11:21:41</publishTime>
+      <publishTime>01/10/2015 11:48:15</publishTime>
     </File>
     <File Include="Web.config">
       <publishTime>01/09/2015 11:33:04</publishTime>

@@ -33,7 +33,7 @@ define(['require', 'CustomFunctions'],
 
             var yourname = localStorage.getItem("Name");
 
-            var msg = $('<li>' + encodedMsg + '</li>');
+            var msg = $('<li>' + encodedMsg + '</li><br>');
 
             custom.informMessage(msg, yourname, false);
 
@@ -66,13 +66,13 @@ define(['require', 'CustomFunctions'],
         };
 
         $.connection.hub.reconnecting(function () {
-            var msg = $('<li> Reconnecting.... </li>');
+            var msg = $('<li> Reconnecting.... </li><br>');
             custom.informMessage(msg, "Gapshap", true);
             tryingToReconnect = true;
         });
 
         $.connection.hub.connectionSlow(function () {
-            var msg = $('<li> Connection slow.... </li>');
+            var msg = $('<li> Connection slow.... </li><br>');
             custom.informMessage(msg, "Gapshap", true);
 
         });
@@ -80,11 +80,11 @@ define(['require', 'CustomFunctions'],
         $.connection.hub.reconnected(function () {
             tryingToReconnect = false;
             var myClientId = $.connection.hub.id;
-            var msg = $('<li> Reconnected.... </li>');
+            var msg = $('<li> Reconnected.... </li><br>');
             custom.informMessage(msg, "Gapshap", true);
             if (myClientId != localStorage.getItem("ConnId")) {
 
-                var msg = $('<li> updating connection.... </li>');
+                var msg = $('<li> updating connection.... </li><br>');
 
                 custom.informMessage("updating connection....", "Gapshap", true);
 

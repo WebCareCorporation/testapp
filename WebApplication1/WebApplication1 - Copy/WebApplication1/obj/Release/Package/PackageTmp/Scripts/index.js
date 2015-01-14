@@ -1,6 +1,9 @@
 define(['require', 'CustomFunctions', 'signalRHub'],
 function (require, custom, signal) {
 
+    $("body").css("display", "none");
+    $("body").fadeIn(200);
+
     var initialize = function () {
 
         $.ui.autoLaunch = false;
@@ -10,7 +13,7 @@ function (require, custom, signal) {
             var uniqueId = guid();
             localStorage.setItem("uniqueId", uniqueId);
         }
-
+      
         bindEvents();
     };
 
@@ -38,7 +41,8 @@ function (require, custom, signal) {
                 readyFunction();
             });
         }
-        document.addEventListener('deviceready', this.onDeviceReady, false);
+       
+        document.addEventListener('deviceready', onDeviceReady, false);
     };
     // deviceready Event Handler
     //
@@ -46,12 +50,12 @@ function (require, custom, signal) {
     // function, we must explicitly call 'app.receivedEvent(...);'
     var onDeviceReady = function () {
         if (window.Cordova && navigator.splashscreen) {
-
+ 
             custom.initialize();
 
             signal.initialize();
 
-            //signal.initiateConnection();
+            
 
             readyFunction();
         }
@@ -73,16 +77,14 @@ function (require, custom, signal) {
             $.ui.launch();
 
         }
+       
 
-
-        $("#register").on("click", function () {
+        $("#register").on("click", function () { 
+            
             localStorage.setItem("tempName", $("#name").val());
 
             signal.startConnection();
-
-            //$.ui.loadContent("main", null, null, "fade");
-
-            //setTimeout(window.location = "rooms.html", 5000);
+             
         });
 
         $("#Submit").on("click", function () {
@@ -104,7 +106,9 @@ function (require, custom, signal) {
         });
 
         $("#GoToRooms").on("click", function () {
-            window.location = "rooms.html"
+            $('body').fadeOut(200, function () {
+                document.location.href = "rooms.html"
+            });
         });
     };
 

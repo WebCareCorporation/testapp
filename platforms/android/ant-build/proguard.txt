@@ -1,25 +1,25 @@
 # view AndroidManifest.xml #generated:6
 -keep class com.chat.gapshap.CordovaApp { <init>(...); }
 
-# view AndroidManifest.xml #generated:22
+# view AndroidManifest.xml #generated:14
 -keep class com.plugin.gcm.CordovaGCMBroadcastReceiver { <init>(...); }
 
-# view AndroidManifest.xml #generated:29
+# view AndroidManifest.xml #generated:21
 -keep class com.plugin.gcm.GCMIntentService { <init>(...); }
 
-# view AndroidManifest.xml #generated:21
+# view AndroidManifest.xml #generated:13
 -keep class com.plugin.gcm.PushHandlerActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:14
+# view AndroidManifest.xml #generated:23
 -keep class de.appplant.cordova.plugin.localnotification.DeleteIntentReceiver { <init>(...); }
 
-# view AndroidManifest.xml #generated:13
+# view AndroidManifest.xml #generated:22
 -keep class de.appplant.cordova.plugin.localnotification.Receiver { <init>(...); }
 
-# view AndroidManifest.xml #generated:20
+# view AndroidManifest.xml #generated:29
 -keep class de.appplant.cordova.plugin.localnotification.ReceiverActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:15
+# view AndroidManifest.xml #generated:24
 -keep class de.appplant.cordova.plugin.localnotification.Restore { <init>(...); }
 
 # view AndroidManifest.xml #generated:12

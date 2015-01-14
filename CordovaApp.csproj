@@ -1504,7 +1504,6 @@
     <Content Include="www\css\index.css" />
     <Content Include="www\css\jquery.mobile-1.0.1.css" />
     <Content Include="www\css\jquery.mobile.structure-1.0.1.css" />
-    <Content Include="www\img\header_logo.png" />
     <Content Include="www\img\logo.png" />
     <Content Include="www\index.html" />
     <Content Include="www\index1.html" />

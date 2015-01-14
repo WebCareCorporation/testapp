@@ -9,6 +9,7 @@ define(['require', 'CustomFunctions'],
 
         window.chat = $.connection.chatHub;
 
+        var tryingToReconnect = false;
 
         window.chat.client.updateMembers = function (names) {
 
@@ -137,10 +138,11 @@ define(['require', 'CustomFunctions'],
 
             var name = message.substring(0, n);
 
-            var encodedMsg = $('<div />').text(message).html();
+            message = message.substring(n + 2, message.length);
 
 
-            var msg = $('<li>' + encodedMsg + '</li>');
+            var msg = custom.buildMsg(name, message);
+
             custom.informMessage(msg, "Gapshap", false);
 
             if (window.background) {
@@ -177,9 +179,8 @@ define(['require', 'CustomFunctions'],
             if (window.activeUser != by)
                 $('#userList #' + by).parent().css("background-color", "orange");
 
-            var encodedMsg = $('<div />').text(message).html();
 
-            var msg = $('<li>' + yourname + ' : ' + encodedMsg + '</li>');
+            var msg = custom.buildMsg(yourname, message);
 
             $('div#' + by + ' .ChatWindow').append(msg);
 
@@ -205,6 +206,7 @@ define(['require', 'CustomFunctions'],
         window.onNotificationGCM = function (e) {
             //$("#app-status-ul").append('<li>EVENT -> RECEIVED:' + e.event + '</li>');
 
+            console.log("event fired : " + e.event);
             switch (e.event) {
                 case 'registered':
                     if (e.regid.length > 0) {
@@ -223,7 +225,13 @@ define(['require', 'CustomFunctions'],
                     // if this flag is set, this notification happened while we were in the foreground.
                     // you might want to play a sound to get the user's attention, throw up a dialog, etc.
                     if (e.foreground) {
-                        custom.showNotification("Gapshap Fore", e.payload.message);
+                        var message = e.payload.message;
+
+                        var n = message.indexOf(":");
+
+                        var name = message.substring(0, n);
+                        console.log("got name : " + name);
+                        custom.showNotification(name, e.payload.message);
                         //$("#app-status-ul").append('<li>--INLINE NOTIFICATION--' + '</li>');
 
                         //// on Android soundname is outside the payload.
@@ -234,7 +242,15 @@ define(['require', 'CustomFunctions'],
                         //my_media.play();
                     }
                     else {
-                        custom.showNotification("Gapshap", e.payload.message);
+                        var message = e.payload.message;
+
+                        var n = message.indexOf(":");
+
+                        var name = message.substring(0, n);
+                        console.log("got name : " + name);
+                        custom.showNotification(name, e.payload.message);
+
+
                         // otherwise we were launched because the user touched a notification in the notification tray.
                         //if (e.coldstart) {
                         //    $("#app-status-ul").append('<li>--COLDSTART NOTIFICATION--' + '</li>');
@@ -289,9 +305,8 @@ define(['require', 'CustomFunctions'],
             if (window.activeUser != by)
                 $('#userList #' + by).parent().css("background-color", "orange");
 
-            var encodedMsg = $('<div />').text(message).html();
 
-            var msg = $('<li>' + by + ' : ' + encodedMsg + '</li>');
+            var msg = custom.buildMsg(by, message);
 
             $('div#' + by + ' .ChatWindow').append(msg);
 
@@ -312,21 +327,13 @@ define(['require', 'CustomFunctions'],
 
                 document.addEventListener("offline", this.onOffline, false);
 
-
-
-                var tryingToReconnect = false;
-
-
-
             }, JoinRoom: JoinRoom,
             initiateConnection: function () {
 
 
                 if (custom.CheckConnection()) {
 
-                    custom.show('afui', false);
 
-                    custom.show('loading', true);
 
                     $.connection.hub.start().done(function () {
                         var myClientId = $.connection.hub.id;
@@ -338,7 +345,7 @@ define(['require', 'CustomFunctions'],
 
                         if (!localStorage.getItem("FirstTime")) {
                             if (window.Cordova) {
-                                alert("push init");
+
                                 pushNotification = window.plugins.pushNotification;
                                 pushNotification.register(
                                         successHandler,
@@ -348,7 +355,6 @@ define(['require', 'CustomFunctions'],
                                             "ecb": "onNotificationGCM"
                                         });
                             }
-
                         }
 
 

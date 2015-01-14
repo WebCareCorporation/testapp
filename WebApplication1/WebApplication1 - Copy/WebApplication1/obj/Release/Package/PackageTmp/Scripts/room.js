@@ -5,19 +5,23 @@ function (require, custom, signal, database) {
     // Application Constructor
     var initialize = function () {
 
+        custom.show('loading', true);
+
+        custom.show('afui', false);
+
         custom.initialize();
 
         signal.initialize();
 
         database.init();
 
-        $.ui.autoLaunch = false;
+        //$.ui.autoLaunch = false;
 
-        $.ui.backButtonText = "";
+        //$.ui.backButtonText = "";
 
         bindEvents();
     };
-        var bindEvents = function () {
+    var bindEvents = function () {
 
         if (!window.Cordova) {
             $(document).ready(function () {
@@ -54,14 +58,14 @@ function (require, custom, signal, database) {
         }
     };
     var readyFunction = function () {
-        
+
         window.background = false;
 
         signal.initiateConnection();
 
         $.ui.setSideMenuWidth('210px');
 
-        $.ui.launch();
+        //$.ui.launch();
 
         var room = localStorage.getItem("room");
         var name = localStorage.getItem("Name");

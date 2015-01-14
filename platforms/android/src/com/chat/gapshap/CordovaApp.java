@@ -21,20 +21,15 @@ package com.chat.gapshap;
 
 import android.os.Bundle;
 import org.apache.cordova.*;
-import android.database.sqlite.*;
 
-import org.pgsqlite.*;
- 
 public class CordovaApp extends CordovaActivity
 {
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-       
         super.init();
-       
         // Set by <content src="index.html" /> in config.xml
-        loadUrl(launchUrl); 
+        loadUrl(launchUrl);
     }
 }

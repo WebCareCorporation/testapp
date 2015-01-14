@@ -27,7 +27,7 @@
                 indi = sum;
         });
 
-        var windowheight = $("div#" + by).parent().height() - (indi * 3);
+        var windowheight = $("div#" + by).parent().height();
 
         if (windowheight < sum) {
             window.scroller[by].scrollToBottom(2);
@@ -38,22 +38,23 @@
         window.plugin.notification.local.add({ message: msg, title: title, autoCancel: true })
     };
 
-    var buildMsg = function (name,msg) {
+    var buildMsg = function (name, msg) {
 
-        var encodedMsg = $('<div style="display: block;" />').text(message).html();
+        var encodedMsg = '<div style="display: block;">' + msg + '</div>';
         
-        var msg = $('<li><b>' + name + "</b><br>" + encodedMsg + '</li>');
+        var msg = $('<li><b>' + name + "</b><br>" + encodedMsg + '</li><br>');
 
+        return msg;
     };
     return {
 
         initialize: function () {
-            
+
             window.scroller = [];
-        }, 
+        },
         showNotification: showNotification,
         buildChatWindow: buildChatWindow,
-        buildMsg:buildMsg,
+        buildMsg: buildMsg,
         informMessage: function (msg, name, addToHeader) {
 
             if (window.background) {
@@ -72,14 +73,14 @@
                     if (indi == 0)
                         indi = sum;
                 });
-                var windowheight = $("#MainComments").parent().height() - (indi * 3);
+                var windowheight = $("#MainComments").parent().height();
 
                 if (windowheight < sum) {
                     window.scroller[room].scrollToBottom(2);
                 }
             }
-            else { 
-                scrollOnMessage(window.activeUser); 
+            else {
+                scrollOnMessage(window.activeUser);
             }
 
             if (addToHeader) {
@@ -142,8 +143,8 @@
             window.activeUser = username;
             $("#HeadName").text(username);
             $('div#' + username).css("display", "block");
-            var back= $('#userList #Home').css("background-color");
-            
+            var back = $('#userList #Home').css("background-color");
+
             $('#userList #' + username).parent().css("background-color", back);
             $('#userList #' + username).css("background-color", back);
             $.ui.toggleSideMenu();
@@ -166,7 +167,7 @@
         },
         show: function (id, value) {
             if (value) {
-                $("#"+id).fadeIn(400);
+                $("#" + id).fadeIn(400);
             } else {
                 $("#" + id).fadeOut(400);
             }

@@ -27,9 +27,32 @@
   <feature name="Device">
     <param name="android-package" value="org.apache.cordova.device.Device" />
   </feature>
-  
+  <preference name="SplashScreen" value="screen" />
+  <preference name="SplashScreenDelay" value="5000" />
   <preference name="permissions" value="none"/>
-	
+  <preference name="Orientation" value="landscape" />
+  <platform name="android">
+    <icon src="res/android/drawable-ldpi/ic_launcher.png" density="ldpi" />
+    <icon src="res/android/drawable-mdpi/ic_launcher.png" density="mdpi" />
+    <icon src="res/android/drawable-hdpi/ic_launcher.png" density="hdpi" />
+    <icon src="res/android/drawable-xhdpi/ic_launcher.png" density="xhdpi" />
+    <icon src="res/android/drawable-xxhdpi/ic_launcher.png" density="xhdpi" />
+    <icon src="res/android/drawable-xxxhdpi/ic_launcher.png" density="xhdpi" />
+  </platform>
+
+  <platform name="android">
+    <!-- you can use any density that exists in the Android project -->
+    <splash src="res/screen/android/res-long-land-hdpi/default.png" density="land-hdpi"/>
+    <splash src="res/screen/android/splash-land-ldpi.png" density="land-ldpi"/>
+    <splash src="res/screen/android/splash-land-mdpi.png" density="land-mdpi"/>
+    <splash src="res/screen/android/splash-land-xhdpi.png" density="land-xhdpi"/>
+
+    <splash src="res/screen/android/splash-port-hdpi.png" density="port-hdpi"/>
+    <splash src="res/screen/android/splash-port-ldpi.png" density="port-ldpi"/>
+    <splash src="res/screen/android/splash-port-mdpi.png" density="port-mdpi"/>
+    <splash src="res/screen/android/splash-port-xhdpi.png" density="port-xhdpi"/>
+  </platform>
+
 
   <!--<platform name="android">
     --><!-- you can use any density that exists in the Android project --><!--

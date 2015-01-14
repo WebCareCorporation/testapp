@@ -1,2 +1,2 @@
-F:\GIt\testapp\platforms\android\ant-build\AndroidManifest.xml : \
-F:\GIt\testapp\platforms\android\AndroidManifest.xml \
+C:\testapp\platforms\android\ant-build\AndroidManifest.xml : \
+C:\testapp\platforms\android\AndroidManifest.xml \
