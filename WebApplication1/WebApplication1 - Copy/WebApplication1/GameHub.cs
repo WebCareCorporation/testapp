@@ -84,13 +84,20 @@ namespace WebApplication1
 
             int c = 52;
             Random random = new Random();
+            int s = random.Next(52);
             while (c > 0)
             {
-                int s= random.Next(52);
+                while (selected.Contains(s))
+                {
+                    s = random.Next(52);
+                }  
+                selected.Add(s);
+                dividelist.Add(s, cards[s]);
+                c = c - 1; 
             }
-             
 
-           
+
+
         }
     }
 }
