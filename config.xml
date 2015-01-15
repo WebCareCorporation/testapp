@@ -30,7 +30,7 @@
   <preference name="SplashScreen" value="screen" />
   <preference name="SplashScreenDelay" value="5000" />
   <preference name="permissions" value="none"/>
-  <preference name="Orientation" value="landscape" />
+  <preference name="Orientation" value="portrait" />
   <platform name="android">
     <icon src="res/android/drawable-ldpi/ic_launcher.png" density="ldpi" />
     <icon src="res/android/drawable-mdpi/ic_launcher.png" density="mdpi" />

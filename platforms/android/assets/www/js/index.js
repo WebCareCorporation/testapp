@@ -104,7 +104,12 @@ function (require, custom, signal) {
 
             //setTimeout(window.location = "rooms.html", 5000);
         });
-
+        
+        $("#GameRoom").on("click", function () {
+            $('body').fadeOut(200, function () {
+                document.location.href = "bhabo.html"
+            });
+        });
         $("#GoToRooms").on("click", function () {
             $('body').fadeOut(200, function () {
                 document.location.href = "rooms.html"

@@ -55,6 +55,8 @@ C:\testapp\platforms\android\assets\www \
 C:\testapp\platforms\android\assets\_where-is-www.txt \
 C:\testapp\platforms\android\assets\www\app.js \
 C:\testapp\platforms\android\assets\www\appframework \
+C:\testapp\platforms\android\assets\www\bhabo.html \
+C:\testapp\platforms\android\assets\www\BhaboApp.js \
 C:\testapp\platforms\android\assets\www\cordova.js \
 C:\testapp\platforms\android\assets\www\cordova_plugins.js \
 C:\testapp\platforms\android\assets\www\css \
@@ -91,6 +93,7 @@ C:\testapp\platforms\android\assets\www\appframework\plugins\af.selectBox.js \
 C:\testapp\platforms\android\assets\www\appframework\plugins\af.slidemenu.js \
 C:\testapp\platforms\android\assets\www\appframework\plugins\af.touchEvents.js \
 C:\testapp\platforms\android\assets\www\appframework\plugins\af.touchLayer.js \
+C:\testapp\platforms\android\assets\www\css\bhabo.css \
 C:\testapp\platforms\android\assets\www\css\custom.css \
 C:\testapp\platforms\android\assets\www\css\customres.css \
 C:\testapp\platforms\android\assets\www\css\index.css \
@@ -99,12 +102,16 @@ C:\testapp\platforms\android\assets\www\css\jquery.mobile.structure-1.0.1.css \
 C:\testapp\platforms\android\assets\www\img\header_logo.png \
 C:\testapp\platforms\android\assets\www\img\loading4.gif \
 C:\testapp\platforms\android\assets\www\img\logo.png \
+C:\testapp\platforms\android\assets\www\img\svg-cards.png \
 C:\testapp\platforms\android\assets\www\js\addstarscript.js \
+C:\testapp\platforms\android\assets\www\js\bhabo.js \
 C:\testapp\platforms\android\assets\www\js\cordova.js \
 C:\testapp\platforms\android\assets\www\js\CustomFunctions.js \
 C:\testapp\platforms\android\assets\www\js\Database.js \
 C:\testapp\platforms\android\assets\www\js\handlebars-v2.0.0.js \
 C:\testapp\platforms\android\assets\www\js\index.js \
+C:\testapp\platforms\android\assets\www\js\interact-1.2.2.js \
+C:\testapp\platforms\android\assets\www\js\interact-1.2.2.min.js \
 C:\testapp\platforms\android\assets\www\js\jquery-1.6.4-vsdoc.js \
 C:\testapp\platforms\android\assets\www\js\jquery-1.6.4.js \
 C:\testapp\platforms\android\assets\www\js\jquery-1.6.4.min.js \
