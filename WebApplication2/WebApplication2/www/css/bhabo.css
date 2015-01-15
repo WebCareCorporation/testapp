@@ -1,0 +1,254 @@
+﻿
+#navlist {
+    position: relative;
+}
+
+#cards {
+    width: 100%;
+    padding: 1px;
+    color: #ffffff;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+     
+    /*border: 2px solid black;*/
+}
+
+.onTop {
+    position:relative;
+    z-index:99;
+}
+.onTopBelow {
+    position:relative;
+    z-index:89;
+}
+.icon-huge {
+    zoom: 1;
+    -moz-transform: scale(1);
+    -moz-transform-origin: 0 0;
+}
+
+.icon-big {
+    zoom: 0.60;
+    -moz-transform: scale(0.60);
+    -moz-transform-origin: 0 0;
+}
+
+.icon-small {
+    zoom: 0.29;
+    -moz-transform: scale(0.29);
+    -moz-transform-origin: 0 0;
+}
+
+#cards .draggable {
+    display: block;
+    height: 244px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: absolute;
+    top: 0;
+    -webkit-transform: translate(0px, 0px);
+    transform: translate(0px, 0px);
+   
+}
+
+#cards .select {
+    opacity: 0;
+    margin-top: 50%;
+    margin-left: 50%;
+    background-color: red;
+    border: thin;
+    border-color: black;
+    height: 14%;
+    border-radius: 10px;
+    width: 20%;
+}
+
+.Footer {
+}
+
+#cards .select:hover {
+    opacity: 1;
+    /*margin-top: 2px;
+            background-color: #d3d3d3;
+            border: thin;
+            border-color: black;
+            height: 10%;
+            border-radius: 10px;*/
+}
+
+#cards .select input[type=checkbox] {
+    margin-top: 25%;
+    margin-left: 25%;
+    cursor: pointer;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    top: 0;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+    -moz-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+    box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+    background: #fcfff4;
+    background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    background: -moz-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    background: -o-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    background: -ms-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 );
+}
+
+
+    #cards .select input[type=checkbox]:after {
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+        filter: alpha(opacity=0);
+        opacity: 0;
+        content: '';
+        position: absolute;
+        width: 9px;
+        height: 5px;
+        background: transparent;
+        top: 4px;
+        left: 4px;
+        border: 3px solid #333;
+        border-top: none;
+        border-right: none;
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+    }
+
+    #cards .select input[type=checkbox]:hover::after {
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+        filter: alpha(opacity=30);
+        opacity: 0.5;
+    }
+
+    #cards .select input[type=checkbox]:checked:after {
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        filter: alpha(opacity=100);
+        opacity: 1;
+    }
+
+
+
+#navlist li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: absolute;
+    top: 0;
+    -webkit-transform: translate(0px, 0px);
+    transform: translate(0px, 0px);
+}
+
+#navlist li, #navlist a {
+    height: 244px;
+    display: block;
+}
+
+#AC {
+    left: 0px;
+    width: 168px;
+    background: url('../img/svg-cards.png') 0 0;
+     background-size:500%;
+}
+
+#BC {
+    left: 170px;
+    width: 168px;
+    background: url('../img/svg-cards.png') -168px 0;
+       background-size:70%;
+}
+
+#CC {
+    left: 340px;
+    width: 168px;
+    background: url('../img/svg-cards.png') -334px 0;
+       background-size:70%;
+}
+
+#DC {
+    left: 510px;
+    width: 168px;
+    background: url('../img/svg-cards.png') -502px 0;
+       background-size:70%;
+}
+
+
+.card {
+    width: 60px;
+    height: 79px;
+    background: url('../img/WZ9Od.gif') no-repeat;
+    background-size: 1300% 500%;
+}
+.card-wide {
+    width: 100px;
+}
+.card-high {
+    height: 130px;
+}
+
+/**
+ * Backgrouns position of all the cards
+ *
+ * x offset in %: i * (100/x); i = 0, 1, ..., (x - 1); x = the number of cols in the sprite
+ * y offset in %: j * (100/y); j = 0, 1, ..., (y - 1); y = the number of rows in the sprite
+ */
+
+.card-hearts-2 { background-position: 0 0; }
+.card-hearts-3 { background-position: 8.33% 0; }
+.card-hearts-4 { background-position: 16.667% 0; }
+/* ... */
+
+/* ... */
+.card-clubs-q { background-position: 83.333% 50%; }
+.card-clubs-k { background-position: 91.667% 50%; }
+.card-clubs-a { background-position: 100% 50%; }
+
+
+#outer-dropzone {
+  height: 140px;
+}
+
+#inner-dropzone {
+  height: 80px;
+}
+
+.dropzone {
+  background-color: #ccc;
+  border: dashed 4px transparent;
+  border-radius: 4px;
+  margin: 10px auto 30px;
+  padding: 10px;
+  width: 80%;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.drop-active {
+  border-color: #666;
+}
+
+.drop-target {
+  background-color: #29e;
+}
+
+.drag-drop {
+  display: inline-block;
+  min-width: 40px;
+  padding: 2em 0.5em;
+
+  background-color: #99e;
+  border: solid 2px white;
+
+  -webkit-transform: translate(0px, 0px);
+          transform: translate(0px, 0px);
+
+  transition: background-color 0.3s;
+}
+
+.drag-drop.can-drop { background-color: #4e4; }
