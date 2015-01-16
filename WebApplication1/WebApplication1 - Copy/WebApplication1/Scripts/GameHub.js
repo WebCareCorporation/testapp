@@ -4,47 +4,245 @@ define(['require', 'CustomFunctions'],
         //    return signalr;
 
         //if (window.Cordova) {
-          //  $.connection.hub.url = "http://bathindavarinder-001-site1.smarterasp.net/signalr";
+        //  $.connection.hub.url = "http://bathindavarinder-001-site1.smarterasp.net/signalr";
         //}
 
         window.game = $.connection.gameHub;
 
         var tryingToReconnect = false;
+        window.game.client.registered = function (name) {
+            //  alert("you are registered");
+        };
+        window.game.client.sendConfirm = function (msg) {
+            //  alert(msg);
+        };
+
+        window.game.client.informGroupName = function (name) {
+            localStorage.setItem("Group", name);
+        };
+
+        window.game.client.FirstTurn = function (message) {
+            showNotification(message);
+        };
+        window.game.client.thrownCard = function (user,card) {
+
+            var idandcard = card.split('?');
+
+            if (!$('#' + idandcard[0]).length) {
+
+                var cardtype = idandcard[1].split('-')[1];
+
+                var card = '<div  id="' + idandcard[0] + '" class="card ' + idandcard[1] + ' ' + cardtype + '" ></div>';
+                $('#outer-dropzone').append(card);
+
+            }
+        };
 
 
+        
 
+        window.game.client.yourTurn = function (card) {
 
+            showNotification("Your Turn.");
+            if (card == "hukam") {
+                ActivateHukam("");
+            }else
+                if (card == "chidi") {
+                ActivateChiddi();
+            }else
+                    if (card == "itt") {
+                Activateitt();
+            }else
+                        if (card == "heart") {
+                ActivateHeart();
+            }
+
+        };
+
+        
+
+        function showNotification(Message) {
+            $('#Message').empty();
+            $("#Message").slideDown(1000);
+            $('#Message').append(Message);
+            //$("#Message").fadeIn(400);
+
+            setTimeout(function () { 
+                //$("#Message").hide( "slow" )
+                $("#Message").slideUp(1000);
+            }, 5000);
+        }
+      
+
+        var UserName = localStorage.getItem("Name");
+        var Group = localStorage.getItem("Group");
+
+        var havHukamA = false;
 
         window.game.client.sendCards = function (cards) {
+            $('.card').remove();
             var Cards = cards.split(";");
             var x = 0;
             var y = 0;
             $.each(Cards, function (index, name) {
                 var idandcard = name.split('?');
-                var card = '<div data-x="' + x + '" data-y="0" id="' + idandcard[0] + '" class="card ' + idandcard[1] + ' active dropcan" style="transform:translate('+x+'px,'+ y+'px);-webkit-transform: translate('+x+'px,'+y+'px);"></div>';
+
+                var cardtype = idandcard[1].split('-')[1];
+
+                if (idandcard[1] == "card-hukam-a") {
+                    havHukamA = true;
+                }
+
+                var card = '<div data-x="' + x + '" data-y="' + y + '" id="' + idandcard[0] + '" class="card mine ' + idandcard[1] + ' ' + cardtype + ' active" ></div>';
                 $('.ui-page').append(card);
-                x = x + 5;
+
+
+                $('#' + idandcard[0]).css({
+                    'transform': 'translate(' + x + 'px,' + y + 'px)',
+                    '-webkit-transform': 'translate(' + x + 'px,' + y + 'px)',
+                    '-moz-transform': 'translate(' + x + 'px,' + y + 'px)',
+                    '-ms-transform': 'translate(' + x + 'px,' + y + 'px)',
+                    '-o-transform': 'translate(' + x + 'px,' + y + 'px)'
+
+                });
+                x = x + 30;
+                y = y - 79;
+
             });
+
+            var xz = 0;
+            var yz = 0;
+            $.each($('.heart'), function (index, name) {
+
+                var datay = $(name).attr('data-y');
+                datay = parseFloat(datay) + parseFloat(100);
+                var datax = $(name).attr('data-x');
+                $(name).css({
+                    'transform': 'translate(' + xz + 'px,' + datay + 'px)',
+                    '-webkit-transform': 'translate(' + xz + 'px,' + datay + 'px)',
+                    '-moz-transform': 'translate(' + xz + 'px,' + datay + 'px)',
+                    '-ms-transform': 'translate(' + xz + 'px,' + datay + 'px)',
+                    '-o-transform': 'translate(' + xz + 'px,' + datay + 'px)'
+                });
+                $(name).attr('data-y', datay);
+                $(name).attr('data-x', xz);
+                xz = xz + 30;
+
+            });
+
+            xz = xz + 100;
+            yz = 0;
+            $.each($('.chidi'), function (index, name) {
+
+                var datay = $(name).attr('data-y');
+                datay = parseFloat(datay) + parseFloat(100);
+                var datax = $(name).attr('data-x');
+                //    xz =   parseFloat(datax) + parseFloat(30);
+
+                $(name).css({
+                    'transform': 'translate(' + xz + 'px,' + datay + 'px)',
+                    '-webkit-transform': 'translate(' + xz + 'px,' + datay + 'px)',
+                    '-moz-transform': 'translate(' + xz + 'px,' + datay + 'px)',
+                    '-ms-transform': 'translate(' + xz + 'px,' + datay + 'px)',
+                    '-o-transform': 'translate(' + xz + 'px,' + datay + 'px)'
+                });
+                $(name).attr('data-y', datay);
+                $(name).attr('data-x', xz);
+                xz = xz + parseFloat(30);
+            });
+
+            xz = 0;
+            yz = 0;
+            $.each($('.hukam'), function (index, name) {
+
+                var datay = $(name).attr('data-y');
+                // datay = parseFloat(datay) + parseFloat(100);
+                var datax = $(name).attr('data-x');
+
+
+                $(name).css({
+                    'transform': 'translate(' + xz + 'px,' + datay + 'px)',
+                    '-webkit-transform': 'translate(' + xz + 'px,' + datay + 'px)',
+                    '-moz-transform': 'translate(' + xz + 'px,' + datay + 'px)',
+                    '-ms-transform': 'translate(' + xz + 'px,' + datay + 'px)',
+                    '-o-transform': 'translate(' + xz + 'px,' + datay + 'px)'
+                });
+
+                $(name).attr('data-y', datay);
+                $(name).attr('data-x', xz);
+
+                xz = xz + parseFloat(30);
+            });
+
+            xz = xz + 100;
+            yz = 0;
+            $.each($('.itt'), function (index, name) {
+
+                var datay = $(name).attr('data-y');
+                // datay = parseFloat(datay) + parseFloat(100);
+                var datax = $(name).attr('data-x');
+
+                if (xz == 0) {
+                    xz = parseFloat(datax);
+                }
+                $(name).css({
+                    'transform': 'translate(' + xz + 'px,' + datay + 'px)',
+                    '-webkit-transform': 'translate(' + xz + 'px,' + datay + 'px)',
+                    '-moz-transform': 'translate(' + xz + 'px,' + datay + 'px)',
+                    '-ms-transform': 'translate(' + xz + 'px,' + datay + 'px)',
+                    '-o-transform': 'translate(' + xz + 'px,' + datay + 'px)'
+                });
+                $(name).attr('data-y', datay);
+                $(name).attr('data-x', xz);
+                xz = xz + parseFloat(30);
+            });
+
+            if (havHukamA) {
+                window.game.server.firstTurnMessage(Group,UserName);
+                ActivateHukam("a");
+                showNotification("Your Turn! please throw hukam 'A'");
+            }
+
+
+        };
+
+        function ActivateHukam(specific) {
+            if (specific == "") {
+                $('.hukam').addClass("dropcan");
+            } else {
+                $('.card-hukam-a').addClass("dropcan");
+            }
+        }
+
+        function ActivateHeart() {
+            $('.heart').addClass("dropcan");
+        }
+
+        function ActivateChiddi() {
+            $('.chidi').addClass("dropcan");
+        }
+
+        function Activateitt() {
+
+            $('.itt').addClass("dropcan");
+
         }
 
 
 
 
 
-
-         
-
         $.connection.hub.reconnecting(function () {
-            
+
         });
 
         $.connection.hub.connectionSlow(function () {
-           
+
 
         });
 
         $.connection.hub.reconnected(function () {
-           
+
 
         });
 
@@ -84,9 +282,9 @@ define(['require', 'CustomFunctions'],
         });
 
 
-         
+
         var JoinRoom = function (groupname, name) {
-           // window.chat.server.joinRoom(groupname, name);
+            // window.chat.server.joinRoom(groupname, name);
         };
 
         function successHandler(result) {
@@ -171,10 +369,10 @@ define(['require', 'CustomFunctions'],
         };
 
 
- 
+
 
         var SendGCMID = function (name, GCMId) {
-           
+
         };
 
         //var signalr = {
@@ -217,11 +415,11 @@ define(['require', 'CustomFunctions'],
                         }
 
 
-                       // JoinRoom(room, name);
-                       
+                        // JoinRoom(room, name);
+
                     });
 
-                }  
+                }
             },
             startConnection: function () {
 
@@ -233,7 +431,7 @@ define(['require', 'CustomFunctions'],
 
                         //var uniqueId = localStorage.getItem("uniqueId");
                         window.game.server.register(name);
-                   //     window.chat.server.registerUser(uniqueId, name);
+                        //     window.chat.server.registerUser(uniqueId, name);
 
                     });
 

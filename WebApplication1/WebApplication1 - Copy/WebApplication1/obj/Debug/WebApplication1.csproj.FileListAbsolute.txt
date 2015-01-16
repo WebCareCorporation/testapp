@@ -143,8 +143,8 @@ F:\GIt\testapp\WebApplication1\WebApplication1 - Copy\WebApplication1\obj\Debug\
 C:\testapp\WebApplication1\WebApplication1 - Copy\WebApplication1\bin\Microsoft.AspNet.SignalR.Owin.dll
 C:\testapp\WebApplication1\WebApplication1 - Copy\WebApplication1\bin\Microsoft.Web.Infrastructure.dll
 C:\testapp\WebApplication1\WebApplication1 - Copy\WebApplication1\bin\Microsoft.AspNet.SignalR.Owin.xml
-C:\testapp\WebApplication1\WebApplication1 - Copy\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
 F:\GIt\testapp\WebApplication1\WebApplication1 - Copy\WebApplication1\bin\Microsoft.AspNet.SignalR.Owin.dll
 F:\GIt\testapp\WebApplication1\WebApplication1 - Copy\WebApplication1\bin\Microsoft.Web.Infrastructure.dll
 F:\GIt\testapp\WebApplication1\WebApplication1 - Copy\WebApplication1\bin\Microsoft.AspNet.SignalR.Owin.xml
 F:\GIt\testapp\WebApplication1\WebApplication1 - Copy\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
+C:\testapp\WebApplication1\WebApplication1 - Copy\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache

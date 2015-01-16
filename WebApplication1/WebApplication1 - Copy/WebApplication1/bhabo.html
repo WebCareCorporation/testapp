@@ -9,7 +9,7 @@
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
-    
+
 
 
     <script type="text/javascript" src="Scripts/jquery.signalR-2.1.2.js"></script>
@@ -22,9 +22,9 @@
     <script src="intelxdk.js"></script>
     <!-- phantom library, needed for Cordova api calls -->
     <script src="cordova.js"></script>
-    
+
     <script src="local-notification.js"></script>
-    
+
     <script src="xhr.js"></script>
     <script type="text/javascript" charset="utf-8" src="PushNotification.js"></script>
     <script type="text/javascript" charset="utf-8" src="SQLitePlugin.js"></script>
@@ -93,18 +93,25 @@
                 dropzoneElement.classList.add('drop-target');
                 draggableElement.classList.add('can-drop');
 
-           //     draggableElement.textContent = 'Dragged in';
+                //     draggableElement.textContent = 'Dragged in';
             },
             ondragleave: function (event) {
                 // remove the drop feedback style
                 event.target.classList.remove('drop-target');
                 event.relatedTarget.classList.remove('can-drop');
 
-              //  event.relatedTarget.textContent = 'Dragged out';
+                //  event.relatedTarget.textContent = 'Dragged out';
             },
             ondrop: function (event) {
-               // event.relatedTarget.textContent = 'Dropped';
+                // event.relatedTarget.textContent = 'Dropped';
                 if (window.confirm("Are you sure?")) {
+                     
+
+                    var UserName = localStorage.getItem("Name");
+                    var Group = localStorage.getItem("Group");
+
+                    window.game.server.throwCard(event.relatedTarget.id, UserName, Group);
+
                     event.relatedTarget.classList.remove('active');
                 } else {
 
@@ -132,14 +139,11 @@
 </head>
 <body>
 
-
-    <!--<div id="ac" class="card card-hearts-2 active dropcan"></div>
-    <div class="card card-hearts-3 active dropcan"></div>
-    <div class="card card-hearts-4 active"></div>-->
-
-
     <div id="outer-dropzone" class="dropzone">
+        <div id="Message" class="notify notify-green">
+        </div>
     </div>
+
 
 </body>
 </html>
