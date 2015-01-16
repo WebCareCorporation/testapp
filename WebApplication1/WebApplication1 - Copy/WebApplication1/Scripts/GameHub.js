@@ -43,6 +43,8 @@ define(['require', 'CustomFunctions'],
 
         window.game.client.yourTurn = function (card) {
 
+            localStorage.setItem("cardType", card);
+
             showNotification("Your Turn.");
             if (card == "hukam") {
                 ActivateHukam("");

@@ -109,10 +109,16 @@
 
                     var UserName = localStorage.getItem("Name");
                     var Group = localStorage.getItem("Group");
-
-                    window.game.server.throwCard(event.relatedTarget.id, UserName, Group);
-
                     event.relatedTarget.classList.remove('active');
+                    var hasCard="true";
+                    if(!$('.card .active').length)
+                    {
+                        hasCard ="false"
+                    }
+                    
+                    window.game.server.throwCard(event.relatedTarget.id, UserName, Group, hasCard, localStorage.getItem("cardType"));
+
+                  
                 } else {
 
                     var x = 0;

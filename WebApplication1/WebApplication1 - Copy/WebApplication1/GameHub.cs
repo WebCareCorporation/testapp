@@ -172,15 +172,38 @@ namespace WebApplication1
                 {
                     Clients.Group(groupname).turnComplete();
 
+                    string largestCardUser = "";
+                    int largestcard = GetLargestCard(groupname, out largestCardUser);
 
-
-
+                    Dictionary<string, string> uTurn = new Dictionary<string, string>();
+                    uTurn.Add(largestCardUser, "Pending");
+                    
                     List<KeyValuePair<string, string>> Done = userturn.Where(x => x.Value == "Done").ToList();
+
+                    int index = Done.FindIndex(x => x.Key == largestCardUser);
+
+                    int length = Done.Count;
+
+                    for (int i = index + 1; i < length; i++)
+                    {
+
+                        var us= Done.ElementAt(i);
+
+                        uTurn.Add(us.Key, "Pending");
+                    }
+
+                    for (int i =0; i < index; i++)
+                    { 
+                        var us = Done.ElementAt(i);
+
+                        uTurn.Add(us.Key, "Pending");
+                    }
+
                     foreach (var d in Done)
                     {
                         userturn[d.Key] = "Pending";
                     }
-                    gameUserTurn[groupname] = userturn;
+                    gameUserTurn[groupname] = uTurn;
                 }
             }
             else
@@ -188,29 +211,16 @@ namespace WebApplication1
                 Clients.Group(groupname).thokaGiven();
 
 
-                // Get largest Card
-                int largestcard = 0;
+                // Get largest Card 
                 string largestCardUser = "";
-                string ct = cardThrown[groupname];
-                string[] cts = ct.Split('?');
-                foreach (string c in cts)
-                {
-                    int cardNumber = Convert.ToInt32(c.Split(':')[1]);
-                    if (cardNumber == 1 || cardNumber == 14 || cardNumber == 27 || cardNumber == 40)
-                    {
-                        largestcard = cardNumber;
-                        largestCardUser = c.Split(':')[0];
-                        break;
-                    }
-                    else
-                    {
-                        if (cardNumber > largestcard)
-                        {
-                            largestcard = cardNumber;
-                            largestCardUser = c.Split(':')[0];
-                        }
-                    }
-                }
+                int largestcard = GetLargestCard(groupname,out largestCardUser);
+
+                cthrown = cardThrown[groupname];
+
+                cthrown = cthrown + "?" + username + ":" + card;
+
+            
+              
 
                 List<KeyValuePair<string, string>> Done = userturn.Where(x => x.Value == "Done").ToList();
                 foreach (var d in Done)
