@@ -3,13 +3,60 @@ define(['require', 'CustomFunctions'],
     function (require, custom) {
         //    return signalr;
 
+        $("#Message").slideUp(1);
+
         //if (window.Cordova) {
-        //  $.connection.hub.url = "http://bathindavarinder-001-site1.smarterasp.net/signalr";
+        //    $.connection.hub.url = "http://bathindavarinder-001-site1.smarterasp.net/signalr";
         //}
+
+        window.timeout = false;
+
+        window.reconnecting = false;
 
         window.game = $.connection.gameHub;
 
+        window.Userturn = "";
+
         var tryingToReconnect = false;
+
+        window.game.client.TimedOut = function () {
+            //ResetTimer();
+
+            //$('.card').remove();
+            //$('#Message').append("You are removed from this game.");
+        };
+
+        window.game.client.GameClosed = function () {
+            //localStorage.setItem("cardType", "");
+            //ResetTimer();
+            //$('.card').remove();
+            //$('#Message').append("Game Closed as all left.");
+        };
+
+        function resettimer() {
+            //window.timeout = false;
+            //mystopfunction();
+            //window.timein = 50;
+            //document.getelementbyid("timer").innerhtml = "";
+        }
+
+        window.game.client.StartTimer = function (user, game, card) {
+
+            //window.timeIn = 50;
+
+            //window.timeout = true;
+            //window.Userturn = user;
+            //window.myVar = setInterval(function () { myTimer() }, 1000);
+
+            //window.myTimeout = setTimeout(function () {
+            //    if (window.timeout) {
+            //        window.game.server.asktimeOut(user, game, card);
+            //    }
+            //    ResetTimer();
+
+            //}, 50000);
+        };
+
         window.game.client.registered = function (name) {
             //  alert("you are registered");
         };
@@ -24,7 +71,41 @@ define(['require', 'CustomFunctions'],
         window.game.client.FirstTurn = function (message) {
             showNotification(message);
         };
-        window.game.client.thrownCard = function (user,card) {
+
+        window.game.client.groupMessage = function (message) {
+            showNotification(message);
+        };
+
+
+
+        window.game.client.thokaGiven = function (cs) {
+            $('.card:not(.active)').remove();
+            //ResetTimer();
+            showNotification("THoka given : " + cs);
+            var Cards = cs.split(';');
+
+            var x = 0;
+            var y = 0;
+            $.each(Cards, function (index, name) {
+                var idandcard = name.split('?');
+
+                var cardtype = idandcard[1].split('-')[1];
+
+
+
+                //var card = '<div data-x="' + x + '" data-y="' + y + '" id="' + idandcard[0] + '" class="card mine ' + idandcard[1] + ' ' + cardtype + ' active" data-card="' + cardtype + '" ></div>';
+                var card = '<div id="' + idandcard[0] + '" class="card mine ' + idandcard[1] + ' ' + cardtype + ' active" data-card="' + cardtype + '" ></div>';
+                $('.ui-page').append(card);
+
+
+
+
+            });
+        };
+
+        window.game.client.thrownCard = function (user, card) {
+
+            //ResetTimer();
 
             var idandcard = card.split('?');
 
@@ -32,36 +113,64 @@ define(['require', 'CustomFunctions'],
 
                 var cardtype = idandcard[1].split('-')[1];
 
-                var card = '<div  id="' + idandcard[0] + '" class="card ' + idandcard[1] + ' ' + cardtype + '" ></div>';
+                var card = '<div  id="' + idandcard[0] + '" class="card ' + idandcard[1] + ' ' + cardtype + ' thrownCard" ></div>';
                 $('#outer-dropzone').append(card);
 
             }
         };
 
+        function myStopFunction() {
+            //clearInterval(window.myVar);
+            //clearTimeout(window.myTimeout);
+        }
 
-        
+        function myTimer() {
+            //document.getElementById("timer").innerHTML = window.Userturn + "'s turn : " + window.timeIn + " seconds left.";
+            //window.timeIn = parseFloat(window.timeIn) - parseFloat(1);
+        }
+
+
+
+        window.game.client.turnComplete = function (user) {
+            $('.card:not(.active)').remove();//.css("visibility", "hidden");
+            showNotification(user + " will start.");
+            localStorage.setItem("cardType", "");
+        };
+
+        window.game.client.startTurn = function () {
+            localStorage.setItem("cardType", "");
+
+            $('.mine').addClass("dropcan");
+        };
+
+
 
         window.game.client.yourTurn = function (card) {
 
             localStorage.setItem("cardType", card);
 
+            if (!$('.' + card + ' .active').length) {
+                $('.mine').addClass('dropcan');
+                return;
+            }
+
             showNotification("Your Turn.");
             if (card == "hukam") {
                 ActivateHukam("");
-            }else
+            } else
                 if (card == "chidi") {
-                ActivateChiddi();
-            }else
+                    ActivateChiddi();
+                } else
                     if (card == "itt") {
-                Activateitt();
-            }else
+                        Activateitt();
+                    } else
                         if (card == "heart") {
-                ActivateHeart();
-            }
+                            ActivateHeart();
+                        }
 
         };
 
-        
+
 
         function showNotification(Message) {
             $('#Message').empty();
@@ -69,12 +178,13 @@ define(['require', 'CustomFunctions'],
             $('#Message').append(Message);
             //$("#Message").fadeIn(400);
 
-            setTimeout(function () { 
+            setTimeout(function () {
                 //$("#Message").hide( "slow" )
+                $('#Message').empty();
                 $("#Message").slideUp(1000);
-            }, 5000);
+            }, 10000);
         }
-      
+
 
         var UserName = localStorage.getItem("Name");
         var Group = localStorage.getItem("Group");
@@ -95,116 +205,117 @@ define(['require', 'CustomFunctions'],
                     havHukamA = true;
                 }
 
-                var card = '<div data-x="' + x + '" data-y="' + y + '" id="' + idandcard[0] + '" class="card mine ' + idandcard[1] + ' ' + cardtype + ' active" ></div>';
+                //var card = '<div data-x="' + x + '" data-y="' + y + '" id="' + idandcard[0] + '" class="card mine ' + idandcard[1] + ' ' + cardtype + ' active" data-card="' + cardtype + '" ></div>';
+                var card = '<div id="' + idandcard[0] + '" class="card thrownCard mine ' + idandcard[1] + ' ' + cardtype + ' active" data-card="' + cardtype + '" ></div>';
                 $('.ui-page').append(card);
 
 
-                $('#' + idandcard[0]).css({
-                    'transform': 'translate(' + x + 'px,' + y + 'px)',
-                    '-webkit-transform': 'translate(' + x + 'px,' + y + 'px)',
-                    '-moz-transform': 'translate(' + x + 'px,' + y + 'px)',
-                    '-ms-transform': 'translate(' + x + 'px,' + y + 'px)',
-                    '-o-transform': 'translate(' + x + 'px,' + y + 'px)'
+                //$('#' + idandcard[0]).css({
+                //    'transform': 'translate(' + x + 'px,' + y + 'px)',
+                //    '-webkit-transform': 'translate(' + x + 'px,' + y + 'px)',
+                //    '-moz-transform': 'translate(' + x + 'px,' + y + 'px)',
+                //    '-ms-transform': 'translate(' + x + 'px,' + y + 'px)',
+                //    '-o-transform': 'translate(' + x + 'px,' + y + 'px)'
 
-                });
+                //});
                 x = x + 30;
                 y = y - 79;
 
             });
 
-            var xz = 0;
-            var yz = 0;
-            $.each($('.heart'), function (index, name) {
+            //var xz = 0;
+            //var yz = 0;
+            //$.each($('.heart'), function (index, name) {
 
-                var datay = $(name).attr('data-y');
-                datay = parseFloat(datay) + parseFloat(100);
-                var datax = $(name).attr('data-x');
-                $(name).css({
-                    'transform': 'translate(' + xz + 'px,' + datay + 'px)',
-                    '-webkit-transform': 'translate(' + xz + 'px,' + datay + 'px)',
-                    '-moz-transform': 'translate(' + xz + 'px,' + datay + 'px)',
-                    '-ms-transform': 'translate(' + xz + 'px,' + datay + 'px)',
-                    '-o-transform': 'translate(' + xz + 'px,' + datay + 'px)'
-                });
-                $(name).attr('data-y', datay);
-                $(name).attr('data-x', xz);
-                xz = xz + 30;
+            //    var datay = $(name).attr('data-y');
+            //    datay = parseFloat(datay) + parseFloat(100);
+            //    var datax = $(name).attr('data-x');
+            //    $(name).css({
+            //        'transform': 'translate(' + xz + 'px,' + datay + 'px)',
+            //        '-webkit-transform': 'translate(' + xz + 'px,' + datay + 'px)',
+            //        '-moz-transform': 'translate(' + xz + 'px,' + datay + 'px)',
+            //        '-ms-transform': 'translate(' + xz + 'px,' + datay + 'px)',
+            //        '-o-transform': 'translate(' + xz + 'px,' + datay + 'px)'
+            //    });
+            //    $(name).attr('data-y', datay);
+            //    $(name).attr('data-x', xz);
+            //    xz = xz + 30;
 
-            });
+            //});
 
-            xz = xz + 100;
-            yz = 0;
-            $.each($('.chidi'), function (index, name) {
+            //xz = xz + 100;
+            //yz = 0;
+            //$.each($('.chidi'), function (index, name) {
 
-                var datay = $(name).attr('data-y');
-                datay = parseFloat(datay) + parseFloat(100);
-                var datax = $(name).attr('data-x');
-                //    xz =   parseFloat(datax) + parseFloat(30);
+            //    var datay = $(name).attr('data-y');
+            //    datay = parseFloat(datay) + parseFloat(100);
+            //    var datax = $(name).attr('data-x');
+            //    //    xz =   parseFloat(datax) + parseFloat(30);
 
-                $(name).css({
-                    'transform': 'translate(' + xz + 'px,' + datay + 'px)',
-                    '-webkit-transform': 'translate(' + xz + 'px,' + datay + 'px)',
-                    '-moz-transform': 'translate(' + xz + 'px,' + datay + 'px)',
-                    '-ms-transform': 'translate(' + xz + 'px,' + datay + 'px)',
-                    '-o-transform': 'translate(' + xz + 'px,' + datay + 'px)'
-                });
-                $(name).attr('data-y', datay);
-                $(name).attr('data-x', xz);
-                xz = xz + parseFloat(30);
-            });
+            //    $(name).css({
+            //        'transform': 'translate(' + xz + 'px,' + datay + 'px)',
+            //        '-webkit-transform': 'translate(' + xz + 'px,' + datay + 'px)',
+            //        '-moz-transform': 'translate(' + xz + 'px,' + datay + 'px)',
+            //        '-ms-transform': 'translate(' + xz + 'px,' + datay + 'px)',
+            //        '-o-transform': 'translate(' + xz + 'px,' + datay + 'px)'
+            //    });
+            //    $(name).attr('data-y', datay);
+            //    $(name).attr('data-x', xz);
+            //    xz = xz + parseFloat(30);
+            //});
 
-            xz = 0;
-            yz = 0;
-            $.each($('.hukam'), function (index, name) {
+            //xz = 0;
+            //yz = 0;
+            //$.each($('.hukam'), function (index, name) {
 
-                var datay = $(name).attr('data-y');
-                // datay = parseFloat(datay) + parseFloat(100);
-                var datax = $(name).attr('data-x');
+            //    var datay = $(name).attr('data-y');
+            //    // datay = parseFloat(datay) + parseFloat(100);
+            //    var datax = $(name).attr('data-x');
 
 
-                $(name).css({
-                    'transform': 'translate(' + xz + 'px,' + datay + 'px)',
-                    '-webkit-transform': 'translate(' + xz + 'px,' + datay + 'px)',
-                    '-moz-transform': 'translate(' + xz + 'px,' + datay + 'px)',
-                    '-ms-transform': 'translate(' + xz + 'px,' + datay + 'px)',
-                    '-o-transform': 'translate(' + xz + 'px,' + datay + 'px)'
-                });
+            //    $(name).css({
+            //        'transform': 'translate(' + xz + 'px,' + datay + 'px)',
+            //        '-webkit-transform': 'translate(' + xz + 'px,' + datay + 'px)',
+            //        '-moz-transform': 'translate(' + xz + 'px,' + datay + 'px)',
+            //        '-ms-transform': 'translate(' + xz + 'px,' + datay + 'px)',
+            //        '-o-transform': 'translate(' + xz + 'px,' + datay + 'px)'
+            //    });
 
-                $(name).attr('data-y', datay);
-                $(name).attr('data-x', xz);
+            //    $(name).attr('data-y', datay);
+            //    $(name).attr('data-x', xz);
 
-                xz = xz + parseFloat(30);
-            });
+            //    xz = xz + parseFloat(30);
+            //});
 
-            xz = xz + 100;
-            yz = 0;
-            $.each($('.itt'), function (index, name) {
+            //xz = xz + 100;
+            //yz = 0;
+            //$.each($('.itt'), function (index, name) {
 
-                var datay = $(name).attr('data-y');
-                // datay = parseFloat(datay) + parseFloat(100);
-                var datax = $(name).attr('data-x');
+            //    var datay = $(name).attr('data-y');
+            //    // datay = parseFloat(datay) + parseFloat(100);
+            //    var datax = $(name).attr('data-x');
 
-                if (xz == 0) {
-                    xz = parseFloat(datax);
-                }
-                $(name).css({
-                    'transform': 'translate(' + xz + 'px,' + datay + 'px)',
-                    '-webkit-transform': 'translate(' + xz + 'px,' + datay + 'px)',
-                    '-moz-transform': 'translate(' + xz + 'px,' + datay + 'px)',
-                    '-ms-transform': 'translate(' + xz + 'px,' + datay + 'px)',
-                    '-o-transform': 'translate(' + xz + 'px,' + datay + 'px)'
-                });
-                $(name).attr('data-y', datay);
-                $(name).attr('data-x', xz);
-                xz = xz + parseFloat(30);
-            });
+            //    if (xz == 0) {
+            //        xz = parseFloat(datax);
+            //    }
+            //    $(name).css({
+            //        'transform': 'translate(' + xz + 'px,' + datay + 'px)',
+            //        '-webkit-transform': 'translate(' + xz + 'px,' + datay + 'px)',
+            //        '-moz-transform': 'translate(' + xz + 'px,' + datay + 'px)',
+            //        '-ms-transform': 'translate(' + xz + 'px,' + datay + 'px)',
+            //        '-o-transform': 'translate(' + xz + 'px,' + datay + 'px)'
+            //    });
+            //    $(name).attr('data-y', datay);
+            //    $(name).attr('data-x', xz);
+            //    xz = xz + parseFloat(30);
+            //});
 
             if (havHukamA) {
-                window.game.server.firstTurnMessage(Group,UserName);
+                window.game.server.firstTurnMessage(Group, UserName);
                 ActivateHukam("a");
                 showNotification("Your Turn! please throw hukam 'A'");
             }
-
+            localStorage.setItem("cardType", "hukam");
 
         };
 
@@ -235,6 +346,7 @@ define(['require', 'CustomFunctions'],
 
 
         $.connection.hub.reconnecting(function () {
+            window.reconnecting = true;
 
         });
 
@@ -245,42 +357,55 @@ define(['require', 'CustomFunctions'],
 
         $.connection.hub.reconnected(function () {
 
+            var myClientId = $.connection.hub.id;
+
+            if (myClientId != localStorage.getItem("ConnId")) {
+
+                var yourname = localStorage.getItem("Name");
+
+                window.chat.server.updateConnId(localStorage.getItem("ConnId"), myClientId, yourname);
+
+                localStorage.setItem("ConnId", myClientId);
+            }
+
+            if (localStorage.getItem("SendCard") && localStorage.getItem("SendCard") != "") {
+
+                var card = localStorage.getItem("SendCard");
+
+                var details = card.split('$');
+
+                window.game.server.throwCard(details[0], details[1], details[2], details[3], details[4]);
+
+                localStorage.setItem("SendCard", "");
+            }
+            window.reconnecting = false;
 
         });
 
         $.connection.hub.disconnected(function () {
 
-            //if (!window.background) {
-            //    if (localStorage.getItem("room")) {
-            //        $.connection.hub.start().done(function () {
+            window.reconnecting = true;
 
-            //            var myClientId = $.connection.hub.id;
-            //            var yourname = localStorage.getItem("Name");
-            //            if (myClientId != localStorage.getItem("ConnId")) {
-            //               // window.chat.server.updateConnId(localStorage.getItem("ConnId"), myClientId, yourname);
-            //            }
-            //            var myClientId = $.connection.hub.id;
+            $.connection.hub.start().done(function () {
 
-            //            localStorage.setItem("ConnId", myClientId);
-            //            //window.chat.server.updateName(myClientId, $('#displayname').val());
+                var myClientId = $.connection.hub.id;
 
-            //            var name = localStorage.getItem("Name");
+                var yourname = localStorage.getItem("Name");
 
-            //            var room = localStorage.getItem("room");
+                window.game.server.Register(yourname);
 
+                if (localStorage.getItem("SendCard") && localStorage.getItem("SendCard") != "") {
 
-            //            JoinRoom(room, name);
+                    var card = localStorage.getItem("SendCard");
 
+                    var details = card.split('$');
 
-            //        });
-            //    }
+                    window.game.server.throwCard(details[0], details[1], details[2], details[3], details[4]);
 
-            //} else {
-            //    custom.showNotification("Timeout", "You have been pulled out of room because of no activity");
-            //    localStorage.setItem("room", undefined);
-            //    custom.openRooms();
-            //}
-
+                    localStorage.setItem("SendCard", "")
+                }
+                window.reconnecting = false;
+            });
         });
 
 
@@ -303,11 +428,9 @@ define(['require', 'CustomFunctions'],
             switch (e.event) {
                 case 'registered':
                     if (e.regid.length > 0) {
-                        //$("#app-status-ul").append('<li>REGISTERED -> REGID:' + e.regid + "</li>");
-                        // Your GCM push server needs to know the regID before it can push to this device
-                        // here is where you might want to send it the regID for later use.
+
                         console.log("regID = " + e.regid);
-                        //alert('resgisterd' + e.regid);
+
                         localStorage.setItem("FirstTime", "false");
                         var name = localStorage.getItem("Name");
                         SendGCMID(name, e.regid);
@@ -315,8 +438,6 @@ define(['require', 'CustomFunctions'],
                     break;
 
                 case 'message':
-                    // if this flag is set, this notification happened while we were in the foreground.
-                    // you might want to play a sound to get the user's attention, throw up a dialog, etc.
                     if (e.foreground) {
                         var message = e.payload.message;
 
@@ -325,14 +446,7 @@ define(['require', 'CustomFunctions'],
                         var name = message.substring(0, n);
                         console.log("got name : " + name);
                         custom.showNotification(name, e.payload.message);
-                        //$("#app-status-ul").append('<li>--INLINE NOTIFICATION--' + '</li>');
 
-                        //// on Android soundname is outside the payload.
-                        //// On Amazon FireOS all custom attributes are contained within payload
-                        //var soundfile = e.soundname || e.payload.sound;
-                        //// if the notification contains a soundname, play it.
-                        //var my_media = new Media("/android_asset/www/" + soundfile);
-                        //my_media.play();
                     }
                     else {
                         var message = e.payload.message;
@@ -342,22 +456,7 @@ define(['require', 'CustomFunctions'],
                         var name = message.substring(0, n);
                         console.log("got name : " + name);
                         custom.showNotification(name, e.payload.message);
-
-
-                        // otherwise we were launched because the user touched a notification in the notification tray.
-                        //if (e.coldstart) {
-                        //    $("#app-status-ul").append('<li>--COLDSTART NOTIFICATION--' + '</li>');
-                        //}
-                        //else {
-                        //    $("#app-status-ul").append('<li>--BACKGROUND NOTIFICATION--' + '</li>');
-                        //}
                     }
-
-                    //$("#app-status-ul").append('<li>MESSAGE -> MSG: ' + e.payload.message + '</li>');
-                    ////Only works for GCM
-                    //$("#app-status-ul").append('<li>MESSAGE -> MSGCNT: ' + e.payload.msgcnt + '</li>');
-                    ////Only works on Amazon Fire OS
-                    //$status.append('<li>MESSAGE -> TIME: ' + e.payload.timeStamp + '</li>');
                     break;
 
                 case 'error':
@@ -428,9 +527,9 @@ define(['require', 'CustomFunctions'],
                 if (custom.CheckConnection()) {
 
                     $.connection.hub.start().done(function () {
-
+                        var myClientId = $.connection.hub.id;
                         var name = localStorage.getItem("Name");
-
+                        localStorage.setItem("ConnId", myClientId);
                         //var uniqueId = localStorage.getItem("uniqueId");
                         window.game.server.register(name);
                         //     window.chat.server.registerUser(uniqueId, name);

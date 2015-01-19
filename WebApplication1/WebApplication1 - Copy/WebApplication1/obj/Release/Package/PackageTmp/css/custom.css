@@ -31,16 +31,17 @@
     font: 200;
     font-style: normal;
     font-size: 17px;
-    margin-bottom: 5px;
+    margin-bottom: 0px;
     margin-top: 7px;
     width: auto;
     padding-top: 7px;
-    padding-bottom: 7px;
+    padding-bottom: 5px;
     padding-left: 6px;
-    padding-right: 6px;
+    padding-right: 40px;
       border: 1px solid #808080 /*{c-bdown-border}*/;
     background: #fdfdfd /*{c-bdown-background-color}*/;
-    
+     display: inline-block;
+    max-width:50%;
     color: #111111 /*{c-bdown-color}*/;
     text-shadow: 0 /*{c-bdown-shadow-x}*/ 1px /*{c-bdown-shadow-y}*/ 1px /*{c-bdown-shadow-radius}*/ #ffffff /*{c-bdown-shadow-color}*/;
     background-image: -webkit-gradient(linear, left top, left bottom, from( #eee /*{c-bdown-background-start}*/ ), to( #fdfdfd /*{c-bdown-background-end}*/ )); /* Saf4+, Chrome */
@@ -51,7 +52,9 @@
     background-image: linear-gradient(#eee /*{c-bdown-background-start}*/, #fdfdfd /*{c-bdown-background-end}*/ );
 
 }
-
+.ChatWindow li div {
+    margin-top: 7px;
+}
 
 
     #userList li:hover {

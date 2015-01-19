@@ -13,7 +13,6 @@ function (require,signal) {
     };
     var bindEvents = function () {
 
-
         if (!window.Cordova) {
             $(document).ready(function () {
                
@@ -25,8 +24,9 @@ function (require,signal) {
 
         document.addEventListener("backbutton", function () {
 
-         
-            
+            var name = localStorage.getItem("Name");
+            var room = localStorage.getItem("room");
+            signal.leaveRoom(room, name);
 
         }, false);
 

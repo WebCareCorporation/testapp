@@ -40,9 +40,9 @@
 
     var buildMsg = function (name,msg) {
 
-        var encodedMsg = $('<div style="display: block;" />').text(message).html();
-        
-        var msg = $('<li><b>' + name + "</b><br>" + encodedMsg + '</li>');
+        var encodedMsg ='<div style="display: block;">' + msg + '</div>';
+       
+        var msg = $('<li><b>' + name + "</b><br>" + encodedMsg + '</li><br>');
 
         return msg;
     };
