@@ -1,37 +1,48 @@
 ﻿
 .notify {
-    background-color:#e3f7fc; 
-    color:#555; 
-    border:.1em solid;
+    background-color: #e3f7fc;
+    color: #555;
+    border: .1em solid;
     border-color: #8ed9f6;
-    border-radius:10px;
-    font-family:Tahoma,Geneva,Arial,sans-serif;
-    font-size:1.1em;
-    padding:10px 10px 10px 10px;
-    margin:10px;
+    border-radius: 10px;
+    font-family: Tahoma,Geneva,Arial,sans-serif;
+    font-size: 1.1em;
+    /*padding:10px 10px 10px 10px;*/
+    margin: 20px;
     cursor: default;
+    margin-left:50px;
     /*width:auto;*/
-    float:left;
-    
+    float: left;
     /*z-index:199;*/
+    position: fixed;
+    top: 0;
+    width: 40%;
+    z-index: 100;
+}
 
-      
-    position:fixed;
-    top:0;
-    width:40%;
-    z-index:100;
-}
 #timer {
-    border-radius:10px;
+    border-radius: 10px;
     border-color: #8ed9f6;
-    background-color:#e3f7fc; 
-    float:left;
-    position:relative;
-    z-index:199;
+    background-color: #e3f7fc;
+    float: left;
+    position: relative;
+    z-index: 199;
 }
-.notify-yellow { background: #fff8c4; border-color: #f7deae; }
-.notify-red { background: #ffecec; border-color: #fad9d7; }
-.notify-green { background: #e9ffd9; border-color: #D1FAB6; }
+
+.notify-yellow {
+    background: #fff8c4;
+    border-color: #f7deae;
+}
+
+.notify-red {
+    background: #ffecec;
+    border-color: #fad9d7;
+}
+
+.notify-green {
+    background: #e9ffd9;
+    border-color: #D1FAB6;
+}
 
 #navlist {
     position: relative;
@@ -45,18 +56,19 @@
     margin-left: auto;
     margin-right: auto;
     position: relative;
-     
     /*border: 2px solid black;*/
 }
 
 .onTop {
-    position:relative;
-    z-index:99;
+    position: relative;
+    z-index: 99;
 }
+
 .onTopBelow {
-    position:relative;
-    z-index:89;
+    position: relative;
+    z-index: 89;
 }
+
 .icon-huge {
     zoom: 1;
     -moz-transform: scale(1);
@@ -85,7 +97,6 @@
     top: 0;
     -webkit-transform: translate(0px, 0px);
     transform: translate(0px, 0px);
-   
 }
 
 #cards .select {
@@ -189,27 +200,28 @@
     left: 0px;
     width: 168px;
     background: url('../img/svg-cards.png') 0 0;
-     background-size:500%;
+    background-size: 500%;
 }
 
 #BC {
     left: 170px;
     width: 168px;
     background: url('../img/svg-cards.png') -168px 0;
-       background-size:70%;
+    background-size: 70%;
 }
 
 #CC {
     left: 340px;
     width: 168px;
     background: url('../img/svg-cards.png') -334px 0;
-       background-size:70%;
+    background-size: 70%;
 }
 
-#DC {    left: 510px;
+#DC {
+    left: 510px;
     width: 168px;
     background: url('../img/svg-cards.png') -502px 0;
-       background-size:70%;
+    background-size: 70%;
 }
 
 
@@ -220,17 +232,104 @@
     background-size: 1300% 500%;
     /*display:inline-block;*/
 }
+
 .card-wide {
     width: 100px;
 }
+
 .card-high {
     height: 130px;
 }
 
 .thrownCard {
-    float:left;
+    float: left;
     /*clear:both;*/
 }
+
+.animatedCard {
+    position: relative;
+    -webkit-animation: animatein 3s; /* Chrome, Safari, Opera */
+    animation: animatein 3s;
+}
+
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes animatein {
+    0% {
+        left: -200px;
+        top: -300px;
+    }
+
+    100% {
+        left: 0px;
+        top: 0px;
+    }
+}
+
+@keyframes animatein {
+    0% {
+        left: 0px;
+        top: -3000px;
+    }
+
+    100% {
+        left: 0px;
+        top: 0px;
+    }
+}
+
+.animatedOutCard {
+    position: relative;
+    -webkit-animation: animateout 3s; /* Chrome, Safari, Opera */
+    animation: animatein 3s;
+}
+
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes animateout {
+    0% {
+        left: 0px;
+        top: 0px;
+    }
+
+    25% {
+        left: 20px;
+        top: 20px;
+    }
+
+    50% {
+        left: 0px;
+        top: 0px;
+    }
+
+    100% {
+        left: -300px;
+        top: -300px;
+    }
+}
+
+@keyframes animateout {
+    0% {
+        left: 0px;
+        top: 0px;
+    } 
+
+    25% {
+        left: 20px;
+        top: 20px;
+    }
+
+    50% {
+        left: 0px;
+        top: 0px;
+    }
+    100% {
+        left: -300px;
+        top: -300px;
+    }
+}
+
+
 
 /**
  * Backgrouns position of all the cards
@@ -239,110 +338,397 @@
  * y offset in %: j * (100/y); j = 0, 1, ..., (y - 1); y = the number of rows in the sprite
  */
 
-.card-heart-2 { background-position: 0 0; }
-.card-heart-3 { background-position: 8.33% 0; }
-.card-heart-4 { background-position: 16.667% 0; }
-.card-heart-5 { background-position: 24.999% 0; }
-.card-heart-6 { background-position: 33.32% 0; }
-.card-heart-7 { background-position: 41.65% 0; }
-.card-heart-8 { background-position: 49.99% 0; }
-.card-heart-9 { background-position: 58.31% 0; }
-.card-heart-10 { background-position: 66.64% 0; }
-.card-heart-j { background-position: 74.97% 0; }
-.card-heart-q { background-position: 83.333% 0; }
-.card-heart-k { background-position: 91.667% 0; }
-.card-heart-a { background-position: 100% 0; }
-
-.card-chidi-2 { background-position: 0 50%; }
-.card-chidi-3 { background-position: 8.33% 50%; }
-.card-chidi-4 { background-position: 16.667% 50%; }
-.card-chidi-5 { background-position: 24.999% 50%; }
-.card-chidi-6 { background-position: 33.32% 50%; }
-.card-chidi-7 { background-position: 41.65% 50%; }
-.card-chidi-8 { background-position: 49.99% 50%; }
-.card-chidi-9 { background-position: 58.31% 50%; }
-.card-chidi-10 { background-position: 66.64% 50%; }
-.card-chidi-j { background-position: 74.97% 50%; }
-
-
-.card-chidi-q { background-position: 83.333% 50%; }
-.card-chidi-k { background-position: 91.667% 50%; }
-.card-chidi-a { background-position: 100% 50%; }
-
-
-.card-itt-2 { background-position: 0 25%; }
-.card-itt-3 { background-position: 8.33% 25%; }
-.card-itt-4 { background-position: 16.667% 25%; }
-.card-itt-5 { background-position: 24.999% 25%; }
-.card-itt-6 { background-position: 33.32% 25%; }
-.card-itt-7 { background-position: 41.65% 25%; }
-.card-itt-8 { background-position: 49.99% 25%; }
-.card-itt-9 { background-position: 58.31% 25%; }
-.card-itt-10 { background-position: 66.64% 25%; }
-.card-itt-j { background-position: 74.97% 25%; }
-
-
-.card-itt-q { background-position: 83.333% 25%; }
-.card-itt-k { background-position: 91.667% 25%; }
-.card-itt-a { background-position: 100% 25%; }
-
-
-.card-hukam-2 { background-position: 0 75%; }
-.card-hukam-3 { background-position: 8.33% 75%; }
-.card-hukam-4 { background-position: 16.667% 75%; }
-.card-hukam-5 { background-position: 24.999% 75%; }
-.card-hukam-6 { background-position: 33.32% 75%; }
-.card-hukam-7 { background-position: 41.65% 75%; }
-.card-hukam-8 { background-position: 49.99% 75%; }
-.card-hukam-9 { background-position: 58.31% 75%; }
-.card-hukam-10 { background-position: 66.64% 75%; }
-.card-hukam-j { background-position: 74.97% 75%; }
-
-
-.card-hukam-q { background-position: 83.333% 75%; }
-.card-hukam-k { background-position: 91.667% 75%; }
-.card-hukam-a { background-position: 100% 75%; }
-
-
-
-#outer-dropzone {
-  height: 140px;
+.card-heart-2 {
+    background-position: 0 0;
 }
 
+.card-heart-3 {
+    background-position: 8.33% 0;
+}
+
+.card-heart-4 {
+    background-position: 16.667% 0;
+}
+
+.card-heart-5 {
+    background-position: 24.999% 0;
+}
+
+.card-heart-6 {
+    background-position: 33.32% 0;
+}
+
+.card-heart-7 {
+    background-position: 41.65% 0;
+}
+
+.card-heart-8 {
+    background-position: 49.99% 0;
+}
+
+.card-heart-9 {
+    background-position: 58.31% 0;
+}
+
+.card-heart-10 {
+    background-position: 66.64% 0;
+}
+
+.card-heart-j {
+    background-position: 74.97% 0;
+}
+
+.card-heart-q {
+    background-position: 83.333% 0;
+}
+
+.card-heart-k {
+    background-position: 91.667% 0;
+}
+
+.card-heart-a {
+    background-position: 100% 0;
+}
+
+.card-chidi-2 {
+    background-position: 0 50%;
+}
+
+.card-chidi-3 {
+    background-position: 8.33% 50%;
+}
+
+.card-chidi-4 {
+    background-position: 16.667% 50%;
+}
+
+.card-chidi-5 {
+    background-position: 24.999% 50%;
+}
+
+.card-chidi-6 {
+    background-position: 33.32% 50%;
+}
+
+.card-chidi-7 {
+    background-position: 41.65% 50%;
+}
+
+.card-chidi-8 {
+    background-position: 49.99% 50%;
+}
+
+.card-chidi-9 {
+    background-position: 58.31% 50%;
+}
+
+.card-chidi-10 {
+    background-position: 66.64% 50%;
+}
+
+.card-chidi-j {
+    background-position: 74.97% 50%;
+}
+
+
+.card-chidi-q {
+    background-position: 83.333% 50%;
+}
+
+.card-chidi-k {
+    background-position: 91.667% 50%;
+}
+
+.card-chidi-a {
+    background-position: 100% 50%;
+}
+
+
+.card-itt-2 {
+    background-position: 0 25%;
+}
+
+.card-itt-3 {
+    background-position: 8.33% 25%;
+}
+
+.card-itt-4 {
+    background-position: 16.667% 25%;
+}
+
+.card-itt-5 {
+    background-position: 24.999% 25%;
+}
+
+.card-itt-6 {
+    background-position: 33.32% 25%;
+}
+
+.card-itt-7 {
+    background-position: 41.65% 25%;
+}
+
+.card-itt-8 {
+    background-position: 49.99% 25%;
+}
+
+.card-itt-9 {
+    background-position: 58.31% 25%;
+}
+
+.card-itt-10 {
+    background-position: 66.64% 25%;
+}
+
+.card-itt-j {
+    background-position: 74.97% 25%;
+}
+
+
+.card-itt-q {
+    background-position: 83.333% 25%;
+}
+
+.card-itt-k {
+    background-position: 91.667% 25%;
+}
+
+.card-itt-a {
+    background-position: 100% 25%;
+}
+
+
+.card-hukam-2 {
+    background-position: 0 75%;
+}
+
+.card-hukam-3 {
+    background-position: 8.33% 75%;
+}
+
+.card-hukam-4 {
+    background-position: 16.667% 75%;
+}
+
+.card-hukam-5 {
+    background-position: 24.999% 75%;
+}
+
+.card-hukam-6 {
+    background-position: 33.32% 75%;
+}
+
+.card-hukam-7 {
+    background-position: 41.65% 75%;
+}
+
+.card-hukam-8 {
+    background-position: 49.99% 75%;
+}
+
+.card-hukam-9 {
+    background-position: 58.31% 75%;
+}
+
+.card-hukam-10 {
+    background-position: 66.64% 75%;
+}
+
+.card-hukam-j {
+    background-position: 74.97% 75%;
+}
+
+
+.card-hukam-q {
+    background-position: 83.333% 75%;
+}
+
+.card-hukam-k {
+    background-position: 91.667% 75%;
+}
+
+.card-hukam-a {
+    background-position: 100% 75%;
+}
+
+
+
+#outer-dropzone { 
+     background: url('../img/table.jpg') no-repeat;
+    background-size: 50%;
+    height: 100%;
+    width: 100%;
+  /*  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;*/
+}
+div#menu {
+		width: 30%;
+		background-color: yellow;
+		position:absolute;
+		bottom: 0;
+		left: 35%;
+		display:none;
+	}
+
 #inner-dropzone {
-  height: 80px;
+    height: 80px;
 }
 
 .dropzone {
-  background-color: #ccc;
-  border: dashed 4px transparent;
-  border-radius: 4px;
-  margin: 10px auto 30px;
-  padding: 10px;
-  width: 80%;
-  transition: background-color 0.3s, border-color 0.3s;
+    background-color: #ccc;
+    border: dashed 4px transparent;
+    border-radius: 4px;
+    /*margin: 10px auto 30px;*/
+    padding: 10px;
+    width: 80%;
+    transition: background-color 0.3s, border-color 0.3s;
+   
+ 
 }
 
 .drop-active {
-  border-color: #666;
+    border-color: #666;
 }
 
 .drop-target {
-  background-color: #29e;
+    border-color: #29e;
 }
 
 .drag-drop {
-  display: inline-block;
-  min-width: 40px;
-  padding: 2em 0.5em;
-
-  background-color: #99e;
-  border: solid 2px white;
-
-  -webkit-transform: translate(0px, 0px);
-          transform: translate(0px, 0px);
-
-  transition: background-color 0.3s;
+    display: inline-block;
+    min-width: 40px;
+    padding: 2em 0.5em;
+    border-color: #99e;
+    border: solid 2px white;
+    -webkit-transform: translate(0px, 0px);
+    transform: translate(0px, 0px);
+    transition: background-color 0.3s;
 }
 
-.drag-drop.can-drop { background-color: #4e4; }
+    .drag-drop.can-drop {
+        background-color: #4e4;
+    }
+
+.turn {
+    background-color:#FFD801;
+    font:bold;
+}
+
+
+    body, html {
+    height: 100%;
+    margin: 0;
+    overflow:scroll;
+    font-family: helvetica;
+    font-weight: 100;
+}
+.container {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    -webkit-transition:  left 0.4s ease-in-out;
+    -moz-transition:  left 0.4s ease-in-out;
+    -ms-transition:  left 0.4s ease-in-out;
+    -o-transition:  left 0.4s ease-in-out;
+    transition:  left 0.4s ease-in-out;
+}
+.container.open-sidebar {
+    left: 150px;
+}
+ 
+.swipe-area {
+   position: absolute;
+width: 100%;
+left: 0;
+top: 0;
+height: 5%;
+z-index: 0;
+background-color: #f3f3f3;
+}
+#sidebar {
+    background: #DF314D;
+    position: absolute;
+    width: 150px;
+    height: 100%;
+    left: -150px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+#sidebar ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+   
+}
+#sidebar ul li {
+    margin: 0;
+}
+#sidebar ul li a {
+    padding: 15px 20px;
+    font-size: 16px;
+    font-weight: 100;
+    color: white;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #C9223D;
+    -webkit-transition:  background 0.3s ease-in-out;
+    -moz-transition:  background 0.3s ease-in-out;
+    -ms-transition:  background 0.3s ease-in-out;
+    -o-transition:  background 0.3s ease-in-out;
+    transition:  background 0.3s ease-in-out;
+}
+#sidebar ul li:hover a {
+    background: #C9223D;
+}
+.main-content {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    position: relative;
+}
+.main-content .content{
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+ 
+ 
+/* padding-left: 60px; */
+padding-top: 10px;
+width: 100%;
+clear: both;
+}
+.main-content .content h1{
+    font-weight: 100;
+}
+.main-content .content p{
+    width: 100%;
+    line-height: 160%;
+}
+.main-content #sidebar-toggle {
+    background: #DF314D;
+    border-radius: 3px;
+    display: block;
+    position: relative;
+    padding: 10px 7px;
+    float: left;
+}
+.main-content #sidebar-toggle .bar{
+     display: block;
+    width: 18px;
+    margin-bottom: 3px;
+    height: 2px;
+    background-color: #fff;
+    border-radius: 1px;   
+}
+.main-content #sidebar-toggle .bar:last-child{
+     margin-bottom: 0;   
+}
+
+.FinishedUser { 
+    background-color: rgba(255,255,255,0.8);
+}
+ 

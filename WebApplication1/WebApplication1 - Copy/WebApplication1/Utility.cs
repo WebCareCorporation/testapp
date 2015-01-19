@@ -90,5 +90,15 @@ namespace WebApplication1
             return cardList;
 
         }
+
+        public string GetUserList(Dictionary<string, string> users)
+        {
+            string userList = "";
+            foreach (var v in users)
+            {
+                userList = userList + v.Key + "$";
+            }
+            return userList;
+        }
     }
 }

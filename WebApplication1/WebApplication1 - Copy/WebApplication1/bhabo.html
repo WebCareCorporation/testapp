@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <title></title>
     <link rel="stylesheet" type="text/css" href="css/bhabo.css" />
-
+    <link rel="stylesheet" type="text/css" href="css/icons.css" />
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
@@ -19,16 +19,20 @@
 
     <script type="text/javascript" charset="utf-8" src="Scripts/handlebars-v2.0.0.js"></script>
 
-    <script src="intelxdk.js"></script>
+    <!--   <script src="intelxdk.js"></script>
     <!-- phantom library, needed for Cordova api calls -->
-    <script src="cordova.js"></script>
+    <!-- <script src="cordova.js"></script>
 
     <script src="local-notification.js"></script>
 
     <script src="xhr.js"></script>
     <script type="text/javascript" charset="utf-8" src="PushNotification.js"></script>
-    <script type="text/javascript" charset="utf-8" src="SQLitePlugin.js"></script>
+    <script type="text/javascript" charset="utf-8" src="SQLitePlugin.js"></script>-->
 
+    <script type="text/javascript" charset="utf-8" src="Scripts/jq.appframework.js"></script>
+    <!--  <script type="text/javascript" charset="utf-8" src="Scripts/appframework.ui.min.js"></script>-->
+    <!--<script type="text/javascript" charset="utf-8" src="Scripts/af.slidemenu.js"></script>-->
+    <script type="text/javascript" charset="utf-8" src="Scripts/af.scroller.js"></script>
     <script type="text/javascript" src="Scripts/interact-1.2.2.js"></script>
     <script data-main="BhaboApp" src="Scripts/require.js"></script>
     <script type="text/javascript">
@@ -111,28 +115,31 @@
             ondrop: function (event) {
                 // event.relatedTarget.textContent = 'Dropped';
                 if (window.confirm("Are you sure?")) {
-                     
+
 
                     var UserName = localStorage.getItem("Name");
                     var Group = localStorage.getItem("Group");
                     event.relatedTarget.classList.remove('active');
-                    var hasCard="true";
-                    if(!$('.card .active').length)
-                    {                        
-                        hasCard ="false"
+                    var hasCard = "true";
+                    if (!$('.card .active').length) {
+                        hasCard = "false"
                     }
                     if (localStorage.getItem("cardType") == "") {
                         localStorage.setItem("cardType", event.relatedTarget.attributes["data-card"].value)
                     }
-                    $('.dropCan').removeClass('dropCan');
+                    $('.dropcan').removeClass('dropcan');
                     //event.relatedTarget.classList.add("thrownCard");
-                    
-                    window.game.server.throwCard(event.relatedTarget.id, UserName, Group, hasCard, localStorage.getItem("cardType"));
 
-                  
+
+                    if (!window.reconnecting) {
+                        window.game.server.throwCard(event.relatedTarget.id, UserName, Group, hasCard, localStorage.getItem("cardType"));
+                    } else {
+                        localStorage.setItem("SendCard", event.relatedTarget.id + "$" + UserName + "$" + Group + "$" + hasCard + "$" + localStorage.getItem("cardType"));
+                    }
+
                 } else {
 
-                    
+
                     event.relatedTarget.style.webkitTransform =
        event.relatedTarget.style.transform =
         'translate(' + 0 + 'px, ' + 0 + 'px)';
@@ -154,13 +161,34 @@
     </script>
 </head>
 <body>
-    <!--<div id="timer"> </div>-->
-    <div id="Message" style="max-height:10%" class="notify notify-green">
+    <div class="container">
+        <div id="sidebar">
+            <ul id="users">
+                
+            </ul>
         </div>
-    <div id="outer-dropzone" class="dropzone">
-        
-        
+        <div class="main-content">
+            <div class="swipe-area"></div>
+            <!--<div id="timer"> </div>-->
+
+            <a href="#" data-toggle=".container" id="sidebar-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </a>
+            <div class="content">
+                <div id="Message" class="notify notify-green">
+                </div>
+                <div id="outer-dropzone" class="dropzone">
+                </div>
+                <div id="Cards">
+
+                </div>
+            </div>
+        </div>
     </div>
+
+
 
 
 </body>

@@ -118,9 +118,11 @@
     <Content Include="css\bhabo.css" />
     <Content Include="css\custom.css" />
     <Content Include="css\customres.css" />
+    <Content Include="css\icons.css" />
     <Content Include="css\index.css" />
     <Content Include="css\jquery.mobile-1.0.1.css" />
     <Content Include="css\jquery.mobile.structure-1.0.1.css" />
+    <Content Include="img\table.jpg" />
     <Content Include="img\WZ9Od.gif" />
     <Content Include="RoomsApp.js" />
     <Content Include="Global.asax" />
@@ -132,6 +134,9 @@
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="room.html" />
     <Content Include="rooms.html" />
+    <Content Include="Scripts\af.scroller.js" />
+    <Content Include="Scripts\af.slidemenu.js" />
+    <Content Include="Scripts\appframework.ui.min.js" />
     <Content Include="Scripts\bhabo.js" />
     <Content Include="Scripts\cordova.js" />
     <Content Include="Scripts\CustomFunctions.js" />
@@ -141,6 +146,7 @@
     <Content Include="Scripts\index.js" />
     <Content Include="Scripts\interact-1.2.2.js" />
     <Content Include="Scripts\interact-1.2.2.min.js" />
+    <Content Include="Scripts\jq.appframework.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />
     <Content Include="Scripts\jquery.signalR-2.1.2.js" />

@@ -5,9 +5,9 @@ define(['require', 'CustomFunctions'],
 
         $("#Message").slideUp(1);
 
-        //if (window.Cordova) {
-        //    $.connection.hub.url = "http://bathindavarinder-001-site1.smarterasp.net/signalr";
-        //}
+        if (window.Cordova) {
+            $.connection.hub.url = "http://bathindavarinder-001-site1.smarterasp.net/signalr";
+        }
 
         window.timeout = false;
 
@@ -39,6 +39,30 @@ define(['require', 'CustomFunctions'],
             //window.timein = 50;
             //document.getelementbyid("timer").innerhtml = "";
         }
+
+        
+        window.game.client.updateUserStatus = function (user, status) {
+            $('#' + user).text(user + "(" + status + ")");
+            $('#' + user).addClass("FinishedUser"); 
+        }
+        window.game.client.updateUserTurn = function (user) {
+            $('.turn').removeClass('turn');
+            $('#' + user).addClass("turn"); 
+        }
+
+        
+        window.game.client.updateUserList = function (userlist) {
+            $('#users').empty();
+            var users = userlist.split('$');
+            $.each(users, function (index, name) {
+                if (name != "") { 
+                    var user = "<li id='" + name + "'><a href='#' class='icon user'>" + name + "</a></li>";
+                    $('#users').append(user);
+                }
+            });
+        }
+
+        
 
         window.game.client.StartTimer = function (user, game, card) {
 
@@ -79,24 +103,34 @@ define(['require', 'CustomFunctions'],
 
 
         window.game.client.thokaGiven = function (cs) {
+
+            $('.card:not(.active)').removeClass("animatedCard");
+            $('.card:not(.active)').addClass("animatedOutCard");
+            setTimeout(function () {
+                showNotification("Thoka given to you.");
+                $('.card:not(.active)').remove();  
+                localStorage.setItem("cardType", "");
+            }, 4000);
+
             $('.card:not(.active)').remove();
             //ResetTimer();
-            showNotification("THoka given : " + cs);
+            //showNotification("Thoka given to " + cs);
             var Cards = cs.split(';');
 
             var x = 0;
             var y = 0;
             $.each(Cards, function (index, name) {
-                var idandcard = name.split('?');
+                if (name != "") {
+                    var idandcard = name.split('?');
 
-                var cardtype = idandcard[1].split('-')[1];
+                    var cardtype = idandcard[1].split('-')[1];
 
 
 
-                //var card = '<div data-x="' + x + '" data-y="' + y + '" id="' + idandcard[0] + '" class="card mine ' + idandcard[1] + ' ' + cardtype + ' active" data-card="' + cardtype + '" ></div>';
-                var card = '<div id="' + idandcard[0] + '" class="card mine thrownCard ' + idandcard[1] + ' ' + cardtype + ' active" data-card="' + cardtype + '" ></div>';
-                $('.ui-page').append(card);
-
+                    //var card = '<div data-x="' + x + '" data-y="' + y + '" id="' + idandcard[0] + '" class="card mine ' + idandcard[1] + ' ' + cardtype + ' active" data-card="' + cardtype + '" ></div>';
+                    var card = '<div id="' + idandcard[0] + '" class="animatedCard card mine thrownCard ' + idandcard[1] + ' ' + cardtype + ' active" data-card="' + cardtype + '" ></div>';
+                    $('.content').append(card);
+                }
 
 
 
@@ -109,14 +143,16 @@ define(['require', 'CustomFunctions'],
 
             var idandcard = card.split('?');
 
-            if (!$('#' + idandcard[0]).length) {
-
-                var cardtype = idandcard[1].split('-')[1];
-
-                var card = '<div  id="' + idandcard[0] + '" class="card ' + idandcard[1] + ' ' + cardtype + ' thrownCard" ></div>';
-                $('#outer-dropzone').append(card);
-
+            if ($('#' + idandcard[0]).length) {
+                $('#' + idandcard[0]).remove();
             }
+
+            var cardtype = idandcard[1].split('-')[1];
+
+            var card = '<div  id="' + idandcard[0] + '" class="card ' + idandcard[1] + ' ' + cardtype + ' thrownCard animatedCard" ></div>';
+            $('#outer-dropzone').append(card);
+
+            showNotification(user + " has thrown '" + idandcard[1].split('-')[2] + "' of " + cardtype);
         };
 
         function myStopFunction() {
@@ -132,9 +168,18 @@ define(['require', 'CustomFunctions'],
 
 
         window.game.client.turnComplete = function (user) {
-            $('.card:not(.active)').remove();//.css("visibility", "hidden");
-            showNotification(user + " will start.");
-            localStorage.setItem("cardType", "");
+             
+            $('.card:not(.active)').removeClass("animatedCard");
+            $('.card:not(.active)').addClass("animatedOutCard");
+
+            setTimeout(function () {
+                showNotification("Turn Completed");
+                $('.card:not(.active)').remove();//.css("visibility", "hidden");
+                showNotification(user + " will start.");
+                localStorage.setItem("cardType", "");
+            }, 4000);
+
+        
         };
 
         window.game.client.startTurn = function () {
@@ -170,19 +215,24 @@ define(['require', 'CustomFunctions'],
 
         };
 
-
+        var messageCount = 0;
 
         function showNotification(Message) {
-           // $('#Message').empty();
-            $("#Message").slideDown(1000);
-            $('#Message').append(Message+"<br>");
-            //$("#Message").fadeIn(400);
 
-            setTimeout(function () {
-                //$("#Message").hide( "slow" )
+            if (messageCount < 6) {
+                messageCount = messageCount + 1;
+            } else {
                 $('#Message').empty();
+                messageCount = 0;
+            }
+
+            $("#Message").slideDown(1000);
+            $('#Message').append("<div>" + Message + "</div>");
+
+ 
+            setTimeout(function () {
                 $("#Message").slideUp(1000);
-            }, 10000);
+            }, 5000);
         }
 
 
@@ -207,7 +257,7 @@ define(['require', 'CustomFunctions'],
 
                 //var card = '<div data-x="' + x + '" data-y="' + y + '" id="' + idandcard[0] + '" class="card mine ' + idandcard[1] + ' ' + cardtype + ' active" data-card="' + cardtype + '" ></div>';
                 var card = '<div id="' + idandcard[0] + '" class="card thrownCard mine ' + idandcard[1] + ' ' + cardtype + ' active" data-card="' + cardtype + '" ></div>';
-                $('.ui-page').append(card);
+                $('#Cards').append(card);
 
 
                 //$('#' + idandcard[0]).css({
