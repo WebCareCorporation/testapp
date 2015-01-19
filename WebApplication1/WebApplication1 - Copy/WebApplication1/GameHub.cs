@@ -713,7 +713,7 @@ namespace WebApplication1
 
                 Clients.Group(groupName).updateUserList(userList);
 
-                if (GRUSRs.Where(x => x.Value == groupName).Count() > 1)// && !gameInPrgress.Any(x => x.Key == groupName))
+                if (GRUSRs.Where(x => x.Value == groupName).Count() > 2)// && !gameInPrgress.Any(x => x.Key == groupName))
                 {
                     Clients.Group(groupName).groupMessage("Please wait. Card Distribution started !");
                     Clients.All.sendConfirm("started distri");
