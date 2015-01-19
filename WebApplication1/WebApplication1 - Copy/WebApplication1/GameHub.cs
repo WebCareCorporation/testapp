@@ -62,17 +62,17 @@ namespace WebApplication1
                     GRUSRs.Remove(u.Key);
                     //int grpCnt = groups[grpName];
                     //groups[grpName] = grpCnt - 1;
-                    if (GRUSRs.Where(x => x.Value == grpName).Count() == 1)
-                    {
-                        gameUserTurn.Remove(grpName);
+                    //if (GRUSRs.Where(x => x.Value == grpName).Count() == 1)
+                    //{
+                    //    gameUserTurn.Remove(grpName);
 
 
 
-                        //if (gameInPrgress.Where(x => x.Key == grpName).Any())
-                        //    gameInPrgress.Remove(grpName);
-                       Clients.Group(grpName).groupMessage("As " + u.Key + " has Left. So he/she declared as bhabo.");
-                       Clients.Group(grpName).GameClosed();
-                    } else
+                    //    //if (gameInPrgress.Where(x => x.Key == grpName).Any())
+                    //    //    gameInPrgress.Remove(grpName);
+                    //   Clients.Group(grpName).groupMessage("As " + u.Key + " has Left. So he/she declared as bhabo.");
+                    //   Clients.Group(grpName).GameClosed();
+                    //} else
                     if (gameUserTurn.Where(x => x.Key == grpName).Any())
                     {
                         Dictionary<string, string> userturn = gameUserTurn[grpName];
