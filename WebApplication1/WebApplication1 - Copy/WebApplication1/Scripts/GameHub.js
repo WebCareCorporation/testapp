@@ -94,7 +94,7 @@ define(['require', 'CustomFunctions'],
 
 
                 //var card = '<div data-x="' + x + '" data-y="' + y + '" id="' + idandcard[0] + '" class="card mine ' + idandcard[1] + ' ' + cardtype + ' active" data-card="' + cardtype + '" ></div>';
-                var card = '<div id="' + idandcard[0] + '" class="card mine ' + idandcard[1] + ' ' + cardtype + ' active" data-card="' + cardtype + '" ></div>';
+                var card = '<div id="' + idandcard[0] + '" class="card mine thrownCard ' + idandcard[1] + ' ' + cardtype + ' active" data-card="' + cardtype + '" ></div>';
                 $('.ui-page').append(card);
 
 
@@ -149,7 +149,7 @@ define(['require', 'CustomFunctions'],
 
             localStorage.setItem("cardType", card);
 
-            if (!$('.' + card + ' .active').length) {
+            if (!$('.' + card + '.active').length) {
                 $('.mine').addClass('dropcan');
                 return;
             }
@@ -173,9 +173,9 @@ define(['require', 'CustomFunctions'],
 
 
         function showNotification(Message) {
-            $('#Message').empty();
+           // $('#Message').empty();
             $("#Message").slideDown(1000);
-            $('#Message').append(Message);
+            $('#Message').append(Message+"<br>");
             //$("#Message").fadeIn(400);
 
             setTimeout(function () {
@@ -389,6 +389,8 @@ define(['require', 'CustomFunctions'],
             $.connection.hub.start().done(function () {
 
                 var myClientId = $.connection.hub.id;
+
+                window.game = $.connection.gameHub;
 
                 var yourname = localStorage.getItem("Name");
 

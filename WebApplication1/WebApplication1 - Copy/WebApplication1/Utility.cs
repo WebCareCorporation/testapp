@@ -84,7 +84,7 @@ namespace WebApplication1
                 if (c != "")
                 {
                     int cardNumber = Convert.ToInt32(c.Split(':')[1]);
-                    cardList += cardNumber+"?"+ cards[cardNumber] + ";";
+                    cardList += cards[cardNumber] + ";";
                 }
             }
             return cardList;

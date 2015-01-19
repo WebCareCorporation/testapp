@@ -54,12 +54,13 @@ namespace WebApplication1
             KeyValuePair<string, string> u = user.Where(x => x.Value == Context.ConnectionId).FirstOrDefault();
             if (GRUSRs.Where(x => x.Key == u.Key).Any())
             {
-                string grpName = GRUSRs[u.Key];
-                GRUSRs.Remove(u.Key);
-
+               
                 
                 if (stopCalled)
                 {
+                    string grpName = GRUSRs[u.Key];
+                    GRUSRs.Remove(u.Key);
+
                     int grpCnt = groups[grpName];
                     groups[grpName] = grpCnt - 1;
                     if (GRUSRs.Where(x => x.Value == grpName).Count() == 1)
@@ -68,7 +69,7 @@ namespace WebApplication1
 
                         if (gameInPrgress.Where(x => x.Key == grpName).Any())
                             gameInPrgress.Remove(grpName);
-                        Clients.Group(grpName).groupMessage("As " + u.Key + " has Left.So he/she declared as bhabo.");
+                    //    Clients.Group(grpName).groupMessage("As " + u.Key + " has Left.So he/she declared as bhabo.");
                     }
 
                     Clients.Group(grpName).GameClosed();                    
@@ -164,11 +165,11 @@ namespace WebApplication1
 
         public void FirstTurnMessage(string groupName, string user)
         {
-            Clients.Group(groupName).StartTimer(user, groupName, "hukam");
-            if (!askTimeOut.Where(x => x.Key == user).Any())
-            {
-                askTimeOut.Add(user, groupName);
-            }
+         //   Clients.Group(groupName).StartTimer(user, groupName, "hukam");
+            //if (!askTimeOut.Where(x => x.Key == user).Any())
+            //{
+            //    askTimeOut.Add(user, groupName);
+            //}
             Clients.Group(groupName, Context.ConnectionId).FirstTurn(user + " has Hukam A. His turn is first.");
         }
 
@@ -328,14 +329,14 @@ namespace WebApplication1
         public void ThrowCard(int card, string username, string groupname, string lastCard, string cardTurnType)
         {
 
-            if (askTimeOut.Where(x => x.Value == groupname).Any())
-            {
-                List<KeyValuePair<string,string>> times= askTimeOut.Where(x => x.Value == groupname).ToList();
-                foreach (var t in times)
-                {
-                    askTimeOut.Remove(t.Key);
-                }
-            }
+            //if (askTimeOut.Where(x => x.Value == groupname).Any())
+            //{
+            //    List<KeyValuePair<string,string>> times= askTimeOut.Where(x => x.Value == groupname).ToList();
+            //    foreach (var t in times)
+            //    {
+            //        askTimeOut.Remove(t.Key);
+            //    }
+            //}
             string cthrown = "";
 
             Dictionary<string, string> userturn = gameUserTurn[groupname];
@@ -400,7 +401,7 @@ namespace WebApplication1
             if (cardTurnType == cardType)
             {
 
-                Clients.Group(groupname).thrownCard(user, throwncard);
+                Clients.Group(groupname).thrownCard(user[username], throwncard);
 
                 List<KeyValuePair<string, string>> pending = userturn.Where(x => x.Value == "Pending").ToList();
 
@@ -419,7 +420,7 @@ namespace WebApplication1
                 }
                 else
                 {
-                    Clients.Group(groupname).thrownCard(user, throwncard);
+                   // Clients.Group(groupname).thrownCard(user, throwncard);
 
                     string largestCardUser = "";
 
@@ -518,6 +519,8 @@ namespace WebApplication1
             }
             else
             {
+                Clients.Group(groupname).thrownCard(user[username], throwncard);
+
                 // Get largest Card 
                 string largestCardUser = "";
                 int largestcard = (new Utility()).GetLargestCard(groupname, cardThrown[groupname], out largestCardUser);
@@ -529,7 +532,7 @@ namespace WebApplication1
                 string list = (new Utility()).GetThokaList(cthrown, cards);
                 string dhokaGivenTo = user[largestCardUser];
 
-                Clients.Group(groupname).groupMessage("Thoka is given by" + user + " to" + largestCardUser);
+                Clients.Group(groupname).groupMessage("Thoka is given by" + user[username] + " to" + largestCardUser);
 
                 Clients.Client(dhokaGivenTo).thokaGiven(list);
 
@@ -565,8 +568,8 @@ namespace WebApplication1
                 }
 
                 Clients.Group(groupname).turnComplete(largestCardUser);
-                askTimeOut.Add(largestCardUser, groupname);
-                Clients.Group(groupname).StartTimer(largestCardUser, groupname, "");
+              //  askTimeOut.Add(largestCardUser, groupname);
+                //Clients.Group(groupname).StartTimer(largestCardUser, groupname, "");
 
                 string startTurn = user[largestCardUser];
 
@@ -676,8 +679,9 @@ namespace WebApplication1
                 grpCnt = groups[groupName];
                 
                 Clients.All.informGroupName(groupName);
-                if (GRUSRs.Where(x=>x.Value==groupName).Count() > 2)// && !gameInPrgress.Any(x => x.Key == groupName))
+                if (GRUSRs.Where(x=>x.Value==groupName).Count() > 1)// && !gameInPrgress.Any(x => x.Key == groupName))
                 {
+                    Clients.Group(groupName).groupMessage("Please wait. Card Distribution started !");
                     Clients.All.sendConfirm("started distri");
 
                     StartGame(GRUSRs.Where(x => x.Value == groupName).Count(), groupName);

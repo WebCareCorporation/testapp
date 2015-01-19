@@ -124,6 +124,7 @@
                     if (localStorage.getItem("cardType") == "") {
                         localStorage.setItem("cardType", event.relatedTarget.attributes["data-card"].value)
                     }
+                    $('.dropCan').removeClass('dropCan');
                     //event.relatedTarget.classList.add("thrownCard");
                     
                     window.game.server.throwCard(event.relatedTarget.id, UserName, Group, hasCard, localStorage.getItem("cardType"));
@@ -153,10 +154,12 @@
     </script>
 </head>
 <body>
-    <div id="timer"> </div>
-    <div id="outer-dropzone" class="dropzone">
-        <div id="Message" class="notify notify-green">
+    <!--<div id="timer"> </div>-->
+    <div id="Message" style="max-height:10%" class="notify notify-green">
         </div>
+    <div id="outer-dropzone" class="dropzone">
+        
+        
     </div>
 
 
