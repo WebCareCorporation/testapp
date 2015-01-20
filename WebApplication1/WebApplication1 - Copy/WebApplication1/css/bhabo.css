@@ -682,9 +682,11 @@ background-color: #f3f3f3;
     opacity:.9;
 }
 #loading span {
+    margin-top: 27%;
   display: inline-block;
   vertical-align: middle;
   line-height: normal;      
+  font:bold;
 }
 
 #sidebar ul li {
