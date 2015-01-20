@@ -54,44 +54,37 @@ namespace WebApplication1
             KeyValuePair<string, string> u = user.Where(x => x.Value == Context.ConnectionId).FirstOrDefault();
             if (GRUSRs.Where(x => x.Key == u.Key).Any())
             {
-               
-                
                 if (stopCalled)
                 {
                     string grpName = GRUSRs[u.Key];
                     GRUSRs.Remove(u.Key);
-                    //int grpCnt = groups[grpName];
-                    //groups[grpName] = grpCnt - 1;
-                    //if (GRUSRs.Where(x => x.Value == grpName).Count() == 1)
-                    //{
-                    //    gameUserTurn.Remove(grpName);
+                    Clients.Group(grpName).groupMessage("only removed from group:" + u.Key + " Left.");
 
-
-
-                    //    //if (gameInPrgress.Where(x => x.Key == grpName).Any())
-                    //    //    gameInPrgress.Remove(grpName);
-                    //   Clients.Group(grpName).groupMessage("As " + u.Key + " has Left. So he/she declared as bhabo.");
-                    //   Clients.Group(grpName).GameClosed();
-                    //} else
                     if (gameUserTurn.Where(x => x.Key == grpName).Any())
                     {
-                        Dictionary<string, string> userturn = gameUserTurn[grpName];
-                        userturn.Remove(u.Key);
-
-                        string userList = (new Utility()).GetUserList(userturn);
-
-                        Clients.Group(grpName).updateUserStatus(u.Key, "Disconnected"); 
-
-                        gameUserTurn[grpName] = userturn;
+                        AsktimeOut(u.Key, grpName, "disc");
+                        if (gameUserTurn.Any(x => x.Key == grpName))
+                        {
+                            Dictionary<string, string> userturn = gameUserTurn[grpName];
+                            userturn.Remove(u.Key);
+                            string userList = (new Utility()).GetUserList(userturn);
+                            Clients.Group(grpName).updateUserStatus(u.Key, "Disconnected");
+                            gameUserTurn[grpName] = userturn;
+                        }
                         Clients.Group(grpName).groupMessage("Diconnected : " + u.Key + " Left.");
+                    }
+
+                    if (GRUSRs.Where(x => x.Value == grpName).Count() == 1)
+                    {
+                        if (gameUserTurn.Where(x => x.Key == grpName).Any())
+                        {
+                            gameUserTurn.Remove(grpName);
+                            Clients.Group(grpName).groupMessage("As " + u.Key + " has Left. So he/she declared as bhabo.");
+                            Clients.Group(grpName).GameClosed();
+                        }
                     }
                 }
             }
-            //else
-            //{
-
-            //}
-
             return base.OnDisconnected(stopCalled);
         }
 
@@ -170,163 +163,184 @@ namespace WebApplication1
 
         public void FirstTurnMessage(string groupName, string user)
         {
-         //   Clients.Group(groupName).StartTimer(user, groupName, "hukam");
-            //if (!askTimeOut.Where(x => x.Key == user).Any())
-            //{
-            //    askTimeOut.Add(user, groupName);
-            //}
+            Clients.Group(groupName).StartTimer(user, groupName, "hukam");
+            if (!askTimeOut.Where(x => x.Key == user).Any())
+            {
+                askTimeOut.Add(user, groupName);
+            }
             Clients.Group(groupName, Context.ConnectionId).FirstTurn(user + " has Hukam A. His turn is first.");
             Clients.Group(groupName).updateUserTurn(user);
         }
 
         public void AsktimeOut(string userName, string groupname, string card)
         {
-            //if(askTimeOut.Where(x=>x.Key==userName).Any())
-            //{
-            //    askTimeOut.Remove(userName);
-            //    string connectionId = user[userName];
-            //    Clients.Client(connectionId).TimedOut();
-            //}else
-            //{
-            //    return;
-            //}
+            if (askTimeOut.Where(x => x.Key == userName).Any())
+            {
+                if (askTimeOut.Where(x => x.Value == groupname).Any())
+                {
+                    List<KeyValuePair<string, string>> times = askTimeOut.Where(x => x.Value == groupname).ToList();
+                    foreach (var t in times)
+                    {
+                        askTimeOut.Remove(t.Key);
+                    }
+                } 
+            }
+            else
+            {
+                return;
+            }
 
-            //Dictionary<string, string> userturn = gameUserTurn[groupname];
-            //userturn.Remove(userName);
-            //gameUserTurn[groupname] = userturn;
-
-
-
-            //if (userturn.Count == 1)
-            //{
-
-            //    if (gameInPrgress.Where(x => x.Key == groupname).Any())
-            //        gameInPrgress.Remove(groupname);
-            //    int grpCnt = groups[groupname];
-            //    Clients.Group(groupname).groupMessage("As " + userName + " has Left.So he/she declared as bhabo.");
-            //    cardThrown[groupname] = "";
-            //    if (grpCnt > 2)
-            //    {
-            //        StartGame(grpCnt, groupname);
-            //    }
-            //    return;
-            //}
-            //Clients.Group(groupname).groupMessage(userName + " Left.");
-            //List<KeyValuePair<string, string>> pending = userturn.Where(x => x.Value == "Pending").ToList();
-
-            //if (pending.Any())
-            //{
-            //    KeyValuePair<string, string> nextUser = pending.First();
-
-            //    string nextConnId = user[nextUser.Key];
-
-            //    Clients.Group(groupname).FirstTurn("Next turn : " + nextUser.Key);
-            //    if (card != "")
-            //    {
-            //        Clients.Client(nextConnId).yourTurn(card);
-            //        askTimeOut.Add(nextUser.Key, groupname);
-            //        Clients.Group(groupname).StartTimer(nextUser.Key, groupname, card);
-            //    }
-            //    else
-            //    {
-            //        Clients.Client(nextConnId).startTurn();
-            //        askTimeOut.Add(nextUser.Key, groupname);
-            //        Clients.Group(groupname).StartTimer(nextUser.Key, groupname, "");
-            //    }
-            //}
-            //else
-            //{
-            //    string largestCardUser = "";
-
-            //    int largestcard = (new Utility()).GetLargestCard(groupname, cardThrown[groupname], out largestCardUser);
-
-            //    string startTurn = user[largestCardUser];
-
-            //    /// remove user if he is not largest or check if only 2 left
-            //    if (userToRemove.Where(x => x.Value == groupname).Any())
-            //    {
-            //        bool checklarge = false;
-            //        List<KeyValuePair<string, string>> uTR = userToRemove.Where(x => x.Value == groupname).ToList();
-            //        foreach (var u in uTR)
-            //        {
-            //            if (u.Key != largestCardUser)
-            //            {
-            //                userturn.Remove(u.Key);
-            //                gameUserTurn[groupname] = userturn;
-            //                Clients.Group(groupname).groupMessage(u.Key + " has finished his cards.");
-            //            }
-            //            else
-            //            {
-            //                checklarge = true;
-            //            }
-            //            userToRemove.Remove(u.Key);
-            //        }
-
-            //        if (checklarge && userturn.Count == 2)
-            //        {
-            //            Random rd = new Random();
-            //            Clients.Client(startTurn).assignRandom(cards[rd.Next(1, 52)]);
-            //        }
-            //        else
-            //        {
-            //            userturn.Remove(largestCardUser);
-            //            gameUserTurn[groupname] = userturn;
-            //            Clients.Group(groupname).groupMessage(largestCardUser + " has finished his cards.");
-            //            largestcard = (new Utility()).GetLargestCardAgain(groupname, cardThrown[groupname], out largestCardUser, uTR);
-            //        }
-            //    }
-
-            //    if (userturn.Count == 1)
-            //    {
-            //        cardThrown[groupname] = "";
-            //        if (gameInPrgress.Where(x => x.Key == groupname).Any())
-            //            gameInPrgress.Remove(groupname);
-            //        int grpCnt = groups[groupname];
-            //        Clients.Group(groupname).groupMessage(userturn.First().Key + " became bhabo. Timed Out.");
-            //        cardThrown[groupname] = "";
-            //        if (GRUSRs.Where(x => x.Value == groupname).Count() > 2)
-            //        {
-            //            StartGame(GRUSRs.Where(x => x.Value == groupname).Count(), groupname);
-            //        }
-            //        return;
-            //    }
-
-            //    Clients.Group(groupname).turnComplete(largestCardUser);
-
-            //    Clients.Client(startTurn).startTurn();
-            //    askTimeOut.Add(largestCardUser, groupname);
-            //    Clients.Group(groupname).StartTimer(largestCardUser, groupname, "");
-
-            //    Dictionary<string, string> uTurn = new Dictionary<string, string>();
-            //    uTurn.Add(largestCardUser, "Pending");
+            Dictionary<string, string> userturn = gameUserTurn[groupname];
+            userturn.Remove(userName);
+            gameUserTurn[groupname] = userturn;
 
 
-            //    List<KeyValuePair<string, string>> Done = userturn.Where(x => x.Value == "Done").ToList();
 
-            //    int index = Done.FindIndex(x => x.Key == largestCardUser);
+            if (userturn.Count == 1)
+            {
 
-            //    int length = Done.Count;
+                Clients.Group(groupname).groupMessage("As " + userName + " has Left.So he/she declared as bhabo.");
+                cardThrown[groupname] = "";
+                if (GRUSRs.Where(x => x.Value == groupname).Count() > 2)
+                {
+                    StartGame(GRUSRs.Where(x => x.Value == groupname).Count(), groupname);
+                }
+                else
+                {
+                    gameUserTurn.Remove(groupname);
+                }
+                return;
+            }
+            Clients.Group(groupname).groupMessage(userName + " Left.");
+            List<KeyValuePair<string, string>> pending = userturn.Where(x => x.Value == "Pending").ToList();
 
-            //    for (int i = index + 1; i < length; i++)
-            //    {
+            if (pending.Any())
+            {
+                KeyValuePair<string, string> nextUser = pending.First();
 
-            //        var us = Done.ElementAt(i);
+                string nextConnId = user[nextUser.Key];
 
-            //        uTurn.Add(us.Key, "Pending");
-            //    }
+                Clients.Group(groupname).FirstTurn("Next turn : " + nextUser.Key);
+                if (card != "")
+                {
+                    Clients.Client(nextConnId).yourTurn(card);
+                 
+                    Clients.Group(groupname).StartTimer(nextUser.Key, groupname, card);
+                }
+                else
+                {
+                    Clients.Client(nextConnId).startTurn();
+                 
+                    Clients.Group(groupname).StartTimer(nextUser.Key, groupname, "");
+                }
+                if (!askTimeOut.Where(x => x.Key == nextUser.Key).Any())
+                    askTimeOut.Add(nextUser.Key, groupname);
 
-            //    for (int i = 0; i < index; i++)
-            //    {
-            //        var us = Done.ElementAt(i);
+            }
+            else
+            {
+                string largestCardUser = "";
 
-            //        uTurn.Add(us.Key, "Pending");
-            //    }
+                int largestcard = (new Utility()).GetLargestCard(groupname, cardThrown[groupname], out largestCardUser);
 
 
-            //    gameUserTurn[groupname] = uTurn;
-            //    cardThrown[groupname] = "";
+                string startTurn = user[largestCardUser];
 
-            //}
+                /// remove user if he is not largest or check if only 2 left
+                if (userToRemove.Where(x => x.Value == groupname).Any())
+                {
+                    bool checklarge = false;
+                    List<KeyValuePair<string, string>> uTR = userToRemove.Where(x => x.Value == groupname).ToList();
+                    foreach (var u in uTR)
+                    {
+                        if (u.Key != largestCardUser)
+                        {
+                            userturn.Remove(u.Key);
+
+                            Clients.Group(groupname).updateUserStatus(u.Key, "Finished");
+                            gameUserTurn[groupname] = userturn;
+                            Clients.Group(groupname).groupMessage(u.Key + " has finished his cards.");
+                        }
+                        else
+                        {
+                            checklarge = true;
+                        }
+                        userToRemove.Remove(u.Key);
+                    }
+
+                    if (checklarge && userturn.Count == 2)
+                    {
+                        Random rd = new Random();
+                        Clients.Client(startTurn).assignRandom(cards[rd.Next(1, 52)]);
+                        Clients.Group(groupname).updateUserTurn(largestCardUser);
+                    }
+                    else
+                    {
+                        userturn.Remove(largestCardUser);
+                        Clients.Group(groupname).updateUserStatus(largestCardUser, "Finished");
+
+                        Clients.Group(groupname).groupMessage(largestCardUser + " has finished his cards.");
+                        gameUserTurn[groupname] = userturn;
+
+                        largestcard = (new Utility()).GetLargestCardAgain(groupname, cardThrown[groupname], out largestCardUser, uTR);
+                    }
+                }
+
+                if (userturn.Count == 1)
+                {
+                    Clients.Group(groupname).groupMessage(userturn.First().Key + " became bhabo");
+                    cardThrown[groupname] = "";
+                    if (GRUSRs.Where(x => x.Value == groupname).Count() > 2)
+                    {
+                        StartGame(GRUSRs.Where(x => x.Value == groupname).Count(), groupname);
+                    }
+                    else
+                    {
+                        gameUserTurn.Remove(groupname);
+                    }
+                    return;
+                }
+                startTurn = user[largestCardUser];
+                Clients.Group(groupname).updateUserTurn(largestCardUser);
+                Clients.Group(groupname).turnComplete(largestCardUser);
+
+                if (!askTimeOut.Where(x => x.Key == largestCardUser).Any())
+                    askTimeOut.Add(largestCardUser, groupname);
+
+                Clients.Client(startTurn).startTurn();
+
+
+
+                Clients.Group(groupname).StartTimer(largestCardUser, groupname, "");
+
+                Dictionary<string, string> uTurn = new Dictionary<string, string>();
+                uTurn.Add(largestCardUser, "Pending");
+
+
+                List<KeyValuePair<string, string>> Done = userturn.ToList();
+
+                int index = Done.FindIndex(x => x.Key == largestCardUser);
+
+                int length = Done.Count;
+
+                for (int i = index + 1; i < length; i++)
+                {
+
+                    var us = Done.ElementAt(i);
+
+                    uTurn.Add(us.Key, "Pending");
+                }
+
+                for (int i = 0; i < index; i++)
+                {
+                    var us = Done.ElementAt(i);
+
+                    uTurn.Add(us.Key, "Pending");
+                }
+
+                gameUserTurn[groupname] = uTurn;
+                cardThrown[groupname] = "";
+            }
 
 
         }
@@ -335,14 +349,14 @@ namespace WebApplication1
         public void ThrowCard(int card, string username, string groupname, string lastCard, string cardTurnType)
         {
 
-            //if (askTimeOut.Where(x => x.Value == groupname).Any())
-            //{
-            //    List<KeyValuePair<string,string>> times= askTimeOut.Where(x => x.Value == groupname).ToList();
-            //    foreach (var t in times)
-            //    {
-            //        askTimeOut.Remove(t.Key);
-            //    }
-            //}
+            if (askTimeOut.Where(x => x.Value == groupname).Any())
+            {
+                List<KeyValuePair<string, string>> times = askTimeOut.Where(x => x.Value == groupname).ToList();
+                foreach (var t in times)
+                {
+                    askTimeOut.Remove(t.Key);
+                }
+            }
             string cthrown = "";
 
             Dictionary<string, string> userturn = gameUserTurn[groupname];
@@ -382,7 +396,7 @@ namespace WebApplication1
                     // If last card, remove user from turn list.
                     userturn.Remove(username);
 
-                    Clients.Group(groupname).updateUserStatus(username, "Finished"); 
+                    Clients.Group(groupname).updateUserStatus(username, "Finished");
 
                     gameUserTurn[groupname] = userturn;
                     Clients.Group(groupname).groupMessage(username + " has finished his cards.");
@@ -423,15 +437,17 @@ namespace WebApplication1
                     Clients.Group(groupname).FirstTurn("Next turn : " + nextUser.Key);
 
                     Clients.Client(nextConnId).yourTurn(cardType);
-                    if(!askTimeOut.Where(x=>x.Key==nextUser.Key).Any())
-                        askTimeOut.Add(nextUser.Key, groupname);
+
+                 
                     Clients.Group(groupname).StartTimer(nextUser.Key, groupname, cardType);
 
                     Clients.Group(groupname).updateUserTurn(nextUser.Key);
+                    if (!askTimeOut.Where(x => x.Key == nextUser.Key).Any())
+                        askTimeOut.Add(nextUser.Key, groupname);
+
                 }
                 else
                 {
-                   // Clients.Group(groupname).thrownCard(user, throwncard);
 
                     string largestCardUser = "";
 
@@ -451,7 +467,7 @@ namespace WebApplication1
                             {
                                 userturn.Remove(u.Key);
 
-                                Clients.Group(groupname).updateUserStatus(u.Key, "Finished"); 
+                                Clients.Group(groupname).updateUserStatus(u.Key, "Finished");
                                 gameUserTurn[groupname] = userturn;
                                 Clients.Group(groupname).groupMessage(u.Key + " has finished his cards.");
                             }
@@ -471,7 +487,7 @@ namespace WebApplication1
                         else
                         {
                             userturn.Remove(largestCardUser);
-                            Clients.Group(groupname).updateUserStatus(largestCardUser, "Finished"); 
+                            Clients.Group(groupname).updateUserStatus(largestCardUser, "Finished");
 
                             Clients.Group(groupname).groupMessage(largestCardUser + " has finished his cards.");
                             gameUserTurn[groupname] = userturn;
@@ -484,26 +500,30 @@ namespace WebApplication1
                     if (userturn.Count == 1)
                     {
 
-                        if (gameInPrgress.Where(x => x.Key == groupname).Any())
-                            gameInPrgress.Remove(groupname);
-                        int grpCnt = groups[groupname];
+
+
                         Clients.Group(groupname).groupMessage(userturn.First().Key + " became bhabo");
                         cardThrown[groupname] = "";
                         if (GRUSRs.Where(x => x.Value == groupname).Count() > 2)
                         {
                             StartGame(GRUSRs.Where(x => x.Value == groupname).Count(), groupname);
                         }
+                        else
+                        {
+                            gameUserTurn.Remove(groupname);
+                        }
                         return;
                     }
                     startTurn = user[largestCardUser];
                     Clients.Group(groupname).updateUserTurn(largestCardUser);
                     Clients.Group(groupname).turnComplete(largestCardUser);
-                    //if (!askTimeOut.Where(x => x.Key == largestCardUser).Any())
-                    //    askTimeOut.Add(largestCardUser, groupname);
+
+                    if (!askTimeOut.Where(x => x.Key == largestCardUser).Any())
+                        askTimeOut.Add(largestCardUser, groupname);
 
                     Clients.Client(startTurn).startTurn();
 
-              
+
 
                     Clients.Group(groupname).StartTimer(largestCardUser, groupname, "");
 
@@ -539,7 +559,7 @@ namespace WebApplication1
             }
             else
             {
-                Clients.Group(groupname).thrownCard(username, throwncard);
+               // Clients.Group(groupname).thrownCard(username, throwncard);
 
                 // Get largest Card 
                 string largestCardUser = "";
@@ -552,7 +572,7 @@ namespace WebApplication1
                 string list = (new Utility()).GetThokaList(cthrown, cards);
                 string dhokaGivenTo = user[largestCardUser];
 
-                Clients.Group(groupname).groupMessage("Thoka is given by '" +username + "' to '" + largestCardUser +"'");
+                Clients.Group(groupname).groupMessage("Thoka is given by '" + username + "' to '" + largestCardUser + "'");
 
                 Clients.Client(dhokaGivenTo).thokaGiven(list);
 
@@ -567,7 +587,7 @@ namespace WebApplication1
                         {
                             userturn.Remove(u.Key);
 
-                            Clients.Group(groupname).updateUserStatus(u.Key,"Finished"); 
+                            Clients.Group(groupname).updateUserStatus(u.Key, "Finished");
                             gameUserTurn[groupname] = userturn;
                             Clients.Group(groupname).groupMessage(u.Key + " has finished his cards.");
                         }
@@ -577,7 +597,7 @@ namespace WebApplication1
 
                 if (userturn.Count == 1)
                 {
-                    if(gameInPrgress.Where(x=>x.Key==groupname).Any())
+                    if (gameInPrgress.Where(x => x.Key == groupname).Any())
                         gameInPrgress.Remove(groupname);
                     int grpCnt = groups[groupname];
                     Clients.Group(groupname).groupMessage(largestCardUser + " became bhabo. Thoka Given.");
@@ -586,12 +606,17 @@ namespace WebApplication1
                     {
                         StartGame(GRUSRs.Where(x => x.Value == groupname).Count(), groupname);
                     }
+                    else
+                    {
+                        gameUserTurn.Remove(groupname);
+                    }
                     return;
                 }
 
                 Clients.Group(groupname).turnComplete(largestCardUser);
-              //  askTimeOut.Add(largestCardUser, groupname);
-                //Clients.Group(groupname).StartTimer(largestCardUser, groupname, "");
+                if (!askTimeOut.Where(x => x.Key == largestCardUser).Any())
+                    askTimeOut.Add(largestCardUser, groupname);
+                Clients.Group(groupname).StartTimer(largestCardUser, groupname, "");
                 Clients.Group(groupname).updateUserTurn(largestCardUser);
                 string startTurn = user[largestCardUser];
 
@@ -671,9 +696,9 @@ namespace WebApplication1
                 int grpCnt = 0;
                 string connectionId = Context.ConnectionId;
 
-                var grpselect = GRUSRs.GroupBy(x=>x.Value)
-              .Where(g=>g.Count()<6)
-              .Select(y=>y)
+                var grpselect = GRUSRs.GroupBy(x => x.Value)
+              .Where(g => g.Count() < 6)
+              .Select(y => y)
               .FirstOrDefault();
 
                 //GRUSRs.Select
@@ -699,7 +724,7 @@ namespace WebApplication1
 
                 //groups[groupName] = grpCnt + 1;
                 grpCnt = groups[groupName];
-                
+
                 Clients.All.informGroupName(groupName);
 
                 List<KeyValuePair<string, string>> allUsrs = GRUSRs.Where(x => x.Value == groupName).ToList();
@@ -714,7 +739,7 @@ namespace WebApplication1
                 Clients.Group(groupName).updateUserList(userList);
                 Clients.Client(Context.ConnectionId).updateUserList(userList);
 
-                if (GRUSRs.Where(x => x.Value == groupName).Count() > 2)// && !gameInPrgress.Any(x => x.Key == groupName))
+                if (GRUSRs.Where(x => x.Value == groupName).Count() > 1 && !gameUserTurn.Where(x => x.Key == groupName).Any())
                 {
                     Clients.Group(groupName).groupMessage("Please wait. Card Distribution started !");
                     Clients.All.sendConfirm("started distri");
@@ -722,7 +747,7 @@ namespace WebApplication1
                     StartGame(GRUSRs.Where(x => x.Value == groupName).Count(), groupName);
                     gameInPrgress.Add(groupName, "InProgress");
                 }
-                 
+
             }
             catch (Exception ex)
             {
@@ -735,14 +760,14 @@ namespace WebApplication1
             {
                 if (gameUserTurn.Where(x => x.Key == groupName).Any())
                 {
-                    gameInPrgress.Remove(groupName);
+                    gameUserTurn.Remove(groupName);
                 }
 
 
                 Dictionary<int, string> randomCards = DistCards();
                 int count = 52 / grpCnt;
                 List<KeyValuePair<string, string>> allUsrs = GRUSRs.Where(x => x.Value == groupName).ToList();
-                
+
                 Clients.All.sendConfirm("distri done");
                 int userCnt = 0;
                 int start = 0;

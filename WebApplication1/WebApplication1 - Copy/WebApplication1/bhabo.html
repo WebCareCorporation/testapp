@@ -16,6 +16,7 @@
 
 
     <script type="text/javascript" src="Scripts/jquery.signalR-2.1.2.js"></script>
+     
 
     <script src="signalR/hubs" type="text/javascript"></script>
 
@@ -123,9 +124,10 @@
                     var UserName = localStorage.getItem("Name");
                     var Group = localStorage.getItem("Group");
                     event.relatedTarget.classList.remove('active');
-                    var hasCard = "true";
-                    if (!$('.card .active').length) {
-                        hasCard = "false"
+                    event.relatedTarget.classList.remove('mine');
+                    var lastCard = "true";
+                    if ($('.mine').length) {
+                        lastCard = "false"
                     }
                     if (localStorage.getItem("cardType") == "") {
                         localStorage.setItem("cardType", event.relatedTarget.attributes["data-card"].value)
@@ -135,9 +137,9 @@
 
 
                     if (!window.reconnecting) {
-                        window.game.server.throwCard(event.relatedTarget.id, UserName, Group, hasCard, localStorage.getItem("cardType"));
+                        window.game.server.throwCard(event.relatedTarget.id, UserName, Group, lastCard, localStorage.getItem("cardType"));
                     } else {
-                        localStorage.setItem("SendCard", event.relatedTarget.id + "$" + UserName + "$" + Group + "$" + hasCard + "$" + localStorage.getItem("cardType"));
+                        localStorage.setItem("SendCard", event.relatedTarget.id + "$" + UserName + "$" + Group + "$" + lastCard + "$" + localStorage.getItem("cardType"));
                     }
 
                 } else {
@@ -164,13 +166,14 @@
     </script>
 </head>
 <body>
+      <div id="loading"><span>Game will start in a moment....</span></div>
     <div class="container">
         <div id="sidebar">
             <ul id="users">
                 
             </ul>
         </div>
-        <div class="main-content">
+        <div class="main-content" style="">
             <div class="swipe-area"></div>
             <!--<div id="timer"> </div>-->
 
@@ -183,6 +186,7 @@
                 <div id="Message" class="notify notify-green">
                 </div>
                 <div id="outer-dropzone" class="dropzone">
+                    <div id="timer"></div>
                 </div>
                 <div id="Cards">
 
