@@ -2,10 +2,10 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta name="viewport" id="viewport"
+    <!--<meta name="viewport" id="viewport"
  content="width=device-width, height=device-height,
  initial-scale=1.0, maximum-scale=1.0,
- user-scalable=no;" />
+ user-scalable=no;" />-->
     <title></title>
     <link rel="stylesheet" type="text/css" href="css/bhabo.css" />
     <link rel="stylesheet" type="text/css" href="css/icons.css" />
@@ -61,7 +61,12 @@
             // keep the dragged position in the data-x/data-y attributes
             x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
             y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
-
+        if (x > window.innerWidth - 100) {
+            return;
+        }
+        if (y > window.innerHeight - 119) {
+            return;
+        }
         // translate the element
         target.style.webkitTransform =
         target.style.transform =

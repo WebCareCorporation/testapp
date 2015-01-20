@@ -21,11 +21,16 @@
     z-index: 100;
 }
 
+.overthrow-enabled .overthrow {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
 #timer {
     border-radius: 10px;
     border-color: #8ed9f6;
     background-color: #e3f7fc;
-    float: left;
+    float: right;
     position: relative;
     z-index: 199;
 }
@@ -563,6 +568,7 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  z-index:-100;
 }
 div#menu {
 		width: 30%;
@@ -626,7 +632,7 @@ div#menu {
     font-weight: 100;
 }
 .container {
-    display:block;
+   
     position: relative;
     height: 100%;
     width: 100%;
@@ -667,7 +673,6 @@ background-color: #f3f3f3;
 }
 
 #loading {
-    display: block;
     position: absolute;
     top: 0;
     left: 0;
@@ -676,7 +681,7 @@ background-color: #f3f3f3;
     height: 100%;
     background-color: gray;
    text-align:center;
-   background-image: url('../appframework/ajax-loader.gif');
+   background-image: url('../img/ajax-loader.gif');
     background-repeat: no-repeat;
     background-position: center;
     opacity:.9;
@@ -758,7 +763,3 @@ clear: both;
 }
  
  
-.overthrow-enabled .overthrow {
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-}
