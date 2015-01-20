@@ -6,17 +6,18 @@
     border-color: #8ed9f6;
     border-radius: 10px;
     font-family: Tahoma,Geneva,Arial,sans-serif;
-    font-size: 1.1em;
+     font-size: 12px;
+    font-weight: 100;
+    color: black;
     /*padding:10px 10px 10px 10px;*/
     margin: 20px;
     cursor: default;
     margin-left:50px;
-    /*width:auto;*/
+    width:auto;
     float: left;
     /*z-index:199;*/
     position: fixed;
     top: 0;
-    width: 40%;
     z-index: 100;
 }
 
@@ -556,7 +557,7 @@
 #outer-dropzone { 
      background: url('../img/table.jpg') no-repeat;
     background-size: 50%;
-    height: 100%;
+    height: 40%;
     width: 100%;
   /*  -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -644,7 +645,7 @@ div#menu {
 width: 100%;
 left: 0;
 top: 0;
-height: 5%;
+height: 8%;
 z-index: 0;
 background-color: #f3f3f3;
 }
@@ -694,8 +695,8 @@ background-color: #f3f3f3;
 .main-content .content{
     box-sizing: border-box;
     -moz-box-sizing: border-box;
- 
- 
+  /*height: 100%;*/
+ overflow:hidden;
 /* padding-left: 60px; */
 padding-top: 10px;
 width: 100%;
@@ -707,6 +708,7 @@ clear: both;
 .main-content .content p{
     width: 100%;
     line-height: 160%;
+    
 }
 .main-content #sidebar-toggle {
     background: #DF314D;

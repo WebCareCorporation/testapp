@@ -712,6 +712,7 @@ namespace WebApplication1
                 string userList = (new Utility()).GetUserList(userTurn);
 
                 Clients.Group(groupName).updateUserList(userList);
+                Clients.Client(Context.ConnectionId).updateUserList(userList);
 
                 if (GRUSRs.Where(x => x.Value == groupName).Count() > 2)// && !gameInPrgress.Any(x => x.Key == groupName))
                 {
