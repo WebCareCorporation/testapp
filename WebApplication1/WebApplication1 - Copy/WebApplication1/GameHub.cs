@@ -60,13 +60,13 @@ namespace WebApplication1
                     string grpName = GRUSRs[u.Key];
                     GRUSRs.Remove(u.Key);
                    // Clients.Group(grpName).groupMessage("only removed from group:" + u.Key + " Left.");
+                    if (askTimeOut.Where(x => x.Key == u.Key).Any())
+                    {
+                        AsktimeOut(u.Key, grpName, "disc");
+                    }
 
                     if (gameUserTurn.Where(x => x.Key == grpName).Any())
                     {
-                        if (askTimeOut.Where(x => x.Key == u.Key).Any())
-                        {
-                            AsktimeOut(u.Key, grpName, "disc");
-                        }
                         if (gameUserTurn.Any(x => x.Key == grpName))
                         {
                             Dictionary<string, string> userturn = gameUserTurn[grpName];
@@ -194,7 +194,7 @@ namespace WebApplication1
             {
                 return;
             }
-
+            Clients.Client(user[userName]).TimedOut();
             Dictionary<string, string> userturn = gameUserTurn[groupname];
             userturn.Remove(userName);
             gameUserTurn[groupname] = userturn;
@@ -202,7 +202,7 @@ namespace WebApplication1
             {
                 GRUSRs.Remove(userName);
             }
-            Clients.Client(user[userName]).TimedOut();
+            
             
 
             if (userturn.Count == 1)

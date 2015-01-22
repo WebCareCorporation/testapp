@@ -64,19 +64,27 @@ define(['require', 'CustomFunctions'],
 
         var timerInterval;
         function resettimer() {
-            clearInterval(timerInterval);
-            document.getElementById("timer").innerHTML = "";
-            window.timein = 50;
-            window.timeout = false;
-           
+            if (timerInterval) {
+                timerInterval.stop();
+                timerInterval.clearTimer();
+                timerInterval = undefined;
+
+                document.getElementById("timer").innerHTML = "";
+                window.timein = 50;
+                window.timeout = false;
+            }
         }
 
         function myStopFunction() {
-            clearInterval(window.myVar);
-            window.myVar = undefined;
+            timerInterval.stop();
+            //clearInterval(window.myVar);
+            //window.myVar = undefined;
         }
 
         function myTimer() {
+            if (!timerInterval) {
+                return;
+            }
             if (window.timeIn == 0) {
                 //if (window.Userturn == localStorage.getItem("Name")) {
                 window.game.server.asktimeOut(window.Userturn, window.gameJoin, window.cardJoin);
@@ -88,7 +96,7 @@ define(['require', 'CustomFunctions'],
 
             }
             if (window.timeIn <= 0) {
-                clearInterval(timerInterval);
+                
                 resettimer();
                 return;
             }
@@ -111,7 +119,9 @@ define(['require', 'CustomFunctions'],
             }
 
             window.cardJoin = card;
-            timerInterval = setInterval(function () { myTimer() }, 2000);
+            timerInterval = $.timer(myTimer, 1000, false);
+            timerInterval.play(true);
+                //setInterval(function () { myTimer() }, 2000);
         };
 
         window.game.client.updateUserStatus = function (user, status) {
