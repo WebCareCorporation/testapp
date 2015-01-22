@@ -1,11 +1,11 @@
-﻿<!DOCTYPE html>
+﻿<!--<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <!--<meta name="viewport" id="viewport"
  content="width=device-width, height=device-height,
  initial-scale=1.0, maximum-scale=1.0,
- user-scalable=no;" />-->
+ user-scalable=no;" /> 
     <title></title>
     <link rel="stylesheet" type="text/css" href="css/bhabo.css" />
     <link rel="stylesheet" type="text/css" href="css/icons.css" />
@@ -16,29 +16,77 @@
 
 
     <script type="text/javascript" src="Scripts/jquery.signalR-2.1.2.js"></script>
-     
+
 
     <script src="signalR/hubs" type="text/javascript"></script>
 
 
     <script type="text/javascript" charset="utf-8" src="Scripts/handlebars-v2.0.0.js"></script>
 
-    <!--   <script src="intelxdk.js"></script>
-    <!-- phantom library, needed for Cordova api calls -->
-    <!-- <script src="cordova.js"></script>
-
-    <script src="local-notification.js"></script>
-
-    <script src="xhr.js"></script>
-    <script type="text/javascript" charset="utf-8" src="PushNotification.js"></script>
-    <script type="text/javascript" charset="utf-8" src="SQLitePlugin.js"></script>-->
+    
+        
 
     <script type="text/javascript" charset="utf-8" src="Scripts/jq.appframework.js"></script>
-    <!--  <script type="text/javascript" charset="utf-8" src="Scripts/appframework.ui.min.js"></script>-->
-    <!--<script type="text/javascript" charset="utf-8" src="Scripts/af.slidemenu.js"></script>-->
+    
     <script type="text/javascript" charset="utf-8" src="Scripts/af.scroller.js"></script>
     <script type="text/javascript" src="Scripts/interact-1.2.2.js"></script>
     <script data-main="BhaboApp" src="Scripts/require.js"></script>
+
+</head>
+<body>
+
+    <div class="container">
+        <div id="sidebar">
+          
+        </div>
+        <div class="main-content" style="">
+            <div class="swipe-area"></div>
+         
+
+            <a href="#" data-toggle=".container" id="sidebar-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </a>
+            <div class="content">
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+</html>-->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gapshap</title>
+    <!--
+    This template can be used for simple app with left side menu that can be opened to switch views, for applications like Youtube App or Gmail app.
+-->
+
+
+
+    <link rel="stylesheet" type="text/css" href="appframework/af.ui.css" />
+    <link rel="stylesheet" type="text/css" href="appframework/icons.css" />
+
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="appframework/jq.appframework.js"></script>
+    <script type="text/javascript" charset="utf-8" src="appframework/appframework.ui.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="Scripts/handlebars-v2.0.0.js"></script>
+     <script type='application/javascript' src='Scripts/fastclick.js'></script>
+    <script type="text/javascript" src="Scripts/jquery.signalR-2.1.2.js"></script>
+
+
+    <script src="signalr/hubs" type="text/javascript"></script>
+
+    <script type="text/javascript" charset="utf-8" src="appframework/plugins/af.slidemenu.js"></script>
+
+    <script type="text/javascript" src="Scripts/interact-1.2.2.js"></script>
     <script type="text/javascript">
 
         var xd = 0;
@@ -169,39 +217,74 @@
 
 
     </script>
+    <script data-main="BhaboApp" src="Scripts/require.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/cards.css" />
+    <link rel="stylesheet" type="text/css" href="css/custom.css" />
+
 </head>
 <body>
-      <div id="loading"><span>Game will start in a moment....</span></div>
-    <div class="container">
-        <div id="sidebar">
-            <ul id="users">
-                
+    <div id="loading"><span>Game will start in a moment....</span></div>
+    <div id="afui">
+
+        <!--Left Side Menu Navigation bar -->
+        <nav>
+            <ul id="users" class="list">
             </ul>
-        </div>
-        <div class="main-content" style="">
-            <div class="swipe-area"></div>
-            <!--<div id="timer"> </div>-->
+        </nav>
 
-            <a href="#" data-toggle=".container" id="sidebar-toggle">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </a>
-            <div class="content">
-                <div id="Message" class="notify notify-green">
-                </div>
-                <div id="outer-dropzone" class="dropzone">
-                    <div id="timer"></div>
-                </div>
-                <div id="Cards">
+        <div id="content" style="">
 
+            <!--Main View Pages-->
+            <div class="panel" title="Home" id="RoomChatWindow" style="height: 100%; padding-bottom: 13%; position: static" data-footer="none" selected="true">
+                <header>
+                    <a id="menubadge" onclick='$.ui.toggleSideMenu()' class='menuButton' style="float: left !important"></a>
+                    <h1 id="HeadName" class="HeadName"></h1>
+                    <ul class="msglink">
+                        <li>
+                            <a id="msg" class="icon message" style=""></a>
+                        </li>
+                    </ul>
+                </header>
+                <div id="MainComments" class="MainComments scroll">
+                    <!-- <ul id="ChatWindow" class="ChatWindow scroll"></ul>-->
+                    <ul id="Message" class="Message scroll">
+                    </ul>
+                    <div id="cardzone">
+                        <div id="outer-dropzone" class="dropzone">
+                            <div id="timer"></div>
+                        </div>
+                        <div id="Cards" class="cards ">
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <div id="Footer" class="Footer">
+                <div id="messageTable">
+                    <table style="width: 100%; margin-left: 17px; margin-top: 10px;">
+                        <tr>
+                            <td style="width: 80%">
+                                <!--<input type="text" name="name" id="HomeMessage" style="white-space: pre-wrap;" class="Textbox" value=""  />-->
+ 
+                                <textarea id="HomeMessage" style="white-space: pre-wrap;" class="needsfocus Textbox"></textarea></td>
+                            <td style="width: 20%">
+                                <img src="appframework/Sendbtn1.jpg" id="Send" style="height: 62%; border-radius: 14px; margin-right: 20px" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="ThrowTable" style="display:none">
+                    <table style="width: 100%; margin-left: 17px; margin-top: 20px;margin-bottom:20px">
+                        <tr> 
+                            <td style="width: 20%">
+                                <a id="throwbtn" href="#" rel="external nofollow" target="_blank" style="height: 62%; border-radius: 14px; margin-right: 20px;text-decoration:none"  class="throwbtn">Throw Card</a> 
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
         </div>
     </div>
-
-
-
-
 </body>
 </html>

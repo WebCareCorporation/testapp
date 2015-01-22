@@ -7,6 +7,9 @@ function (require, signal, custom) {
 
         if (custom.CheckConnection()) {
 
+            custom.show('loading', true);
+
+            //  custom.show('afui', false);
 
 
             var width = window.innerWidth;
@@ -17,12 +20,14 @@ function (require, signal, custom) {
             width = window.innerWidth * pixelRatio;
             height = window.innerHeight * pixelRatio;
 
-            $('.main-content').css('height', height);
+            //$('.main-content').css('height', height);
 
 
-            $('.content').css('height', 19 * (height / 20));
+            //$('.content').css('height', 19 * (height / 20));
 
             $('#outer-dropzone').css('height', 3 * (height / 10));
+            $('#MainComments').css('height', height);
+
 
             ////   $('#outer-dropzone').css('width', width);
 
@@ -30,8 +35,9 @@ function (require, signal, custom) {
             //   //$('#outer-dropzone').css('background-size', size);
 
 
-            //   $('#Message').css('height', (height / 5));
-            // $('#Message').css('width', width);
+            $('#Message').css('min-height', 4 * (height / 10));
+            $('#Message').css('max-height', 5 * (height / 10));
+            $('#Message').css('width', 6 * (width / 10));
             bindEvents();
         } else {
             alert("Please check your network connection !");
@@ -52,7 +58,21 @@ function (require, signal, custom) {
 
         document.addEventListener("backbutton", function () {
 
-            window.location = "index.html";
+            if (messageopen) {
+                window.Scroller.unlock();
+                window.MessageScroller.lock();
+                $("#Message").slideUp(1);
+                messageopen = false;
+                $("#cardzone").show();
+                $('.msglink li').removeClass("backColorOrange");
+                return;
+            }
+
+
+            if (window.confirm("Want to leave game ?")) {
+                window.location = "index.html";
+            }
+
         }, false);
 
         document.addEventListener("pause", pauseapp, false);
@@ -61,7 +81,7 @@ function (require, signal, custom) {
 
         menuDiv = document.querySelector("#menu");
 
-        document.addEventListener("menubutton", doMenu, false);
+
 
     };
     var pauseapp = function () {
@@ -72,7 +92,7 @@ function (require, signal, custom) {
     };
     var onDeviceReady = function () {                             // called when Cordova is ready
         if (window.Cordova && navigator.splashscreen) {
-
+            //  FastClick.attach($('#RoomChatWindow'));
 
             readyFunction();
         }
@@ -80,66 +100,161 @@ function (require, signal, custom) {
     var menuOpen = false;
     var menuDiv = "";
 
-    function doMenu() {
-        console.log("The menu was clicked...");
-        if (menuOpen) {
-            console.log("close the menu");
-            menuDiv.style.display = "none";
-            menuOpen = false;
-        } else {
-            console.log("open the menu");
-            menuDiv.style.display = "block";
-            menuOpen = true;
-        }
-
-    }
+    var messageopen = false;
     var readyFunction = function () {
 
-        $("[data-toggle]").click(function () {
-            var toggle_el = $(this).data("toggle");
-            $(toggle_el).toggleClass("open-sidebar");
-            event.stopPropagation();
+        FastClick.attach(document.body);
+        window.Scroller = $(".MainComments").scroller({
+            lockBounce: false
         });
-        $('#sidebar').click(function (event) {
-            event.stopPropagation();
-        });
-        $('.container').click(function (event) {
-
-            $(".container").removeClass("open-sidebar");
-            return true;
+        window.MessageScroller = $(".Message").scroller({
+            lockBounce: false
         });
 
-        document.addEventListener('touchmove', function (e) {
-            $(".container").removeClass("open-sidebar");
-        }, false);
+        $('.msglink li').click(
+            function () {
 
-        $(".main-content").swipe({
-            swipeStatus: function (event, phase, direction, distance, duration, fingers) {
+                $('.animatedCard').removeClass('animatedCard');
 
-                return true;
-            }
-        });
+                if (!messageopen) {
+                    if ($("#Message li").length) {
+                        window.Scroller.scrollToTop(1);
+                        window.Scroller.lock();
+                        window.MessageScroller.unlock();
+                        $("#cardzone").hide();
+                        $("#Message").slideDown(1);
+                        $('#Message').scrollTop($('#Message li').last().position().top + 40);
+                        messageopen = true;
+
+                    }
+
+                } else {
+                    window.Scroller.unlock();
+                    window.MessageScroller.lock();
+                    $("#Message").slideUp(1);
+                    messageopen = false;
+
+                    $("#cardzone").show();
+
+                    // $("#Message").empty();
+                }
+                $('.msglink li').removeClass("backColorOrange");
+
+            });
+
+        $.ui.setSideMenuWidth('210px');
+
+
 
         signal.startConnection();
 
+        $("#Send").on("click", function () {
+            $('#HomeMessage').blur();
+            signal.SendMessage();
+        });
+
+
         window.background = false;
 
-        //window.MessageScroller= $("#Message").scroller({
-        //    lockBounce: false
+        $(document).delegate('.mine', 'click', function () {
+
+
+            var that = $(this).find('.squaredThreechk');
+
+            var checked = $(that).attr("checked");
+            $('.squaredThreechk').attr('checked', false); // Checks it
+            if (!checked) {
+                $(that).prop('checked', true);
+                $(that).attr("checked", true);
+                $('#messageTable').hide();
+                $('#ThrowTable').show();
+
+
+                $(that).closest('.select').css({ 'opacity': 1 });
+            } else {
+                $('#messageTable').show();
+                $('#ThrowTable').hide();
+                $(that).closest('.select').css({ 'opacity': 0 });
+            }
+
+        });
+
+
+        //$('#HomeMessage').on("touchstart", function () {
+        //    $('#HomeMessage').trigger('click');
+        //    $('#HomeMessage').trigger('click');
+        //    $('#HomeMessage').trigger('click');
+        //    $('#HomeMessage').trigger('click');
+        //    $('#HomeMessage').trigger('click');
+
+        //    $('#HomeMessage').focus();
         //});
 
+        $(document).delegate(".squaredThreechk", "click", function (event) {
+
+            var checked = $(this).attr("checked");
+            $('.squaredThreechk').attr('checked', false); // Checks it
+            if (!checked) {
+                $(this).prop('checked', true);
+                $(this).attr("checked", true);
+                $('#messageTable').hide();
+                $('#ThrowTable').show();
 
 
-        $('.ui-loader-default').remove();
+                $(this).closest('.select').css({ 'opacity': 1 });
+            } else {
+                $('#messageTable').show();
+                $('#ThrowTable').hide();
+                $(this).closest('.select').css({ 'opacity': 0 });
+            }
 
-        //$('#start').click(function () {
-        //    $('#outer-dropzone').addClass("dropzone");
+            event.stopPropagation();
 
-        //});
-        //$('#pause').click(function () {
-        //    $('#outer-dropzone').removeClass("dropzone");
+        });
 
-        //});
+
+        $('#throwbtn').on('click', function () {
+
+            var card = $("input[type='checkbox']:checked").closest('.card');
+            var cardid = $("input[type='checkbox']:checked").closest('.card').attr('id')
+            if ($(card).hasClass('dropcan')) {
+                if (window.confirm("Are you sure?")) {
+                    var UserName = localStorage.getItem("Name");
+                    var Group = localStorage.getItem("Group");
+
+                    $(card).removeClass('active');
+                    var hasCard = "true";
+                    if (!$('.card .active').length) {
+                        hasCard = "false"
+                    }
+                    if (localStorage.getItem("cardType") == "") {
+                        localStorage.setItem("cardType", $(card).attr("data-card"))
+                    }
+                    $('.dropcan').removeClass('dropcan');
+                    //event.relatedTarget.classList.add("thrownCard");
+
+
+                    if (!window.reconnecting) {
+                        window.game.server.throwCard(cardid, UserName, Group, hasCard, localStorage.getItem("cardType"));
+                    } else {
+                        localStorage.setItem("SendCard", cardid + "$" + UserName + "$" + Group + "$" + hasCard + "$" + localStorage.getItem("cardType"));
+                    }
+                    $('#messageTable').show();
+                    $('#ThrowTable').hide();
+                }
+            } else {
+                if ($('.dropcan').length) {
+                    alert("You can't throw this card !");
+                } else {
+                    alert("Its not your turn !");
+                }
+            }
+
+
+        });
+
+
+
     }
 
 

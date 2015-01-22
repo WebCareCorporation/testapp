@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Microsoft.AspNet.SignalR;
 using System.Collections;
+using System.Timers;
 
 namespace WebApplication1
 {
@@ -161,11 +162,11 @@ namespace WebApplication1
 
         public void SendMessage(string groupName, string user, string message)
         {
-            Clients.Group(groupName, Context.ConnectionId).sendMessage(user, message);
+            Clients.Group(groupName).groupMessage(user+" : "+message);
         }
 
         public void FirstTurnMessage(string groupName, string user)
-        {
+        {   
             Clients.Group(groupName).StartTimer(user, groupName, "hukam");
             if (!askTimeOut.Where(x => x.Key == user).Any())
             {
@@ -179,6 +180,7 @@ namespace WebApplication1
         {
             if (askTimeOut.Where(x => x.Key == userName).Any())
             {
+                askTimeOut.Remove(userName);
                 if (askTimeOut.Where(x => x.Value == groupname).Any())
                 {
                     List<KeyValuePair<string, string>> times = askTimeOut.Where(x => x.Value == groupname).ToList();
@@ -196,8 +198,12 @@ namespace WebApplication1
             Dictionary<string, string> userturn = gameUserTurn[groupname];
             userturn.Remove(userName);
             gameUserTurn[groupname] = userturn;
+            if (GRUSRs.Any(x => x.Key == userName))
+            {
+                GRUSRs.Remove(userName);
+            }
             Clients.Client(user[userName]).TimedOut();
-
+            
 
             if (userturn.Count == 1)
             {
@@ -353,8 +359,9 @@ namespace WebApplication1
         public void ThrowCard(int card, string username, string groupname, string lastCard, string cardTurnType)
         {
 
-            if (askTimeOut.Any(x => x.Value == groupname))
+            if (askTimeOut.Any(x => x.Key == username))
             {
+                askTimeOut.Remove(username);
                 List<KeyValuePair<string, string>> times = askTimeOut.Where(x => x.Value == groupname).ToList();
                 foreach (var t in times)
                 {
@@ -743,10 +750,10 @@ namespace WebApplication1
                 Clients.Group(groupName).updateUserList(userList);
                 Clients.Client(Context.ConnectionId).updateUserList(userList);
 
-                if (GRUSRs.Where(x => x.Value == groupName).Count() > 1 && !gameUserTurn.Where(x => x.Key == groupName).Any())
+                if (GRUSRs.Where(x => x.Value == groupName).Count() > 1)// && !gameUserTurn.Where(x => x.Key == groupName).Any())
                 {
                     Clients.Group(groupName).groupMessage("Please wait. Card Distribution started !");
-                    Clients.All.sendConfirm("started distri");
+                     
 
                     StartGame(GRUSRs.Where(x => x.Value == groupName).Count(), groupName);
                     gameInPrgress.Add(groupName, "InProgress");
@@ -772,7 +779,7 @@ namespace WebApplication1
                 int count = 52 / grpCnt;
                 List<KeyValuePair<string, string>> allUsrs = GRUSRs.Where(x => x.Value == groupName).ToList();
 
-                Clients.All.sendConfirm("distri done");
+            
                 int userCnt = 0;
                 int start = 0;
                 int end = 0;
