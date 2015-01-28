@@ -7,7 +7,7 @@ function (require, custom, signal) {
     var initialize = function () {
 
         $.ui.autoLaunch = false;
-        $.ui.backButtonText = "";
+        $.ui.backButtonText = "Back";
 
         if (!localStorage.getItem("uniqueId")) {
             var uniqueId = guid();
@@ -61,6 +61,12 @@ function (require, custom, signal) {
         }
     };
     var readyFunction = function () {
+
+        custom.show('loading', false);
+
+        custom.show('afui', true);
+
+
         FastClick.attach(document.body);
 
         if (localStorage.getItem("Name") != undefined && localStorage.getItem("Name") != "") {
@@ -96,9 +102,9 @@ function (require, custom, signal) {
 
                 signal.startConnection();
             } else {
-                $.ui.loadContent("main", null, null, "fade");
+                $.ui.loadContent("ResturantPicker", null, null, "fade");
 
-                setTimeout(window.location = "rooms.html", 5000);
+               // setTimeout(window.location = "rooms.html", 5000);
             }
             //localStorage.setItem("Name", $("#changenameText").val());
 
@@ -113,8 +119,18 @@ function (require, custom, signal) {
             });
         });
         $("#GoToRooms").on("click", function () {
-            $('body').fadeOut(200, function () {
-                document.location.href = "rooms.html"
+            $.ui.loadContent("ResturantPicker", null, null, "fade");
+        });
+
+        $("#townList > li a").on("click", function () {
+
+            var room = $(this).attr("id");
+
+            localStorage.setItem("room", room);
+            //window.location = "room.html";
+
+            $('body').fadeOut(300, function () {
+                document.location.href = "room.html"
             });
         });
     };

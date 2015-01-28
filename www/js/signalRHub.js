@@ -49,12 +49,13 @@ define(['require', 'CustomFunctions'],
             custom.show('afui', true);
 
             if (result == "true") {
+                alert("rehstred");
 
                 localStorage.setItem("Name", localStorage.getItem("tempName"));
 
-                $.ui.loadContent("main", null, null, "fade");
+                $.ui.loadContent("ResturantPicker", null, null, "fade");
 
-                setTimeout(window.location = "rooms.html", 5000);
+                
             }
             else {
                 $(".Info").html("This username is already taken. Please use other name.");

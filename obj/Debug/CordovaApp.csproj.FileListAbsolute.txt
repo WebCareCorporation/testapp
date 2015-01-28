@@ -1,0 +1,1 @@
+F:\GIt\testapp\obj\Debug\CordovaApp.csprojResolveAssemblyReference.cache
