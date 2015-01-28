@@ -3,11 +3,11 @@ define(['require', 'CustomFunctions'],
     function (require, custom) {
         //    return signalr;
 
-        $("#Message").slideUp(1);
+        // $("#Message").slideUp(1);
 
-          if (window.Cordova) {
-        $.connection.hub.url = "http://bathindavarinder-001-site1.smarterasp.net/signalr";
-         }
+        if (window.Cordova) {
+            $.connection.hub.url = "http://bathindavarinder-001-site1.smarterasp.net/signalr";
+        }
 
 
         window.timeout = false;
@@ -53,13 +53,17 @@ define(['require', 'CustomFunctions'],
         };
 
         window.game.client.TimedOut = function () {
-            window.dontreconnect = true;
             resettimer();
+            window.dontreconnect = true;
             $('.card').remove();
             if (window.cordova) {
                 custom.showNotification("Bhabo", "You are removed from this game.");
             }
             window.location = "index.html";
+        };
+
+        window.game.client.resetTimer = function () {
+            resettimer();
         };
 
         var timerInterval;
@@ -87,23 +91,28 @@ define(['require', 'CustomFunctions'],
             }
             if (window.timeIn == 0) {
                 //if (window.Userturn == localStorage.getItem("Name")) {
+                resettimer();
                 window.game.server.asktimeOut(window.Userturn, window.gameJoin, window.cardJoin);
+
                 //}
                 if (window.Userturn == localStorage.getItem("Name")) {
                     window.dontreconnect = true;
                     window.location = "index.html";
                 }
-
-            }
-            if (window.timeIn <= 0) {
-                
-                resettimer();
                 return;
             }
+
             window.timeIn = parseFloat(window.timeIn) - parseFloat(1);
             document.getElementById("timer").innerHTML = window.Userturn + "'s turn : " + window.timeIn + " seconds left.";
         }
-
+        window.game.client.becomeBhabo = function (msg) {
+            resettimer();
+            $('.card').remove();
+            if (window.cordova) {
+                custom.showNotification("Bhabo", msg);
+            }
+            showNotification(msg);
+        };
 
 
         window.game.client.StartTimer = function (user, game, card) {
@@ -121,7 +130,7 @@ define(['require', 'CustomFunctions'],
             window.cardJoin = card;
             timerInterval = $.timer(myTimer, 1000, false);
             timerInterval.play(true);
-                //setInterval(function () { myTimer() }, 2000);
+            //setInterval(function () { myTimer() }, 2000);
         };
 
         window.game.client.updateUserStatus = function (user, status) {
@@ -166,7 +175,23 @@ define(['require', 'CustomFunctions'],
         };
 
 
+        window.game.client.assignRandom = function (card) {
+            $('.card:not(.active)').removeClass("animatedCard");
+            $('.card:not(.active)').addClass("animatedOutCard");
 
+            setTimeout(function () {
+                showNotification("You have been assgined a random card. Please throw it.");
+                $('.card:not(.active)').remove();
+                localStorage.setItem("cardType", "");
+            }, 1000);
+
+            var idandcard = card.split('?');
+
+            var cardtype = idandcard[1].split('-')[1];
+            //var card = '<div data-x="' + x + '" data-y="' + y + '" id="' + idandcard[0] + '" class="card mine ' + idandcard[1] + ' ' + cardtype + ' active" data-card="' + cardtype + '" ></div>';
+            var card = '<div id="' + idandcard[0] + '" class="animatedCard card mine thrownCard ' + idandcard[1] + ' ' + cardtype + ' active dropcan" data-card="' + cardtype + '" ><div class="select squaredThree"><input type="checkbox" value="None" class="squaredThreechk" name="check" /></div></div>';
+            $('#Cards').append(card);
+        };
         window.game.client.thokaGiven = function (cs) {
 
             $('.card:not(.active)').removeClass("animatedCard");
@@ -191,7 +216,7 @@ define(['require', 'CustomFunctions'],
                     var cardtype = idandcard[1].split('-')[1];
                     //var card = '<div data-x="' + x + '" data-y="' + y + '" id="' + idandcard[0] + '" class="card mine ' + idandcard[1] + ' ' + cardtype + ' active" data-card="' + cardtype + '" ></div>';
                     var card = '<div id="' + idandcard[0] + '" class="animatedCard card mine thrownCard ' + idandcard[1] + ' ' + cardtype + ' active" data-card="' + cardtype + '" ><div class="select squaredThree"><input type="checkbox" value="None" class="squaredThreechk" name="check" /></div></div>';
-                    $('.content').append(card);
+                    $('#Cards').append(card);
                 }
             });
         };
@@ -275,9 +300,17 @@ define(['require', 'CustomFunctions'],
 
         window.game.client.sendCards = function (cards) {
             resettimer();
-            custom.show('loading', false);
 
-            custom.show('afui', true);
+            window.Scroller.unlock();
+            window.MessageScroller.lock();
+            $("#Message").slideUp(1);
+            window.messageopen = false;
+
+            $("#cardzone").show();
+
+            //custom.show('loading', false);
+
+            //custom.show('afui', true);
 
             $(".container").fadeIn(400);
 
@@ -307,92 +340,7 @@ define(['require', 'CustomFunctions'],
 
             });
 
-            //var xz = 0;
-            //var yz = 0;
-            //$.each($('.heart'), function (index, name) {
 
-            //    var datay = $(name).attr('data-y');
-            //    datay = parseFloat(datay) + parseFloat(100);
-            //    var datax = $(name).attr('data-x');
-            //    $(name).css({
-            //        'transform': 'translate(' + xz + 'px,' + datay + 'px)',
-            //        '-webkit-transform': 'translate(' + xz + 'px,' + datay + 'px)',
-            //        '-moz-transform': 'translate(' + xz + 'px,' + datay + 'px)',
-            //        '-ms-transform': 'translate(' + xz + 'px,' + datay + 'px)',
-            //        '-o-transform': 'translate(' + xz + 'px,' + datay + 'px)'
-            //    });
-            //    $(name).attr('data-y', datay);
-            //    $(name).attr('data-x', xz);
-            //    xz = xz + 30;
-
-            //});
-
-            //xz = xz + 100;
-            //yz = 0;
-            //$.each($('.chidi'), function (index, name) {
-
-            //    var datay = $(name).attr('data-y');
-            //    datay = parseFloat(datay) + parseFloat(100);
-            //    var datax = $(name).attr('data-x');
-            //    //    xz =   parseFloat(datax) + parseFloat(30);
-
-            //    $(name).css({
-            //        'transform': 'translate(' + xz + 'px,' + datay + 'px)',
-            //        '-webkit-transform': 'translate(' + xz + 'px,' + datay + 'px)',
-            //        '-moz-transform': 'translate(' + xz + 'px,' + datay + 'px)',
-            //        '-ms-transform': 'translate(' + xz + 'px,' + datay + 'px)',
-            //        '-o-transform': 'translate(' + xz + 'px,' + datay + 'px)'
-            //    });
-            //    $(name).attr('data-y', datay);
-            //    $(name).attr('data-x', xz);
-            //    xz = xz + parseFloat(30);
-            //});
-
-            //xz = 0;
-            //yz = 0;
-            //$.each($('.hukam'), function (index, name) {
-
-            //    var datay = $(name).attr('data-y');
-            //    // datay = parseFloat(datay) + parseFloat(100);
-            //    var datax = $(name).attr('data-x');
-
-
-            //    $(name).css({
-            //        'transform': 'translate(' + xz + 'px,' + datay + 'px)',
-            //        '-webkit-transform': 'translate(' + xz + 'px,' + datay + 'px)',
-            //        '-moz-transform': 'translate(' + xz + 'px,' + datay + 'px)',
-            //        '-ms-transform': 'translate(' + xz + 'px,' + datay + 'px)',
-            //        '-o-transform': 'translate(' + xz + 'px,' + datay + 'px)'
-            //    });
-
-            //    $(name).attr('data-y', datay);
-            //    $(name).attr('data-x', xz);
-
-            //    xz = xz + parseFloat(30);
-            //});
-
-            //xz = xz + 100;
-            //yz = 0;
-            //$.each($('.itt'), function (index, name) {
-
-            //    var datay = $(name).attr('data-y');
-            //    // datay = parseFloat(datay) + parseFloat(100);
-            //    var datax = $(name).attr('data-x');
-
-            //    if (xz == 0) {
-            //        xz = parseFloat(datax);
-            //    }
-            //    $(name).css({
-            //        'transform': 'translate(' + xz + 'px,' + datay + 'px)',
-            //        '-webkit-transform': 'translate(' + xz + 'px,' + datay + 'px)',
-            //        '-moz-transform': 'translate(' + xz + 'px,' + datay + 'px)',
-            //        '-ms-transform': 'translate(' + xz + 'px,' + datay + 'px)',
-            //        '-o-transform': 'translate(' + xz + 'px,' + datay + 'px)'
-            //    });
-            //    $(name).attr('data-y', datay);
-            //    $(name).attr('data-x', xz);
-            //    xz = xz + parseFloat(30);
-            //});
 
             if (havHukamA) {
                 window.game.server.firstTurnMessage(Group, UserName);
@@ -420,18 +368,35 @@ define(['require', 'CustomFunctions'],
         }
 
         function Activateitt() {
-
             $('.itt').addClass("dropcan");
-
         }
 
 
 
+        window.game.client.registerConfirm = function (result) {
+            custom.show('loading', false);
 
+            custom.show('afui', true);
+
+            if (result == "true") {
+
+                localStorage.setItem("Name", localStorage.getItem("tempName"));
+                $("#logname").text(localStorage.getItem("Name"));
+                $.ui.loadContent("signin", null, null, "fade");
+
+            }
+            else {
+                $(".Info").html("This username is already taken. Please use other name.");
+            }
+        }
 
         $.connection.hub.reconnecting(function () {
             window.reconnecting = true;
             $('#HeadName').text("Reconnecting..");
+
+            if (timerInterval) {
+                timerInterval.pause();
+            }
         });
 
         $.connection.hub.connectionSlow(function () {
@@ -439,7 +404,19 @@ define(['require', 'CustomFunctions'],
 
         });
 
+        $.connection.hub.stateChanged(function (change) {
+            if (change.newState === $.signalR.connectionState.disconnected) {
+ 
+            }
+        });
+
+
+
         $.connection.hub.reconnected(function () {
+
+            if (timerInterval) {
+                timerInterval.play(false);
+            }
 
             $('#HeadName').text("Reconnected");
 
@@ -484,7 +461,7 @@ define(['require', 'CustomFunctions'],
 
                 var yourname = localStorage.getItem("Name");
 
-                window.game.server.register(yourname);
+                window.game.server.updateConnId(localStorage.getItem("ConnId"), myClientId, yourname);
 
                 $('#HeadName').text("Registered Again.");
 
@@ -627,6 +604,30 @@ define(['require', 'CustomFunctions'],
                         //var uniqueId = localStorage.getItem("uniqueId");
                         window.game.server.register(name);
                         //     window.chat.server.registerUser(uniqueId, name);
+
+                    });
+
+                } else {
+                    alert("please check your network.");
+                }
+            },
+            registerName: function () {
+
+                if (custom.CheckConnection()) {
+
+                    custom.show('loading', true);
+
+                    custom.show('afui', false);
+
+
+
+                    $.connection.hub.start().done(function () {
+
+                        var name = localStorage.getItem("tempName");
+
+                        var uniqueId = localStorage.getItem("uniqueId");
+
+                        window.game.server.registerUser(uniqueId, name);
 
                     });
 
