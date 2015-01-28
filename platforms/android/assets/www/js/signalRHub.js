@@ -43,6 +43,11 @@ define(['require', 'CustomFunctions'],
             }
         };
         window.chat.client.registerConfirm = function (result) {
+
+            custom.show('loading', false);
+
+            custom.show('afui', true);
+
             if (result == "true") {
 
                 localStorage.setItem("Name", localStorage.getItem("tempName"));
@@ -378,6 +383,10 @@ define(['require', 'CustomFunctions'],
                         var name = localStorage.getItem("tempName");
 
                         var uniqueId = localStorage.getItem("uniqueId");
+
+                        custom.show('loading', true);
+
+                        custom.show('afui', false);
 
                         window.chat.server.registerUser(uniqueId, name);
 

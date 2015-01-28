@@ -59,6 +59,8 @@ function (require, custom, signal, database) {
     };
     var readyFunction = function () {
 
+        FastClick.attach(document.body);
+
         window.background = false;
 
         signal.initiateConnection();

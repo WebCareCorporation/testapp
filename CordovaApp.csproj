@@ -947,7 +947,9 @@
     <None Include="plugins\org.apache.cordova.vibration\src\ios\CDVVibration.m" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="config.xml" />
+    <Content Include="config.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="platforms\android\.gitignore" />
     <Content Include="platforms\android\AndroidManifest.xml" />
     <Content Include="platforms\android\ant-build\AndroidManifest.cordova.xml" />
@@ -1509,18 +1511,16 @@
     <Content Include="www\index1.html" />
     <Content Include="www\index22.html" />
     <Content Include="www\Indexapp.js" />
-    <Content Include="www\js\addstarscript.js" />
     <Content Include="www\js\cordova.js" />
     <Content Include="www\js\CustomFunctions.js" />
     <Content Include="www\js\Database.js" />
+    <Content Include="www\js\fastclick.js" />
     <Content Include="www\js\handlebars-v2.0.0.js" />
     <Content Include="www\js\index.js" />
-    <Content Include="www\js\jquery-1.6.4-vsdoc.js" />
-    <Content Include="www\js\jquery-1.6.4.js" />
-    <Content Include="www\js\jquery-1.6.4.min.js" />
-    <Content Include="www\js\jquery-1.7.1.min.js" />
-    <Content Include="www\js\jquery.mobile-1.0.1.js" />
-    <Content Include="www\js\jquery.mobile-1.0.1.min.js" />
+    <Content Include="www\js\interact-1.2.2.js" />
+    <Content Include="www\js\interact-1.2.2.min.js" />
+    <Content Include="www\js\jquery-1.11.1.min.js" />
+    <Content Include="www\js\jquery.mobile-1.4.5.min.js" />
     <Content Include="www\js\jquery.signalR-2.1.2.js" />
     <Content Include="www\js\jquery.signalR-2.1.2.min.js" />
     <Content Include="www\js\require.js" />

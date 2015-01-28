@@ -34,8 +34,8 @@ function (require, custom, signal) {
 
     };
     var readyFunction = function () {
-       
-        
+
+        FastClick.attach(document.body); 
 
         $("#townList > li a").on("click", function () {
 

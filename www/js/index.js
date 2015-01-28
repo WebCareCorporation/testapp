@@ -61,6 +61,8 @@ function (require, custom, signal) {
         }
     };
     var readyFunction = function () {
+        FastClick.attach(document.body);
+
         if (localStorage.getItem("Name") != undefined && localStorage.getItem("Name") != "") {
 
             if (window.Cordova && navigator.splashscreen) {
