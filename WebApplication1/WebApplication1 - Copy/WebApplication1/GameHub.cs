@@ -114,7 +114,10 @@ namespace WebApplication1
                     }
                 }
                 else
-                {  userDiscQueue.Add(u.Key, grpName);
+                {
+                    if (!userDiscQueue.Any(x => x.Key == u.Key))
+                        userDiscQueue.Add(u.Key, grpName);
+
                 }
             }
             return base.OnDisconnected(stopCalled);
@@ -341,8 +344,8 @@ namespace WebApplication1
                         Clients.Group(groupname).updateUserTurn(largestCardUser);
                         return;
                     }
-                    else
-                    {
+                    else if (checklarge && userturn.Count > 1)
+                    { 
                         userturn.Remove(largestCardUser);
                         Clients.Group(groupname).updateUserStatus(largestCardUser, "Finished");
 
@@ -590,7 +593,7 @@ namespace WebApplication1
                             Clients.Group(groupname).updateUserTurn(largestCardUser);
                             return;
                         }
-                        else if (checklarge && userturn.Count > 2)
+                        else if (checklarge && userturn.Count > 1)
                         {
                             userturn.Remove(largestCardUser);
                             Clients.Group(groupname).updateUserStatus(largestCardUser, "Finished");
@@ -602,7 +605,7 @@ namespace WebApplication1
                     }
 
                     if (userturn.Count == 1)
-                    { 
+                    {
                         Clients.Group(groupname).groupMessage(userturn.First().Key + " became bhabo");
                         Clients.Client(userturn.First().Key).becomeBhabo(userturn.First().Key + " became bhabo. !");
                         cardThrown[groupname] = "";
@@ -843,11 +846,8 @@ namespace WebApplication1
             {
                 string groupName = GRUSRs[name];
 
-                Groups.Add(newid, groupName);
+                //    Groups.Add(newid, groupName);
                 Groups.Remove(old, groupName);
-            }
-            else
-            {
                 if (userDiscQueue.Any(x => x.Key == name))
                 {
 
@@ -856,7 +856,7 @@ namespace WebApplication1
                     Groups.Add(Context.ConnectionId, grpname);
 
                     // Add to dicotionary
-                    GRUSRs.Add(name, grpname);
+                    //  GRUSRs.Add(name, grpname);
 
                     List<KeyValuePair<string, string>> allUsrs = GRUSRs.Where(x => x.Value == grpname).ToList();
                     Dictionary<string, string> userTurn = new Dictionary<string, string>();
@@ -870,7 +870,7 @@ namespace WebApplication1
                     Clients.Client(Context.ConnectionId).updateUserList(userList);
 
 
-
+                    userDiscQueue.Remove(name);
 
                     //if (msgQueue.Any(x => x.Key == grpname))
                     //{
@@ -891,15 +891,16 @@ namespace WebApplication1
 
 
 
-                    userDiscQueue.Remove(name);
-
 
 
                 }
-                else
-                {
-                    JoinGame(name);
-                }
+
+            }
+            else
+            {
+
+                JoinGame(name);
+
             }
         }
 
@@ -953,6 +954,8 @@ namespace WebApplication1
                     grpCnt = 0;
                 }
 
+                Clients.Group(groupName).groupMessage(name + " Joined !");
+                Clients.Group(groupName).groupMessage("Game will start with minimum 3 users !");
 
 
                 /// Add to groups for message
@@ -979,8 +982,7 @@ namespace WebApplication1
                 Clients.Group(groupName).updateUserList(userList);
                 Clients.Client(Context.ConnectionId).updateUserList(userList);
 
-                Clients.Group(groupName).groupMessage(name + " Joined !");
-                Clients.Group(groupName).groupMessage("Game will start with minimum 3 users !");
+             
 
                 Clients.Client(Context.ConnectionId).groupMessage(name + " Joined !");
                 Clients.Client(Context.ConnectionId).groupMessage("Game will start with minimum 3 users !");
@@ -1011,8 +1013,8 @@ namespace WebApplication1
 
 
                 Dictionary<int, string> randomCards = DistCards();
-                //int count = 52 / grpCnt;
-                int count = 4;
+                int count = 52 / grpCnt;
+
                 List<KeyValuePair<string, string>> allUsrs = GRUSRs.Where(x => x.Value == groupName).ToList();
 
 
